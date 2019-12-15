@@ -1,0 +1,22 @@
+.picker-item {
+	height: 100%;
+
+	uni-picker-view,
+	picker-view {
+		height: 100%;
+	}
+
+	.lb-picker-column {
+		padding: 0;
+		font-size: 36rpx;
+		text-align: center;
+		box-sizing: border-box;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+
+		.lb-picker-column-label {
+			transition: all 0.3s;
+		}
+	}
+}

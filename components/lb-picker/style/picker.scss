@@ -1,0 +1,78 @@
+.lb-picker {
+	position: relative;
+
+	.lb-picker-mask {
+		position: fixed;
+		z-index: 999;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.4);
+	}
+
+	.lb-picker-container {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		transform: translateY(100%);
+		backface-visibility: hidden;
+		z-index: 999;
+		width: 100%;
+		background-color: #efeff4;
+		visibility: hidden;
+		overflow: hidden;
+		transition: all 0.3s;
+
+		&.lb-picker-toggle {
+			visibility: visible;
+			transform: translate(0);
+		}
+
+		.lb-picker-header {
+			position: relative;
+			font-size: 36rpx;
+			box-sizing: border-box;
+			background-color: $uni-bg-color;
+			display: flex;
+			justify-content: space-between;
+
+			&::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				height: 1px;
+				clear: both;
+				border-bottom: 1px solid #e5e5e5;
+				color: #e5e5e5;
+				transform-origin: 0 100%;
+				-webkit-transform: scaleY(0.5);
+				transform: scaleY(0.5);
+			}
+
+			.lb-picker-action {
+				font-size: 32rpx;
+				padding: 0 28rpx;
+				display: flex;
+				align-items: center;
+
+				.lb-picker-action-cancle {
+					color: #999999;
+				}
+
+				.lb-picker-action-confirm {
+					color: #007aff;
+				}
+			}
+		}
+
+		.lb-picker-content {
+			position: relative;
+			width: 100%;
+			background-color: $uni-bg-color;
+			font-size: 32rpx;
+		}
+	}
+}

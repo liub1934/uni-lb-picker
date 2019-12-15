@@ -1,0 +1,70 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "lb-picker选择器"
+			}
+		},
+		{
+			"path": "pages/demos/demo1",
+			"style": {
+				"navigationBarTitleText": "单选"
+			}
+		},
+		{
+			"path": "pages/demos/demo2",
+			"style": {
+				"navigationBarTitleText": "多级联动"
+			}
+		},
+		{
+			"path": "pages/demos/demo3",
+			"style": {
+				"navigationBarTitleText": "省市区选择"
+			}
+		},
+		{
+			"path": "pages/demos/demo4",
+			"style": {
+				"navigationBarTitleText": "自定义确定取消文字及颜色"
+			}
+		},
+		{
+			"path": "pages/demos/demo5",
+			"style": {
+				"navigationBarTitleText": "插槽自定义选择器头部"
+			}
+		},
+		{
+			"path": "pages/demos/demo6",
+			"style": {
+				"navigationBarTitleText": "可视区自定义滚动个数"
+			}
+		},
+		{
+			"path": "pages/demos/demo7",
+			"style": {
+				"navigationBarTitleText": "自定义数据结构"
+			}
+		},
+		{
+			"path": "pages/demos/demo9",
+			"style": {
+				"navigationBarTitleText": "自定义样式颜色"
+			}
+		},
+		{
+			"path": "pages/demos/demo10",
+			"style": {
+				"navigationBarTitleText": "相关事件"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
