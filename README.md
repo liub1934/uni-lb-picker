@@ -137,6 +137,20 @@ data () {
 }
 ```
 
+## 插槽使用
+
+选择器支持一些可自定义化的插槽，如选择器的取消和确定文字按钮，如果需要对其自定义处理的话，比如加个icon图标之类的，可使用插槽，使用方法如下：  
+
+```html
+<lb-picker>
+  <view slot="cancle-text">我是自定义确定</view>
+  <view slot="confirm-text">我是自定义取消</view>
+</lb-picker>
+
+```
+
+其他插槽见下。
+
 ## 其他
 
 其他功能参考示例Demo代码。
@@ -145,21 +159,22 @@ data () {
 
 ### Props
 
-| 参数                | 说明                                    | 类型                | 可选值                 | 默认值                                            |
-| :------------------ | :-------------------------------------- | :------------------ | :--------------------- | :------------------------------------------------ |
-| value/v-model       | 绑定值，联动选择为Array类型             | String/Number/Array | -                      | -                                                 |
-| mode                | 选择器类型，支持单列，多列联动          | String              | selector/multiSelector | selector                                          |
-| list                | 选择器数据                              | Array               | -                      | -                                                 |
-| level               | 多列联动层级，仅mode为multiSelector有效 | Number              | -                      | 2                                                 |
-| props               | 自定义数据字段                          | Object              | -                      | {label:'label',value:'value',children:'children'} |
-| cancle-text         | 取消文字                                | String              | -                      | 取消                                              |
-| cancle-color        | 取消文字颜色                            | String              | -                      | #999999                                           |
-| confirm-text        | 确定文字                                | String              | -                      | 确定                                              |
-| confirm-color       | 确定文字颜色                            | String              | -                      | #007aff                                           |
-| column-num          | 可视滚动区域内滚动个数，最好设置奇数值  | Number              | -                      | 5                                                 |
-| radius              | 选择器顶部圆角，支持rpx                 | String              | -                      | -                                                 |
-| column-style        | 选择器默认样式                          | Object              | -                      | -                                                 |
-| active-column-style | 选择器选中样式                          | Object              | -                      | -                                                 |
+| 参数                | 说明                                                  | 类型                | 可选值                 | 默认值                                            |
+| :------------------ | :---------------------------------------------------- | :------------------ | :--------------------- | :------------------------------------------------ |
+| value/v-model       | 绑定值，联动选择为Array类型                           | String/Number/Array | -                      | -                                                 |
+| mode                | 选择器类型，支持单列，多列联动                        | String              | selector/multiSelector | selector                                          |
+| list                | 选择器数据                                            | Array               | -                      | -                                                 |
+| level               | 多列联动层级，仅mode为multiSelector有效               | Number              | -                      | 2                                                 |
+| props               | 自定义数据字段                                        | Object              | -                      | {label:'label',value:'value',children:'children'} |
+| cancle-text         | 取消文字                                              | String              | -                      | 取消                                              |
+| cancle-color        | 取消文字颜色                                          | String              | -                      | #999999                                           |
+| confirm-text        | 确定文字                                              | String              | -                      | 确定                                              |
+| confirm-color       | 确定文字颜色                                          | String              | -                      | #007aff                                           |
+| column-num          | 可视滚动区域内滚动个数，最好设置奇数值                | Number              | -                      | 5                                                 |
+| radius              | 选择器顶部圆角，支持rpx，如radius="10rpx"             | String              | -                      | -                                                 |
+| column-style        | 选择器默认样式                                        | Object              | -                      | -                                                 |
+| active-column-style | 选择器选中样式                                        | Object              | -                      | -                                                 |
+| loading             | 选择器是否显示加载中，可使用loading插槽自定义加载效果 | Boolean             | -                      | -                                                 |
 
 ### 方法
 
@@ -177,6 +192,15 @@ data () {
 | change   | 选择器滚动时触发，此时不会改变绑定的值   | `{ index, item, value }`   `index`触发滚动后新的索引，单选时是具体的索引值，多列联动选择时为数组。`item`触发滚动后新的的完整内容，包裹`label`、`value`等，单选时为对象，多列选择时为数组对象。`value`触发滚动后新的value值，单列选择时为具体值，多列联动选择时为数组 |
 | confirm  | 点击选择器确定时触发，此时会改变绑定的值 | 同上`change`事件说明                                                                                                                                                                                                                                                 |
 | cancle   | 点击选择器取消时触发                     | 同上`change`事件说明                                                                                                                                                                                                                                                 |
+
+### 插槽
+
+| 插槽名        | 说明               |
+| :------------ | :----------------- |
+| cancle-text   | 选择器取消文字插槽 |
+| action-center | 选择器顶部中间插槽 |
+| confirm-text  | 选择器确定文字插槽 |
+| loading       | 选择器loading插槽  |
 
 ## Tips
 

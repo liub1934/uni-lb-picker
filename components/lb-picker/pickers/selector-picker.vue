@@ -1,7 +1,9 @@
 <template>
-  <view class="selector-picker picker-item">
+  <view class="selector-picker picker-item"
+    :style="{height: height}">
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
+      :style="{height: height}"
       @change="handleChange">
       <picker-view-column>
         <view v-for="(item, i) in list"
@@ -29,6 +31,7 @@ export default {
 		props: Object,
 		columnKey: String,
 		visible: Boolean,
+		height: String,
 		columnStyle: Object,
 		activeColumnStyle: Object
 	},
@@ -47,11 +50,8 @@ export default {
 		init () {
 			if (this.list && this.list.length) {
 				let index = this.list.findIndex(item => item[this.props.value] === this.value)
-				if (index > -1) {
-					this.pickerValue = [index]
-				} else {
-					index = 0
-				}
+				index = index > -1 ? index : 0
+				this.pickerValue = [index]
 				this.selectValue = this.list[index][this.props.value]
 				this.$emit('change', {
 					value: this.selectValue,
@@ -63,6 +63,7 @@ export default {
 		handleChange (item) {
 			const index = item.detail.value[0] || 0
 			this.selectValue = this.list[index][this.props.value]
+			this.pickerValue = item.detail.value
 			this.$emit('change', {
 				value: this.selectValue,
 				item: this.list[index],

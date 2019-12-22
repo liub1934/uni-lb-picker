@@ -2,7 +2,8 @@
   <view class="lb-picker">
     <view class="lb-picker-mask"
       v-show="visible"
-      @tap="visible = false"></view>
+      @tap="visible = false">
+    </view>
     <view :class="['lb-picker-container', visible ? 'lb-picker-toggle' : '']"
       :style="{borderRadius: `${radius} ${radius} 0 0`}">
       <view class="lb-picker-header"
@@ -43,21 +44,33 @@
       <view class="lb-picker-content"
         :style="{height: pickerContentHeight}">
 
-        <selector-picker v-if="mode === 'selector'"
-          :value="picker.value"
+        <!-- loading -->
+        <view v-if="loading"
+          class="lb-picker-loading">
+          <slot name="loading">
+            <view class="lb-picker-loading-img"></view>
+          </slot>
+        </view>
+
+        <!-- 单选 -->
+        <selector-picker v-if="mode === 'selector' && !loading"
+          :value="value"
           :list="list"
           :props="pickerProps"
+          :height="pickerContentHeight"
           :column-style="columnStyle"
           :active-column-style="activeColumnStyle"
           @change="handleChange">
         </selector-picker>
 
-        <multi-selector-picker v-if="mode === 'multiSelector'"
+        <!-- 多列联动 -->
+        <multi-selector-picker v-if="mode === 'multiSelector' && !loading"
           :value="value"
           :list="list"
           :level="level"
           :visible="visible"
           :props="pickerProps"
+          :height="pickerContentHeight"
           :column-style="columnStyle"
           :active-column-style="activeColumnStyle"
           @change="handleChange">
@@ -117,7 +130,8 @@
 			},
 			radius: String,
 			columnStyle: Object,
-			activeColumnStyle: Object
+			activeColumnStyle: Object,
+			loading: Boolean
 		},
 		data(){
 			return {

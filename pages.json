@@ -59,6 +59,12 @@
 			"style": {
 				"navigationBarTitleText": "相关事件"
 			}
+		},
+		{
+			"path": "pages/demos/demo11",
+			"style": {
+				"navigationBarTitleText": "异步加载整体数据"
+			}
 		}
 	],
 	"globalStyle": {

@@ -51,6 +51,10 @@
 					{
 						title: '相关事件',
 						path: '/pages/demos/demo10'
+					},
+					{
+						title: '异步加载整体数据',
+						path: '/pages/demos/demo11'
 					}
 				]
 			}

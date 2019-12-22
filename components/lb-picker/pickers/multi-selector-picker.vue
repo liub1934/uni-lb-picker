@@ -1,7 +1,9 @@
 <template>
-  <view class="multi-selector picker-item">
+  <view class="multi-selector picker-item"
+    :style="{height: height}">
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
+      :style="{height: height}"
       @change="handleChange">
       <picker-view-column v-for="(column, index) in pickerColumns"
         :key="index">
@@ -35,6 +37,7 @@ export default {
 			default: true
 		},
 		visible: Boolean,
+		height: String,
 		columnStyle: Object,
 		activeColumnStyle: Object
 	},
@@ -108,11 +111,9 @@ export default {
 				this.init()	
 			}
 		},
-		watch: {
-			list () {
-				this.init()
-			}	
-		}
+		list () {
+			this.init()
+		}	
 	}
 }
 </script>
