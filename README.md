@@ -8,6 +8,7 @@ Github：[https://github.com/liub1934/uni-lb-picker](https://github.com/liub1934
 
 H5 + 各平台小程序（百度除外）  
 安卓及 IOS 未测试（应该也能运行）
+已知问题：支付宝小程序单选可能会出现不对齐的现象
 
 ## 功能
 
