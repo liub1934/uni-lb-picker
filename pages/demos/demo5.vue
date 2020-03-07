@@ -9,13 +9,9 @@
       @change="handleChange"
       @confirm="handleConfirm"
       @cancle="handleCancle">
-      <uni-icons slot="cancle-text"
-        type="closeempty">
-      </uni-icons>
+      <view slot="cancle-text">插槽取消</view>
       <view slot="action-center">中间自定义</view>
-      <uni-icons slot="confirm-text"
-        type="checkmarkempty">
-      </uni-icons>
+      <view slot="confirm-text">插槽确定</view>
     </lb-picker>
     <view>自定义后参数cancleColor、confirmColor将失效</view>
   </view>

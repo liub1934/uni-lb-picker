@@ -8,10 +8,9 @@
       <picker-view-column>
         <view v-for="(item, i) in list"
           :class="['lb-picker-column', item[props.value] === selectValue ? 'lb-picker-column-active' : '']"
-          :key="setColumnKey(item, i)"
+          :key="i"
           :style="{height: columnHeight, lineHeight: columnHeight}">
-          <view class="lb-picker-column-label"
-            :style="[item[props.value] === selectValue ? activeColumnStyle : columnStyle]">
+          <view class="lb-picker-column-label">
             {{ item[props.label] }}
           </view>
         </view>
@@ -21,7 +20,6 @@
 </template>
 
 <script>
-import '../style/picker-item.scss'
 import { getIndicatorHeight } from '../utils.js'
 const indicatorHeight = getIndicatorHeight()
 export default {
@@ -29,11 +27,8 @@ export default {
 		value: [String, Number],
 		list: Array,
 		props: Object,
-		columnKey: String,
 		visible: Boolean,
-		height: String,
-		columnStyle: Object,
-		activeColumnStyle: Object
+		height: String
 	},
 	data(){
 		return {
@@ -69,9 +64,6 @@ export default {
 				item: this.list[index],
 				index: index
 			})
-		},
-		setColumnKey (column, i) {
-			return this.columnKey ? column[this.columnKey] : i
 		}
 	},
 	watch: {
@@ -81,3 +73,7 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+@import "../style/picker-item.scss";
+</style>

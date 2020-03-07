@@ -5,8 +5,6 @@
     <lb-picker ref="picker1"
       v-model="value1"
       mode="selector"
-      :column-style="{ color: '#f0ad4e' }"
-      :active-column-style="{ color: '#007aff', fontWeight: '700' }"
       :list="list1"
       @change="handleChange"
       @confirm="handleConfirm"
@@ -18,8 +16,6 @@
     <lb-picker ref="picker2"
       v-model="value2"
       mode="multiSelector"
-      :column-style="{ color: '#f0ad4e' }"
-      :active-column-style="{ color: '#007aff', fontWeight: '700' }"
       :list="list2"
       :level="3"
       @change="handleChange"
@@ -247,3 +243,17 @@
 		}
 	}
 </script>
+
+<style lang="scss" scoped>
+/deep/ .lb-picker {
+  .lb-picker-column-label {
+    color: #f0ad4e;
+  }
+  .lb-picker-column-active {
+    .lb-picker-column-label {
+      color: #007aff;
+      font-weight: 700;
+    }
+  }
+}
+</style>

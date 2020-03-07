@@ -15,7 +15,7 @@
     </lb-picker>
 
     <button @tap="handleTap('picker2')">异步加载数据2</button>
-    <view>{{ value2 }}</view>
+    <view>{{ value2.join('-') }}</view>
     <lb-picker ref="picker2"
       v-model="value2"
       mode="multiSelector"
@@ -253,7 +253,6 @@
 				console.log('change::', item)
 			},
 			handleConfirm (item) {
-				this.label = item.item.label
 				console.log('confirm::', item)
 			},
 			handleCancle (item) {

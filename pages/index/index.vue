@@ -5,7 +5,6 @@
       :key="index"
       @tap="handleTap(item)">
       <view class="item-title">{{ item.title }}</view>
-      <uni-icons type="arrowright"></uni-icons>
     </view>
   </view>
 </template>

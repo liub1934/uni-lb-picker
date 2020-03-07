@@ -8,20 +8,20 @@
 		right: 0;
 		left: 0;
 		bottom: 0;
-		background: rgba(0, 0, 0, 0.4);
 	}
 
 	.lb-picker-container {
+		width: 100%;
 		position: fixed;
 		left: 0;
 		bottom: 0;
 		transform: translateY(100%);
 		backface-visibility: hidden;
-		z-index: 999;
-		width: 100%;
 		background-color: #efeff4;
+		box-shadow: 0px 0px 1px 0px #e5e5e5;
 		visibility: hidden;
 		overflow: hidden;
+		z-index: 999;
 		transition: all 0.3s;
 
 		&.lb-picker-toggle {

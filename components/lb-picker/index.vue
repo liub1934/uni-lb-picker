@@ -2,7 +2,8 @@
   <view class="lb-picker">
     <view class="lb-picker-mask"
       v-show="visible"
-      @tap="visible = false">
+      :style="{ 'background-color': maskColor }"
+      @tap="handleMaskTap">
     </view>
     <view :class="['lb-picker-container', visible ? 'lb-picker-toggle' : '']"
       :style="{borderRadius: `${radius} ${radius} 0 0`}">
@@ -58,8 +59,6 @@
           :list="list"
           :props="pickerProps"
           :height="pickerContentHeight"
-          :column-style="columnStyle"
-          :active-column-style="activeColumnStyle"
           @change="handleChange">
         </selector-picker>
 
@@ -71,8 +70,6 @@
           :visible="visible"
           :props="pickerProps"
           :height="pickerContentHeight"
-          :column-style="columnStyle"
-          :active-column-style="activeColumnStyle"
           @change="handleChange">
         </multi-selector-picker>
       </view>
@@ -81,116 +78,126 @@
 </template>
 
 <script>
-	const defaultProps = {
-		label: 'label',
-		value: 'value',
-		children: 'children'
-	}
-	import './style/picker.scss'
-	import { getIndicatorHeight } from './utils'
-	import SelectorPicker from './pickers/selector-picker'
-	import MultiSelectorPicker from './pickers/multi-selector-picker'
-	const indicatorHeight = getIndicatorHeight()
-	export default {
-		components: {
-			SelectorPicker,
-			MultiSelectorPicker
+const defaultProps = {
+	label: 'label',
+	value: 'value',
+	children: 'children'
+}
+import { getIndicatorHeight } from './utils'
+import SelectorPicker from './pickers/selector-picker'
+import MultiSelectorPicker from './pickers/multi-selector-picker'
+const indicatorHeight = getIndicatorHeight()
+export default {
+	components: {
+		SelectorPicker,
+		MultiSelectorPicker
+	},
+	props: {
+		value: [String, Number, Array],
+		list: Array,
+		mode: {
+			type: String,
+			default: 'selector'
+		},
+		level: {
+			type: Number,
+			default: 2
 		},
 		props: {
-			value: [String, Number, Array],
-			list: Array,
-			mode: {
-				type: String,
-				default: 'selector'
-			},
-			level: {
-				type: Number,
-				default: 2
-			},
-			props: {
-				type: Object
-			},
-			cancleText: {
-				type: String,
-				default: '取消'
-			},
-			cancleColor: String,
-			confirmText: {
-				type: String,
-				default: '确定'
-			},
-			confirmColor: String,
-			canHide: {
-				type: Boolean,
-				default: true
-			},
-			columnNum: {
-				type: Number,
-				default: 5
-			},
-			radius: String,
-			columnStyle: Object,
-			activeColumnStyle: Object,
-			loading: Boolean
+			type: Object
 		},
-		data(){
-			return {
-				visible: false,
-				myValue: this.value,
-				picker: {},
-				pickerHeaderHeight: indicatorHeight + 'px',
-				pickerContentHeight: indicatorHeight * (this.columnNum) + 'px'
+		cancleText: {
+			type: String,
+			default: '取消'
+		},
+		cancleColor: String,
+		confirmText: {
+			type: String,
+			default: '确定'
+		},
+		confirmColor: String,
+		canHide: {
+			type: Boolean,
+			default: true
+		},
+		radius: String,
+		columnNum: {
+			type: Number,
+			default: 5
+		},
+		loading: Boolean,
+		closeOnClickMask: {
+			type: Boolean,
+			default: true
+		},
+		maskColor: {
+			type: String,
+			default: 'rgba(0, 0, 0, 0.4)'
+		}
+	},
+	data(){
+		return {
+			visible: false,
+			myValue: this.value,
+			picker: {},
+			pickerProps: Object.assign({}, defaultProps, this.props),
+			pickerHeaderHeight: indicatorHeight + 'px',
+			pickerContentHeight: indicatorHeight * (this.columnNum) + 'px'
+		}
+	},
+	methods: {
+		show () {
+			this.visible = true
+		},
+		hide () {
+			this.visible = false
+		},
+		handleCancle () {
+			this.$emit('cancle', this.picker)
+			if (this.canHide) {
+				this.hide()
 			}
 		},
-		computed: {
-			pickerProps () {
-				return Object.assign({}, defaultProps, this.props)
+		handleConfirm () {
+			const picker = JSON.parse(JSON.stringify(this.picker))
+			this.myValue = picker.value
+			this.$emit('confirm', this.picker)
+			if (this.canHide) {
+				this.hide()
 			}
 		},
-		methods: {
-			show () {
-				this.visible = true
-			},
-			hide () {
+		handleChange ({ value, item, index, init }) {
+			this.picker.value = value
+			this.picker.item = item
+			this.picker.index = index
+			if (!init) {
+				this.$emit('change', this.picker)
+			}
+		},
+		handleMaskTap () {
+			if (this.closeOnClickMask) {
 				this.visible = false
-			},
-			handleCancle () {
-				this.$emit('cancle', this.picker)
-				if (this.canHide) {
-					this.hide()
-				}
-			},
-			handleConfirm () {
-				const picker = JSON.parse(JSON.stringify(this.picker))
-				this.myValue = picker.value
-				this.$emit('confirm', this.picker)
-				if (this.canHide) {
-					this.hide()
-				}
-			},
-			handleChange ({ value, item, index, init }) {
-				this.picker.value = value
-				this.picker.item = item
-				this.picker.index = index
-				if (!init) {
-					this.$emit('change', this.picker)
-				}
 			}
+		}
+	},
+	watch: {
+		value (newVal) {
+			this.myValue = newVal
 		},
-		watch: {
-			value (newVal) {
-				this.myValue = newVal
-			},
-			myValue (newVal) {
-				this.$emit('input', newVal)
-			},
-			visible (newVisible) {
-				if (newVisible) {
-					this.$emit('show')
-				} else {
-					this.$emit('hide')
-				}
+		myValue (newVal) {
+			this.$emit('input', newVal)
+		},
+		visible (newVisible) {
+			if (newVisible) {
+				this.$emit('show')
+			} else {
+				this.$emit('hide')
 			}
 		}
 	}
+}
 </script>
+
+<style lang="scss" scoped>
+@import "./style/picker.scss";
+</style>

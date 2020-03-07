@@ -1,6 +1,13 @@
-# uni-app picker选择器
+# uni-app picker 选择器
 
-插件市场里面的picker选择器不满足自己的需求，所以自己写了一个简单的picker选择器，可扩展、可自定义，一般满足日常需要。
+插件市场里面的 picker 选择器不满足自己的需求，所以自己写了一个简单的 picker 选择器，可扩展、可自定义，一般满足日常需要。  
+Github：[https://github.com/liub1934/uni-lb-picker](https://github.com/liub1934/uni-lb-picker)  
+插件市场：[https://ext.dcloud.net.cn/plugin?id=1111](https://ext.dcloud.net.cn/plugin?id=1111)
+
+## 兼容性
+
+H5 + 各平台小程序（百度除外）  
+安卓及 IOS 未测试（应该也能运行）
 
 ## 功能
 
@@ -10,11 +17,11 @@
 4、自定义选择器头部确定取消按钮颜色及插槽支持  
 5、选择器可视区自定义滚动个数  
 6、自定义数据字段，满足不同人的需求  
-7、自定义选择器样式  
+7、自定义选择器样式
 
 ## 引入插件
 
-单独引入，在需要使用的页面上import引入即可
+单独引入，在需要使用的页面上 import 引入即可
 
 ```html
 <template>
@@ -24,16 +31,16 @@
 </template>
 
 <script>
-import LbPicker from '@/components/lb-picker'
-export default {
-  components: {
-    LbPicker
+  import LbPicker from '@/components/lb-picker'
+  export default {
+    components: {
+      LbPicker
+    }
   }
-}
 </script>
 ```
 
-全局引入，`main.js`中import引入并注册即可全局使用
+全局引入，`main.js`中 import 引入并注册即可全局使用
 
 ```jsvascript
 import LbPicker from '@/components/lb-picker'
@@ -44,7 +51,7 @@ Vue.component("lb-picker", LbPicker)
 
 通过`ref`形式手动调用`show`方法显示，隐藏同理调用`hide`
 
-```javascript
+```text
 <lb-picker ref="picker"></lb-picker>
 
 this.$refs.picker.show() // 显示
@@ -53,7 +60,7 @@ this.$refs.picker.hide() // 隐藏
 
 ## 绑定值及设置默认值
 
-支持vue中`v-model`写法绑定值
+支持 vue 中`v-model`写法绑定值
 
 ```javascript
 <lb-picker v-model="value1"></lb-picker>
@@ -90,7 +97,7 @@ this.$refs.picker2.show() // picker2显示
 为了满足不同人的需求，插件支持自定义数据字段名称， 插件默认的数据字段如下形式：
 
 ```javascript
-[
+;[
   {
     label: '选择1',
     value: 1,
@@ -107,7 +114,7 @@ this.$refs.picker2.show() // picker2显示
 如果你的数据字段和上面不一样，如下形式：
 
 ```javascript
-[
+;[
   {
     text: '选择1',
     id: 1,
@@ -139,42 +146,43 @@ data () {
 
 ## 插槽使用
 
-选择器支持一些可自定义化的插槽，如选择器的取消和确定文字按钮，如果需要对其自定义处理的话，比如加个icon图标之类的，可使用插槽，使用方法如下：  
+选择器支持一些可自定义化的插槽，如选择器的取消和确定文字按钮，如果需要对其自定义处理的话，比如加个 icon 图标之类的，可使用插槽，使用方法如下：
 
 ```html
 <lb-picker>
   <view slot="cancle-text">我是自定义确定</view>
   <view slot="confirm-text">我是自定义取消</view>
 </lb-picker>
-
 ```
 
 其他插槽见下。
 
 ## 其他
 
-其他功能参考示例Demo代码。
+其他功能参考示例 Demo 代码。
 
 ## 参数及事件
 
 ### Props
 
-| 参数                | 说明                                                  | 类型                | 可选值                 | 默认值                                            |
-| :------------------ | :---------------------------------------------------- | :------------------ | :--------------------- | :------------------------------------------------ |
-| value/v-model       | 绑定值，联动选择为Array类型                           | String/Number/Array | -                      | -                                                 |
-| mode                | 选择器类型，支持单列，多列联动                        | String              | selector/multiSelector | selector                                          |
-| list                | 选择器数据                                            | Array               | -                      | -                                                 |
-| level               | 多列联动层级，仅mode为multiSelector有效               | Number              | -                      | 2                                                 |
-| props               | 自定义数据字段                                        | Object              | -                      | {label:'label',value:'value',children:'children'} |
-| cancle-text         | 取消文字                                              | String              | -                      | 取消                                              |
-| cancle-color        | 取消文字颜色                                          | String              | -                      | #999999                                           |
-| confirm-text        | 确定文字                                              | String              | -                      | 确定                                              |
-| confirm-color       | 确定文字颜色                                          | String              | -                      | #007aff                                           |
-| column-num          | 可视滚动区域内滚动个数，最好设置奇数值                | Number              | -                      | 5                                                 |
-| radius              | 选择器顶部圆角，支持rpx，如radius="10rpx"             | String              | -                      | -                                                 |
-| column-style        | 选择器默认样式                                        | Object              | -                      | -                                                 |
-| active-column-style | 选择器选中样式                                        | Object              | -                      | -                                                 |
-| loading             | 选择器是否显示加载中，可使用loading插槽自定义加载效果 | Boolean             | -                      | -                                                 |
+| 参数                    | 说明                                                    | 类型                | 可选值                 | 默认值                                            |
+| :---------------------- | :------------------------------------------------------ | :------------------ | :--------------------- | :------------------------------------------------ |
+| value/v-model           | 绑定值，联动选择为 Array 类型                           | String/Number/Array | -                      | -                                                 |
+| mode                    | 选择器类型，支持单列，多列联动                          | String              | selector/multiSelector | selector                                          |
+| list                    | 选择器数据                                              | Array               | -                      | -                                                 |
+| level                   | 多列联动层级，仅 mode 为 multiSelector 有效             | Number              | -                      | 2                                                 |
+| props                   | 自定义数据字段                                          | Object              | -                      | {label:'label',value:'value',children:'children'} |
+| cancle-text             | 取消文字                                                | String              | -                      | 取消                                              |
+| cancle-color            | 取消文字颜色                                            | String              | -                      | #999999                                           |
+| confirm-text            | 确定文字                                                | String              | -                      | 确定                                              |
+| confirm-color           | 确定文字颜色                                            | String              | -                      | #007aff                                           |
+| column-num              | 可视滚动区域内滚动个数，最好设置奇数值                  | Number              | -                      | 5                                                 |
+| radius                  | 选择器顶部圆角，支持 rpx，如 radius="10rpx"             | String              | -                      | -                                                 |
+| ~~column-style~~        | 选择器默认样式(已弃用，见下方自定义样式说明)            | Object              | -                      | -                                                 |
+| ~~active-column-style~~ | 选择器选中样式(已弃用，见下方自定义样式说明)            | Object              | -                      | -                                                 |
+| loading                 | 选择器是否显示加载中，可使用 loading 插槽自定义加载效果 | Boolean             | -                      | -                                                 |
+| mask-color              | 遮罩层颜色                                              | String              | -                      | rgba(0, 0, 0, 0.4)                                |
+| close-on-click-mask     | 点击遮罩层是否关闭选择器                                | Boolean             | true/false             | true                                              |
 
 ### 方法
 
@@ -189,19 +197,61 @@ data () {
 | :------- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | show     | 选择器打开时触发                         | -                                                                                                                                                                                                                                                                    |
 | hide     | 选择器隐藏时触发                         | -                                                                                                                                                                                                                                                                    |
-| change   | 选择器滚动时触发，此时不会改变绑定的值   | `{ index, item, value }`   `index`触发滚动后新的索引，单选时是具体的索引值，多列联动选择时为数组。`item`触发滚动后新的的完整内容，包裹`label`、`value`等，单选时为对象，多列选择时为数组对象。`value`触发滚动后新的value值，单列选择时为具体值，多列联动选择时为数组 |
+| change   | 选择器滚动时触发，此时不会改变绑定的值   | `{ index, item, value }` `index`触发滚动后新的索引，单选时是具体的索引值，多列联动选择时为数组。`item`触发滚动后新的的完整内容，包裹`label`、`value`等，单选时为对象，多列选择时为数组对象。`value`触发滚动后新的 value 值，单列选择时为具体值，多列联动选择时为数组 |
 | confirm  | 点击选择器确定时触发，此时会改变绑定的值 | 同上`change`事件说明                                                                                                                                                                                                                                                 |
 | cancle   | 点击选择器取消时触发                     | 同上`change`事件说明                                                                                                                                                                                                                                                 |
 
 ### 插槽
 
-| 插槽名        | 说明               |
-| :------------ | :----------------- |
-| cancle-text   | 选择器取消文字插槽 |
-| action-center | 选择器顶部中间插槽 |
-| confirm-text  | 选择器确定文字插槽 |
-| loading       | 选择器loading插槽  |
+| 插槽名        | 说明                |
+| :------------ | :------------------ |
+| cancle-text   | 选择器取消文字插槽  |
+| action-center | 选择器顶部中间插槽  |
+| confirm-text  | 选择器确定文字插槽  |
+| loading       | 选择器 loading 插槽 |
+
+## 其他
+
+### 选择器自定义样式
+
+原先的`column-style`和`active-column-style`已弃用，如需修改默认样式及选中样式参考`demo9`
+
+```css
+<style lang="scss" scoped>
+/deep/ .lb-picker {
+  .lb-picker-column-label {
+    color: #f0ad4e;
+  }
+  .lb-picker-column-active {
+    .lb-picker-column-label {
+      color: #007aff;
+      font-weight: 700;
+    }
+  }
+}
+</style>
+```
+
+### 获取选中值的文字
+
+`@confirm`事件中可以拿到：
+
+单选：
+
+```javascript
+handleConfirm (e) {
+  console.log(e.item.label) // 选项1
+}
+```
+
+联动选择：
+
+```javascript
+handleConfirm (e) {
+  console.log(e.item.map(item => item.label).join('-')) // 选项1-选项11
+}
+```
 
 ## Tips
 
-微信小程序端，滚动时在iOS自带振动反馈，可在系统设置 -> 声音与触感 -> 系统触感反馈中关闭  
+微信小程序端，滚动时在 iOS 自带振动反馈，可在系统设置 -> 声音与触感 -> 系统触感反馈中关闭
