@@ -1,0 +1,22 @@
+{
+  "name": "uni-lb-picker",
+  "version": "1.0.4",
+  "description": "uniapp picker选择器，可自定义，扩展性高，支持单选及理论任意级数多级联动选择。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liub1934/uni-lb-picker.git"
+  },
+  "keywords": [
+    "uniapp-picker"
+  ],
+  "author": "https://ext.dcloud.net.cn/plugin?id=1111",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liub1934/uni-lb-picker/issues"
+  },
+  "homepage": "https://github.com/liub1934/uni-lb-picker#readme"
+}

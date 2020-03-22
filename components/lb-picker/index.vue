@@ -72,6 +72,16 @@
           :height="pickerContentHeight"
           @change="handleChange">
         </multi-selector-picker>
+
+        <!-- 非联动选择 -->
+        <unlinked-selector-picker v-if="mode === 'unlinkedSelector' && !loading"
+          :value="value"
+          :list="list"
+          :visible="visible"
+          :props="pickerProps"
+          :height="pickerContentHeight"
+          @change="handleChange">
+        </unlinked-selector-picker>
       </view>
     </view>
   </view>
@@ -86,11 +96,13 @@ const defaultProps = {
 import { getIndicatorHeight } from './utils'
 import SelectorPicker from './pickers/selector-picker'
 import MultiSelectorPicker from './pickers/multi-selector-picker'
+import UnlinkedSelectorPicker from './pickers/unlinked-selector-picker'
 const indicatorHeight = getIndicatorHeight()
 export default {
 	components: {
 		SelectorPicker,
-		MultiSelectorPicker
+		MultiSelectorPicker,
+		UnlinkedSelectorPicker
 	},
 	props: {
 		value: [String, Number, Array],

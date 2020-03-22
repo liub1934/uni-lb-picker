@@ -19,6 +19,12 @@
 			}
 		},
 		{
+			"path": "pages/demos/demo12",
+			"style": {
+				"navigationBarTitleText": "多级非联动"
+			}
+		},
+		{
 			"path": "pages/demos/demo3",
 			"style": {
 				"navigationBarTitleText": "省市区选择"

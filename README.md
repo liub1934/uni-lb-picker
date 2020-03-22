@@ -13,7 +13,7 @@ H5 + 各平台小程序（百度除外）
 ## 功能
 
 1、单选  
-2、多级联动，理论支持任意级数  
+2、多级联动，非多级联动，理论支持任意级数  
 3、省市区选择，基于多级联动  
 4、自定义选择器头部确定取消按钮颜色及插槽支持  
 5、选择器可视区自定义滚动个数  
@@ -48,6 +48,16 @@ import LbPicker from '@/components/lb-picker'
 Vue.component("lb-picker", LbPicker)
 ```
 
+npm 安装引入：
+
+```shell
+npm install uni-lb-picker
+```
+
+```jsvascript
+import LbPicker from 'uni-lb-picker'
+```
+
 ## 调用显示选择器
 
 通过`ref`形式手动调用`show`方法显示，隐藏同理调用`hide`
@@ -61,7 +71,7 @@ this.$refs.picker.hide() // 隐藏
 
 ## 绑定值及设置默认值
 
-支持 vue 中`v-model`写法绑定值
+支持 vue 中`v-model`写法绑定值，无需自己维护选中值的索引。
 
 ```javascript
 <lb-picker v-model="value1"></lb-picker>
@@ -151,39 +161,35 @@ data () {
 
 ```html
 <lb-picker>
-  <view slot="cancle-text">我是自定义确定</view>
-  <view slot="confirm-text">我是自定义取消</view>
+  <view slot="cancle-text">我是自定义取消</view>
+  <view slot="confirm-text">我是自定义确定</view>
 </lb-picker>
 ```
 
 其他插槽见下。
 
-## 其他
-
-其他功能参考示例 Demo 代码。
-
 ## 参数及事件
 
 ### Props
 
-| 参数                    | 说明                                                    | 类型                | 可选值                 | 默认值                                            |
-| :---------------------- | :------------------------------------------------------ | :------------------ | :--------------------- | :------------------------------------------------ |
-| value/v-model           | 绑定值，联动选择为 Array 类型                           | String/Number/Array | -                      | -                                                 |
-| mode                    | 选择器类型，支持单列，多列联动                          | String              | selector/multiSelector | selector                                          |
-| list                    | 选择器数据                                              | Array               | -                      | -                                                 |
-| level                   | 多列联动层级，仅 mode 为 multiSelector 有效             | Number              | -                      | 2                                                 |
-| props                   | 自定义数据字段                                          | Object              | -                      | {label:'label',value:'value',children:'children'} |
-| cancle-text             | 取消文字                                                | String              | -                      | 取消                                              |
-| cancle-color            | 取消文字颜色                                            | String              | -                      | #999999                                           |
-| confirm-text            | 确定文字                                                | String              | -                      | 确定                                              |
-| confirm-color           | 确定文字颜色                                            | String              | -                      | #007aff                                           |
-| column-num              | 可视滚动区域内滚动个数，最好设置奇数值                  | Number              | -                      | 5                                                 |
-| radius                  | 选择器顶部圆角，支持 rpx，如 radius="10rpx"             | String              | -                      | -                                                 |
-| ~~column-style~~        | 选择器默认样式(已弃用，见下方自定义样式说明)            | Object              | -                      | -                                                 |
-| ~~active-column-style~~ | 选择器选中样式(已弃用，见下方自定义样式说明)            | Object              | -                      | -                                                 |
-| loading                 | 选择器是否显示加载中，可使用 loading 插槽自定义加载效果 | Boolean             | -                      | -                                                 |
-| mask-color              | 遮罩层颜色                                              | String              | -                      | rgba(0, 0, 0, 0.4)                                |
-| close-on-click-mask     | 点击遮罩层是否关闭选择器                                | Boolean             | true/false             | true                                              |
+| 参数                    | 说明                                                    | 类型                | 可选值                                                           | 默认值                                            |
+| :---------------------- | :------------------------------------------------------ | :------------------ | :--------------------------------------------------------------- | :------------------------------------------------ |
+| value/v-model           | 绑定值，联动选择为 Array 类型                           | String/Number/Array | -                                                                | -                                                 |
+| mode                    | 选择器类型，支持单列，多列联动                          | String              | selector 单选/multiSelector 多级联动/unlinkedSelector 多级非联动 | selector                                          |
+| list                    | 选择器数据                                              | Array               | -                                                                | -                                                 |
+| level                   | 多列联动层级，仅 mode 为 multiSelector 有效             | Number              | -                                                                | 2                                                 |
+| props                   | 自定义数据字段                                          | Object              | -                                                                | {label:'label',value:'value',children:'children'} |
+| cancle-text             | 取消文字                                                | String              | -                                                                | 取消                                              |
+| cancle-color            | 取消文字颜色                                            | String              | -                                                                | #999999                                           |
+| confirm-text            | 确定文字                                                | String              | -                                                                | 确定                                              |
+| confirm-color           | 确定文字颜色                                            | String              | -                                                                | #007aff                                           |
+| column-num              | 可视滚动区域内滚动个数，最好设置奇数值                  | Number              | -                                                                | 5                                                 |
+| radius                  | 选择器顶部圆角，支持 rpx，如 radius="10rpx"             | String              | -                                                                | -                                                 |
+| ~~column-style~~        | 选择器默认样式(已弃用，见下方自定义样式说明)            | Object              | -                                                                | -                                                 |
+| ~~active-column-style~~ | 选择器选中样式(已弃用，见下方自定义样式说明)            | Object              | -                                                                | -                                                 |
+| loading                 | 选择器是否显示加载中，可使用 loading 插槽自定义加载效果 | Boolean             | -                                                                | -                                                 |
+| mask-color              | 遮罩层颜色                                              | String              | -                                                                | rgba(0, 0, 0, 0.4)                                |
+| close-on-click-mask     | 点击遮罩层是否关闭选择器                                | Boolean             | true/false                                                       | true                                              |
 
 ### 方法
 
@@ -212,6 +218,8 @@ data () {
 | loading       | 选择器 loading 插槽 |
 
 ## 其他
+
+其他功能参考示例 Demo 代码。
 
 ### 选择器自定义样式
 

@@ -1,5 +1,5 @@
 <template>
-  <view class="multi-selector picker-item"
+  <view class="selector-picker picker-item"
     :style="{height: height}">
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
@@ -28,22 +28,18 @@ export default {
 		value: Array,
 		list: Array,
 		props: Object,
-		level: Number,
-		keep: {
-			type: Boolean,
-			default: true
-		},
 		visible: Boolean,
-		height: String
+		height: String,
+		indicatorHeight: Number
 	},
-	data() {
+	data(){
 		return {
 			pickerValue: [],
 			pickerColumns: [],
 			selectValue: [],
 			selectItem: [],
 			columnHeight: indicatorHeight + 'px',
-			indicatorStyle: `height: ${indicatorHeight}px`
+      indicatorStyle: `height: ${indicatorHeight}px`
 		}
 	},
 	created () {
@@ -51,58 +47,41 @@ export default {
 	},
 	methods: {
 		init () {
-			this.setPickerItems(this.list)
-			this.$emit('change', {
-				value: this.selectValue,
-				item: this.selectItem,
-				index: this.pickerValue,
-				init: true
+			if (this.list && this.list.length) {
+				this.pickerColumns = this.list
+				this.setPickerValue()
+				this.$emit('change', {
+					value: this.selectValue,
+					item: this.selectItem,
+					index: this.pickerValue
+				})
+			}
+		},
+		setPickerValue (value) {
+			this.list.forEach((item, i) => {
+				let index = item.findIndex(item => item[this.props.value] === this.value[i])
+				index = index > -1 ? index : 0
+				this.$set(this.pickerValue, i, index)
+				this.$set(this.selectValue, i, this.list[i][index][this.props.value])
+				this.$set(this.selectItem, i, this.list[i][index])
 			})
 		},
+
 		handleChange (item) {
 			const pickerValue = item.detail.value
 			const columnIndex = pickerValue.findIndex((item, i) => item !== this.pickerValue[i] )
 			const valueIndex = pickerValue[columnIndex]
-			this.setPickerChange(pickerValue, valueIndex, columnIndex)
-		},
-		setPickerChange (pickerValue, valueIndex, columnIndex) {
-			for (let i = 0; i < pickerValue.length; i++) {
-				if (i > columnIndex) {
-					pickerValue[i] = 0
-					const column = this.pickerColumns[i-1][valueIndex] || this.pickerColumns[i-1][0]
-					this.$set(this.pickerColumns, i, column[this.props.children] || [])
-          valueIndex = 0
-				}
-				this.selectItem[i] = this.pickerColumns[i][pickerValue[i]]
-				this.selectValue[i] = this.selectItem[i][this.props.value]
-			}
 			this.pickerValue = pickerValue
+			this.$set(this.selectValue, columnIndex, this.list[columnIndex][valueIndex][this.props.value])
+			this.$set(this.selectItem, columnIndex, this.list[columnIndex][valueIndex])
 			this.$emit('change', {
 				value: this.selectValue,
 				item: this.selectItem,
 				index: this.pickerValue
 			})
-		},
-		setPickerItems (list = [], index = 0) {
-			const defaultValue = this.value || []
-			if (index < this.level && list.length) {
-				const value = defaultValue[index] || ''
-				let i = list.findIndex(item => item[this.props.value] === value)
-				i = i > -1 ? i : 0
-				this.$set(this.pickerValue, index, i)
-				this.$set(this.pickerColumns, index, list)
-				this.$set(this.selectValue, index, list[i][this.props.value])
-				this.$set(this.selectItem, index, list[i])
-				this.setPickerItems(list[i][this.props.children] || [], index + 1)
-			}
 		}
 	},
 	watch: {
-		visible (newVisible) {
-			if (newVisible && !this.keep) {
-				this.init()	
-			}
-		},
 		list () {
 			this.init()
 		}	

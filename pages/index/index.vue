@@ -24,6 +24,10 @@
 						path: '/pages/demos/demo2'
 					},
 					{
+						title: '多级非联动',
+						path: '/pages/demos/demo12'
+					},
+					{
 						title: '省市区选择',
 						path: '/pages/demos/demo3'
 					},
