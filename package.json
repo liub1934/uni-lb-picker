@@ -2,7 +2,7 @@
   "name": "uni-lb-picker",
   "version": "1.0.5",
   "description": "uniapp picker选择器，可自定义，扩展性高，支持单选及理论任意级数多级联动选择。",
-  "main": "index.js",
+  "main": "components/lb-picker/index.vue",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
