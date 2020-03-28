@@ -1,4 +1,15 @@
 .picker-item {
+	picker-view-column {
+		transition: all 0.3s;
+	}
+
+	.lb-picker-column-flex0 {
+		flex: 0;
+	}
+
+	.lb-picker-column-flex1 {
+		flex: 1;
+	}
 
 	.lb-picker-column {
 		padding: 0;
