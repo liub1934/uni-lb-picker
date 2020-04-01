@@ -58,13 +58,12 @@ export default {
   methods: {
     init () {
       this.setPickerItems(this.list)
-      if (this.changeOnInit) {
-        this.$emit('change', {
-          value: this.selectValue,
-          item: this.selectItem,
-          index: this.pickerValue
-        })
-      }
+      this.$emit('change', {
+        value: this.selectValue,
+        item: this.selectItem,
+        index: this.pickerValue,
+        change: this.changeOnInit
+      })
     },
     handleChange (item) {
       const pickerValue = item.detail.value
@@ -100,7 +99,8 @@ export default {
       this.$emit('change', {
         value: this.selectValue,
         item: this.selectItem,
-        index: this.pickerValue
+        index: this.pickerValue,
+        change: true
       })
     },
     setPickerItems (list = [], index = 0) {

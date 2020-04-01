@@ -56,13 +56,12 @@ export default {
       if (this.list && this.list.length) {
         this.pickerColumns = this.list
 				this.setPickerValue()
-				if (this.changeOnInit) {
-					this.$emit('change', {
-						value: this.selectValue,
-						item: this.selectItem,
-						index: this.pickerValue
-					})
-				}
+        this.$emit('change', {
+          value: this.selectValue,
+          item: this.selectItem,
+          index: this.pickerValue,
+          change: this.changeOnInit
+        })
       }
     },
     setPickerValue (value) {
@@ -98,7 +97,8 @@ export default {
 				this.$emit('change', {
 					value: this.selectValue,
 					item: this.selectItem,
-					index: this.pickerValue
+          index: this.pickerValue,
+          change: true
 				})
 			}
     }

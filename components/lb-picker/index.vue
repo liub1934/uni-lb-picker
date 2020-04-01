@@ -183,11 +183,13 @@ export default {
         this.hide()
       }
     },
-    handleChange ({ value, item, index }) {
+    handleChange ({ value, item, index, change }) {
       this.picker.value = value
       this.picker.item = item
       this.picker.index = index
-      this.$emit('change', this.picker)
+      if (change) {
+        this.$emit('change', this.picker)
+      }
     },
     handleMaskTap () {
       if (this.closeOnClickMask) {

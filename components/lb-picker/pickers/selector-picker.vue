@@ -54,13 +54,12 @@ export default {
         index = index > -1 ? index : 0
         this.pickerValue = [index]
         this.selectValue = this.list[index][this.props.value]
-        if (this.changeOnInit) {
-          this.$emit('change', {
-            value: this.selectValue,
-            item: this.list[index],
-            index: index
-          })
-        }
+        this.$emit('change', {
+          value: this.selectValue,
+          item: this.list[index],
+          index: index,
+          change: this.changeOnInit
+        })
       }
     },
     handleChange (item) {
@@ -70,7 +69,8 @@ export default {
       this.$emit('change', {
         value: this.selectValue,
         item: this.list[index],
-        index: index
+        index: index,
+        change: true
       })
     }
   },
