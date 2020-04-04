@@ -22,6 +22,15 @@
       @confirm="handleConfirm"
       @cancle="handleCancle">
     </lb-picker>
+
+    <button @tap="handleTap('picker3')">无数据选择器</button>
+    <lb-picker ref="picker3"
+      v-model="value3"
+      mode="selector"
+      @change="handleChange"
+      @confirm="handleConfirm"
+      @cancle="handleCancle">
+    </lb-picker>
   </view>
 </template>
 
@@ -41,7 +50,8 @@
 					}
 				],
 				value2: '选项二',
-				list2: ['选项一', '选项二']
+				list2: ['选项一', '选项二'],
+				value3: ''
 			}
 		},
 		methods: {

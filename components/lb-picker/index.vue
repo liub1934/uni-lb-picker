@@ -54,8 +54,19 @@
           </slot>
         </view>
 
+        <!-- 暂无数据 -->
+        <view v-if="isEmpty && !loading"
+          class="lb-picker-empty">
+          <slot name="empty">
+            <text class="lb-picker-empty-text"
+              :style="{ color: emptyColor }">
+              {{ emptyText }}
+            </text>
+          </slot>
+        </view>
+
         <!-- 单选 -->
-        <selector-picker v-if="mode === 'selector' && !loading"
+        <selector-picker v-if="mode === 'selector' && !loading && !isEmpty"
           :value="value"
           :list="list"
           :props="pickerProps"
@@ -65,7 +76,7 @@
         </selector-picker>
 
         <!-- 多列联动 -->
-        <multi-selector-picker v-if="mode === 'multiSelector' && !loading"
+        <multi-selector-picker v-if="mode === 'multiSelector' && !loading && !isEmpty"
           :value="value"
           :list="list"
           :level="level"
@@ -77,7 +88,7 @@
         </multi-selector-picker>
 
         <!-- 非联动选择 -->
-        <unlinked-selector-picker v-if="mode === 'unlinkedSelector' && !loading"
+        <unlinked-selector-picker v-if="mode === 'unlinkedSelector' && !loading && !isEmpty"
           :value="value"
           :list="list"
           :visible="visible"
@@ -136,6 +147,11 @@ export default {
       type: Boolean,
       default: true
     },
+    emptyColor: String,
+    emptyText: {
+      type: String,
+      default: '暂无数据'
+    },
     radius: String,
     columnNum: {
       type: Number,
@@ -163,6 +179,13 @@ export default {
       pickerContentHeight: indicatorHeight * this.columnNum + 'px'
     }
   },
+  computed: {
+    isEmpty () {
+      if (!this.list) return true
+      if (this.list && !this.list.length) return true
+      return false
+    }
+  },
   methods: {
     show () {
       this.visible = true
@@ -177,11 +200,14 @@ export default {
       }
     },
     handleConfirm () {
-      const picker = JSON.parse(JSON.stringify(this.picker))
-      this.myValue = picker.value
-      this.$emit('confirm', this.picker)
-      if (this.canHide) {
+      if (this.isEmpty) {
+        this.$emit('confirm', null)
         this.hide()
+      } else {
+        const picker = JSON.parse(JSON.stringify(this.picker))
+        this.myValue = picker.value
+        this.$emit('confirm', this.picker)
+        if (this.canHide) this.hide()
       }
     },
     handleChange ({ value, item, index, change }) {

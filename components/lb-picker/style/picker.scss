@@ -59,7 +59,7 @@
 				align-items: center;
 
 				.lb-picker-action-cancle {
-					color: #999999;
+					color: #999;
 				}
 
 				.lb-picker-action-confirm {
@@ -71,7 +71,7 @@
 		.lb-picker-content {
 			position: relative;
 			width: 100%;
-			background-color: $uni-bg-color;
+			background-color: #fff;
 			font-size: 32rpx;
 
 			.uni-picker-view-indicator {
@@ -80,12 +80,15 @@
 				}
 			}
 
-			.lb-picker-loading {
+			.lb-picker-loading,
+			.lb-picker-empty {
 				height: 100%;
 				display: flex;
 				justify-content: center;
 				align-items: center;
+			}
 
+			.lb-picker-loading {
 				.lb-picker-loading-img {
 					width: 64rpx;
 					height: 64rpx;
@@ -93,6 +96,14 @@
 					background-repeat: no-repeat;
 					background-size: 100% 100%;
 					animation: rotating 2s linear infinite;
+				}
+			}
+
+			.lb-picker-empty {
+				font-size: 32rpx;
+
+				.lb-picker-empty-text {
+					color: #999;
 				}
 			}
 		}
