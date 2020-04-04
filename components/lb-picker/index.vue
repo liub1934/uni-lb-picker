@@ -150,7 +150,8 @@ export default {
       type: String,
       default: 'rgba(0, 0, 0, 0.4)'
     },
-    changeOnInit: Boolean
+    changeOnInit: Boolean,
+    dataset: Object
   },
   data () {
     return {
@@ -187,6 +188,7 @@ export default {
       this.picker.value = value
       this.picker.item = item
       this.picker.index = index
+      this.picker.dataset = this.dataset || {}
       if (change) {
         this.$emit('change', this.picker)
       }
@@ -195,8 +197,8 @@ export default {
       if (this.closeOnClickMask) {
         this.visible = false
       }
-		},
-		moveHandle () {}
+    },
+    moveHandle () {}
   },
   watch: {
     value (newVal) {

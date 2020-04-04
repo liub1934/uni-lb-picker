@@ -21,6 +21,18 @@
       @confirm="handleConfirm"
       @cancle="handleCancle">
     </lb-picker>
+
+    <button @tap="handleTap('picker3')">扁平数据支持</button>
+    {{ JSON.stringify(list2) }}
+    <view>{{ value3.join('-') }}</view>
+    <lb-picker ref="picker3"
+      v-model="value3"
+      mode="unlinkedSelector"
+      :list="list2"
+      @change="handleChange"
+      @confirm="handleConfirm"
+      @cancle="handleCancle">
+    </lb-picker>
   </view>
 </template>
 
@@ -30,6 +42,7 @@
 			return {
 				value1: [],
 				value2: ['2', '33', '222'],
+				value3: ['选项2', '选项33', '选项222'],
 				list: [
 					[
 						{
@@ -73,6 +86,11 @@
 							value: '333'
 						}
 					]
+				],
+				list2: [
+					['选项1', '选项2', '选项3'],
+					['选项11', '选项22', '选项33'],
+					['选项111', '选项222', '选项333'],
 				]
 			}
 		},

@@ -10,14 +10,14 @@
         <view v-for="(item, i) in column"
           :class="[
             'lb-picker-column',
-            item[props.value] === selectValue[index]
+            item[props.value] || item === selectValue[index]
               ? 'lb-picker-column-active'
               : ''
           ]"
           :key="i"
           :style="{ height: columnHeight, 'line-height': columnHeight }">
           <view class="lb-picker-column-label">
-            {{ item[props.label] }}
+            {{ item[props.label] || item }}
           </view>
         </view>
       </picker-view-column>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { getIndicatorHeight } from '../utils.js'
+import { getIndicatorHeight, isObject } from '../utils.js'
 const indicatorHeight = getIndicatorHeight()
 export default {
   props: {
@@ -55,7 +55,7 @@ export default {
     init () {
       if (this.list && this.list.length) {
         this.pickerColumns = this.list
-				this.setPickerValue()
+        this.setPickerValue()
         this.$emit('change', {
           value: this.selectValue,
           item: this.selectItem,
@@ -66,13 +66,20 @@ export default {
     },
     setPickerValue (value) {
       this.list.forEach((item, i) => {
-        let index = item.findIndex(
-          item => item[this.props.value] === this.value[i]
-        )
+        let index = item.findIndex(item => {
+          return isObject(item)
+            ? item[this.props.value] === this.value[i]
+            : item === this.value[i]
+        })
         index = index > -1 ? index : 0
+        const columnItem = this.list[i][index]
         this.$set(this.pickerValue, i, index)
-        this.$set(this.selectValue, i, this.list[i][index][this.props.value])
-        this.$set(this.selectItem, i, this.list[i][index])
+        this.$set(
+          this.selectValue,
+          i,
+          isObject(columnItem) ? columnItem[this.props.value] : columnItem
+        )
+        this.$set(this.selectItem, i, columnItem)
       })
     },
 
@@ -80,27 +87,24 @@ export default {
       const pickerValue = item.detail.value
       const columnIndex = pickerValue.findIndex(
         (item, i) => item !== this.pickerValue[i]
-			)
-			if (columnIndex > -1) {
-				const valueIndex = pickerValue[columnIndex]
-				this.pickerValue = pickerValue
-				this.$set(
-					this.selectValue,
-					columnIndex,
-					this.list[columnIndex][valueIndex][this.props.value]
-				)
-				this.$set(
-					this.selectItem,
-					columnIndex,
-					this.list[columnIndex][valueIndex]
-				)
-				this.$emit('change', {
-					value: this.selectValue,
-					item: this.selectItem,
+      )
+      if (columnIndex > -1) {
+        const valueIndex = pickerValue[columnIndex]
+        const columnItem = this.list[columnIndex][valueIndex]
+        this.pickerValue = pickerValue
+        this.$set(
+          this.selectValue,
+          columnIndex,
+          isObject(columnItem) ? columnItem[this.props.value] : columnItem
+        )
+        this.$set(this.selectItem, columnIndex, columnItem)
+        this.$emit('change', {
+          value: this.selectValue,
+          item: this.selectItem,
           index: this.pickerValue,
           change: true
-				})
-			}
+        })
+      }
     }
   },
   watch: {

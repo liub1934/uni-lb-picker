@@ -1,12 +1,23 @@
 <template>
   <view>
-    <button @tap="handleTap">点我弹出选择器</button>
-    <view>{{ value }}</view>
-    <view>{{ label }}</view>
-    <lb-picker ref="picker"
-      v-model="value"
+    <button @tap="handleTap('picker1')">点我弹出选择器</button>
+    <view>{{ value1 }}</view>
+    <lb-picker ref="picker1"
+      v-model="value1"
       mode="selector"
-      :list="list"
+      :list="list1"
+      @change="handleChange"
+      @confirm="handleConfirm"
+      @cancle="handleCancle">
+    </lb-picker>
+
+    <button @tap="handleTap('picker2')">扁平数据支持</button>
+    {{ JSON.stringify(list2) }}
+    <view>{{ value2 }}</view>
+    <lb-picker ref="picker2"
+      v-model="value2"
+      mode="selector"
+      :list="list2"
       @change="handleChange"
       @confirm="handleConfirm"
       @cancle="handleCancle">
@@ -18,9 +29,8 @@
 	export default {
 		data(){
 			return {
-				value: 'B',
-				label: '',
-				list: [
+				value1: 'B',
+				list1: [
 					{
 						label: '选项一',
 						value: 'A'
@@ -29,18 +39,19 @@
 						label: '选项二',
 						value: 'B'
 					}
-				]
+				],
+				value2: '选项二',
+				list2: ['选项一', '选项二']
 			}
 		},
 		methods: {
-			handleTap () {
-				this.$refs.picker.show()
+			handleTap (name) {
+				this.$refs[name].show()
 			},
 			handleChange (item) {
 				console.log('change::', item)
 			},
 			handleConfirm (item) {
-				this.label = item.item.label
 				console.log('confirm::', item)
 			},
 			handleCancle (item) {

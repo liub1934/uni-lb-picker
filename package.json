@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/liub1934/uni-lb-picker/issues"
   },
-  "homepage": "https://github.com/liub1934/uni-lb-picker#readme"
+  "homepage": "https://github.com/liub1934/uni-lb-picker#readme",
+  "standard": {
+    "globals": {
+      "uni": false
+    }
+  }
 }

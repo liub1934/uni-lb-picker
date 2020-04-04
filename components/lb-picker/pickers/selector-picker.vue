@@ -9,12 +9,14 @@
         <view v-for="(item, i) in list"
           :class="[
             'lb-picker-column',
-            item[props.value] === selectValue ? 'lb-picker-column-active' : ''
+            item[props.value] || item === selectValue
+              ? 'lb-picker-column-active'
+              : ''
           ]"
           :key="i"
           :style="{ height: columnHeight, lineHeight: columnHeight }">
           <view class="lb-picker-column-label">
-            {{ item[props.label] }}
+            {{ item[props.label] || item }}
           </view>
         </view>
       </picker-view-column>
@@ -23,7 +25,7 @@
 </template>
 
 <script>
-import { getIndicatorHeight } from '../utils.js'
+import { getIndicatorHeight, isObject } from '../utils.js'
 const indicatorHeight = getIndicatorHeight()
 export default {
   props: {
@@ -48,15 +50,20 @@ export default {
   methods: {
     init () {
       if (this.list && this.list.length) {
-        let index = this.list.findIndex(
-          item => item[this.props.value] === this.value
-        )
+        let index = this.list.findIndex(item => {
+          return isObject(item)
+            ? item[this.props.value] === this.value
+            : item === this.value
+        })
         index = index > -1 ? index : 0
+        const listItem = this.list[index]
         this.pickerValue = [index]
-        this.selectValue = this.list[index][this.props.value]
+        this.selectValue = isObject(listItem)
+          ? listItem[this.props.value]
+          : listItem
         this.$emit('change', {
           value: this.selectValue,
-          item: this.list[index],
+          item: listItem,
           index: index,
           change: this.changeOnInit
         })
@@ -64,11 +71,14 @@ export default {
     },
     handleChange (item) {
       const index = item.detail.value[0] || 0
-      this.selectValue = this.list[index][this.props.value]
+      const listItem = this.list[index]
+      this.selectValue = isObject(listItem)
+        ? listItem[this.props.value]
+        : listItem
       this.pickerValue = item.detail.value
       this.$emit('change', {
         value: this.selectValue,
-        item: this.list[index],
+        item: listItem,
         index: index,
         change: true
       })
