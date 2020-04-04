@@ -34,10 +34,6 @@ export default {
     list: Array,
     props: Object,
     level: Number,
-    keep: {
-      type: Boolean,
-      default: true
-    },
     visible: Boolean,
     height: String,
     changeOnInit: Boolean
@@ -53,16 +49,16 @@ export default {
     }
   },
   created () {
-    this.init()
+    this.init('init')
   },
   methods: {
-    init () {
+    init (changeType) {
       this.setPickerItems(this.list)
       this.$emit('change', {
         value: this.selectValue,
         item: this.selectItem,
         index: this.pickerValue,
-        change: this.changeOnInit
+        change: changeType
       })
     },
     handleChange (item) {
@@ -100,7 +96,7 @@ export default {
         value: this.selectValue,
         item: this.selectItem,
         index: this.pickerValue,
-        change: true
+        change: 'scroll'
       })
     },
     setPickerItems (list = [], index = 0) {
@@ -121,16 +117,11 @@ export default {
     }
   },
   watch: {
-    visible (newVisible) {
-      if (newVisible && !this.keep) {
-        this.init()
-      }
-    },
     value (newVal) {
-      this.init()
+      this.init('value')
     },
     list () {
-      this.init()
+      this.init('list')
     }
   }
 }

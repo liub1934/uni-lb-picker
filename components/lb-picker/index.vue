@@ -188,10 +188,9 @@ export default {
       this.picker.value = value
       this.picker.item = item
       this.picker.index = index
+      this.picker.change = change
       this.picker.dataset = this.dataset || {}
-      if (change) {
-        this.$emit('change', this.picker)
-      }
+      this.$emit('change', this.picker)
     },
     handleMaskTap () {
       if (this.closeOnClickMask) {

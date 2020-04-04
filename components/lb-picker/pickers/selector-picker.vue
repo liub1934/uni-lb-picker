@@ -45,10 +45,10 @@ export default {
     }
   },
   created () {
-    this.init()
+    this.init('init')
   },
   methods: {
-    init () {
+    init (changeType) {
       if (this.list && this.list.length) {
         let index = this.list.findIndex(item => {
           return isObject(item)
@@ -65,7 +65,7 @@ export default {
           value: this.selectValue,
           item: listItem,
           index: index,
-          change: this.changeOnInit
+          change: changeType
         })
       }
     },
@@ -80,16 +80,16 @@ export default {
         value: this.selectValue,
         item: listItem,
         index: index,
-        change: true
+        change: 'scroll'
       })
     }
   },
   watch: {
     list () {
-      this.init()
+      this.init('list')
     },
     value (newVal) {
-      this.init()
+      this.init('value')
     }
   }
 }

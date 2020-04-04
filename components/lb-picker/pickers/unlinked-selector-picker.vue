@@ -35,8 +35,7 @@ export default {
     props: Object,
     visible: Boolean,
     height: String,
-    indicatorHeight: Number,
-    changeOnInit: Boolean
+    indicatorHeight: Number
   },
   data () {
     return {
@@ -49,10 +48,10 @@ export default {
     }
   },
   created () {
-    this.init()
+    this.init('init')
   },
   methods: {
-    init () {
+    init (changeType) {
       if (this.list && this.list.length) {
         this.pickerColumns = this.list
         this.setPickerValue()
@@ -60,7 +59,7 @@ export default {
           value: this.selectValue,
           item: this.selectItem,
           index: this.pickerValue,
-          change: this.changeOnInit
+          change: changeType
         })
       }
     },
@@ -73,12 +72,11 @@ export default {
         })
         index = index > -1 ? index : 0
         const columnItem = this.list[i][index]
+        const valueItem = isObject(columnItem)
+          ? columnItem[this.props.value]
+          : columnItem
         this.$set(this.pickerValue, i, index)
-        this.$set(
-          this.selectValue,
-          i,
-          isObject(columnItem) ? columnItem[this.props.value] : columnItem
-        )
+        this.$set(this.selectValue, i, valueItem)
         this.$set(this.selectItem, i, columnItem)
       })
     },
@@ -91,28 +89,27 @@ export default {
       if (columnIndex > -1) {
         const valueIndex = pickerValue[columnIndex]
         const columnItem = this.list[columnIndex][valueIndex]
+        const valueItem = isObject(columnItem)
+          ? columnItem[this.props.value]
+          : columnItem
         this.pickerValue = pickerValue
-        this.$set(
-          this.selectValue,
-          columnIndex,
-          isObject(columnItem) ? columnItem[this.props.value] : columnItem
-        )
+        this.$set(this.selectValue, columnIndex, valueItem)
         this.$set(this.selectItem, columnIndex, columnItem)
         this.$emit('change', {
           value: this.selectValue,
           item: this.selectItem,
           index: this.pickerValue,
-          change: true
+          change: 'scroll'
         })
       }
     }
   },
   watch: {
     list () {
-      this.init()
+      this.init('list')
     },
     value (newVal) {
-      this.init()
+      this.init('value')
     }
   }
 }
