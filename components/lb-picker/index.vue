@@ -1,27 +1,28 @@
 <template>
-  <view class="lb-picker">
+  <view :class="['lb-picker', inline ? 'lb-picker-inline' : '']">
     <view class="lb-picker-mask"
-      v-show="visible"
+      v-show="visible && !inline"
       :style="{ 'background-color': maskColor }"
-      @tap="handleMaskTap"
+      @tap.stop="handleMaskTap"
       @touchmove.stop.prevent="moveHandle">
     </view>
     <view :class="['lb-picker-container', visible ? 'lb-picker-toggle' : '']"
       :style="{ borderRadius: `${radius} ${radius} 0 0` }">
-      <view class="lb-picker-header"
+      <view v-if="showHeader"
+        class="lb-picker-header"
         :style="{
           height: pickerHeaderHeight,
           'line-height': pickerHeaderHeight
         }">
         <view class="lb-picker-action lb-picker-left">
-          <view class="lb-picker-action-cancle"
-            @tap="handleCancle">
-            <slot v-if="$slots['cancle-text']"
-              name="cancle-text"> </slot>
+          <view class="lb-picker-action-cancel"
+            @tap.stop="handleCancel">
+            <slot v-if="$slots['cancel-text']"
+              name="cancel-text"> </slot>
             <view v-else
-              class="action-cancle-text"
-              :style="{ color: cancleColor }">
-              {{ cancleText }}
+              class="action-cancel-text"
+              :style="{ color: cancelColor }">
+              {{ cancelText }}
             </view>
           </view>
         </view>
@@ -33,7 +34,7 @@
 
         <view class="lb-picker-action lb-picker-right">
           <view class="lb-picker-action-confirm"
-            @tap="handleConfirm">
+            @tap.stop="handleConfirm">
             <slot v-if="$slots['confirm-text']"
               name="confirm-text"> </slot>
             <view v-else
@@ -71,7 +72,7 @@
           :list="list"
           :props="pickerProps"
           :height="pickerContentHeight"
-          :change-on-init="changeOnInit"
+          :inline="inline"
           @change="handleChange">
         </selector-picker>
 
@@ -83,7 +84,7 @@
           :visible="visible"
           :props="pickerProps"
           :height="pickerContentHeight"
-          :change-on-init="changeOnInit"
+          :inline="inline"
           @change="handleChange">
         </multi-selector-picker>
 
@@ -94,7 +95,7 @@
           :visible="visible"
           :props="pickerProps"
           :height="pickerContentHeight"
-          :change-on-init="changeOnInit"
+          :inline="inline"
           @change="handleChange">
         </unlinked-selector-picker>
       </view>
@@ -133,11 +134,11 @@ export default {
     props: {
       type: Object
     },
-    cancleText: {
+    cancelText: {
       type: String,
       default: '取消'
     },
-    cancleColor: String,
+    cancelColor: String,
     confirmText: {
       type: String,
       default: '确定'
@@ -166,8 +167,12 @@ export default {
       type: String,
       default: 'rgba(0, 0, 0, 0.4)'
     },
-    changeOnInit: Boolean,
-    dataset: Object
+    dataset: Object,
+    inline: Boolean,
+    showHeader: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
@@ -188,14 +193,16 @@ export default {
   },
   methods: {
     show () {
+      if (this.inline) return
       this.visible = true
     },
     hide () {
+      if (this.inline) return
       this.visible = false
     },
-    handleCancle () {
-      this.$emit('cancle', this.picker)
-      if (this.canHide) {
+    handleCancel () {
+      this.$emit('cancel', this.picker)
+      if (this.canHide && !this.inline) {
         this.hide()
       }
     },

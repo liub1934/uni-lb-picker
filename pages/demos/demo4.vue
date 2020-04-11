@@ -6,13 +6,13 @@
       v-model="value1"
       mode="selector"
       :list="list"
-      cancle-text="自定义取消"
+      cancel-text="自定义取消"
       confirm-text="自定义确定"
-      cancle-color="#f0ad4e"
+      cancel-color="#f0ad4e"
       confirm-color="#4cd964"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
   </view>
 </template>
@@ -44,8 +44,8 @@
 			handleConfirm (item) {
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

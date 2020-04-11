@@ -9,7 +9,7 @@
       :props="pickerProp"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
   </view>
 </template>
@@ -46,8 +46,8 @@
 				this.label = item.item.label
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

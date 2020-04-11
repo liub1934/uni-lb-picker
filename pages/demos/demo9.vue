@@ -8,7 +8,7 @@
       :list="list1"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker2')">自定义样式颜色-多级联动</button>
@@ -20,7 +20,7 @@
       :level="3"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
   </view>
 </template>
@@ -237,8 +237,8 @@
 				this.label = item.item.label
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

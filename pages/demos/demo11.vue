@@ -10,7 +10,7 @@
       @show="getList1"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
       <view slot="loading">加载中</view>
     </lb-picker>
 
@@ -25,7 +25,7 @@
       @show="getList2"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
   </view>
 </template>
@@ -255,8 +255,8 @@
 			handleConfirm (item) {
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

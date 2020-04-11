@@ -32,6 +32,10 @@
 						path: '/pages/demos/demo3'
 					},
 					{
+						title: 'inline模式',
+						path: '/pages/demos/demo13'
+					},
+					{
 						title: '自定义确定取消文字及颜色',
 						path: '/pages/demos/demo4'
 					},

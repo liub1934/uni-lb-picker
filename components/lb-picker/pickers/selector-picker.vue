@@ -33,8 +33,7 @@ export default {
     list: Array,
     props: Object,
     visible: Boolean,
-    height: String,
-    changeOnInit: Boolean
+    height: String
   },
   data () {
     return {

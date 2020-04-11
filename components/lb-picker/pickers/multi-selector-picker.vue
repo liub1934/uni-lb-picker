@@ -35,8 +35,7 @@ export default {
     props: Object,
     level: Number,
     visible: Boolean,
-    height: String,
-    changeOnInit: Boolean
+    height: String
   },
   data () {
     return {

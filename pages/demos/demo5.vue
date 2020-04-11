@@ -8,12 +8,12 @@
       :list="list"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
-      <view slot="cancle-text">插槽取消</view>
+      @cancel="handleCancel">
+      <view slot="cancel-text">插槽取消</view>
       <view slot="action-center">中间自定义</view>
       <view slot="confirm-text">插槽确定</view>
     </lb-picker>
-    <view>自定义后参数cancleColor、confirmColor将失效</view>
+    <view>自定义后参数cancelColor、confirmColor将失效</view>
   </view>
 </template>
 
@@ -47,8 +47,8 @@
 				this.label = item.item.label
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

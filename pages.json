@@ -30,6 +30,12 @@
 				"navigationBarTitleText": "省市区选择"
 			}
 		},
+    {
+    	"path": "pages/demos/demo13",
+    	"style": {
+    		"navigationBarTitleText": "inline默认显示"
+    	}
+    },
 		{
 			"path": "pages/demos/demo4",
 			"style": {

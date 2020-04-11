@@ -8,7 +8,7 @@
       :list="list"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker2')">点我弹出默认值选择器</button>
@@ -19,7 +19,7 @@
       :list="list"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker3')">扁平数据支持</button>
@@ -31,7 +31,7 @@
       :list="list2"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
   </view>
 </template>
@@ -104,8 +104,8 @@
 			handleConfirm (item) {
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

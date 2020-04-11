@@ -1,40 +1,32 @@
 <template>
   <view>
-    <button @tap="handleTap('picker1')">点我弹出2级联动选择器</button>
-    <view>{{ value1.join('-') }}</view>
-    <lb-picker ref="picker1"
-      v-model="value1"
-      mode="multiSelector"
-      :list="list"
-      :level="2"
-      @change="handleChange"
-      @confirm="handleConfirm"
-      @cancel="handleCancel">
+    <lb-picker v-model="value1"
+      mode="selector"
+      :list="list1"
+      :show-header="false"
+      inline
+      @change="handleChange1">
     </lb-picker>
+    <view style="padding:100rpx;">{{ value1 }}</view>
 
-    <button @tap="handleTap('picker2')">点我弹出3级联动选择器</button>
-    <view>{{ value2.join('-') }}</view>
-    <lb-picker ref="picker2"
-      v-model="value2"
+    <lb-picker v-model="value2"
       mode="multiSelector"
-      :list="list"
+      :list="list2"
       :level="3"
-      @change="handleChange"
-      @confirm="handleConfirm"
-      @cancel="handleCancel">
+      :show-header="false"
+      inline
+      @change="handleChange2">
     </lb-picker>
+    <view style="padding:100rpx;">{{ value2String }}</view>
 
-    <button @tap="handleTap('picker3')">点我弹出有默认值多级联动</button>
-    <view>{{ value3.join('-') }}</view>
-    <lb-picker ref="picker3"
-      v-model="value3"
-      mode="multiSelector"
-      :list="list"
-      :level="3"
-      @change="handleChange"
-      @confirm="handleConfirm"
-      @cancel="handleCancel">
+    <lb-picker v-model="value3"
+      mode="unlinkedSelector"
+      :show-header="false"
+      :list="list3"
+      inline
+      @change="handleChange3">
     </lb-picker>
+    <view style="padding:100rpx;">{{ value3String }}</view>
   </view>
 </template>
 
@@ -42,12 +34,20 @@
 	export default {
 		data(){
 			return {
-				value1: [],
-				label1: [],
-				value2: [],
-				label2: [],
-				value3: ['2', '21', '213'],
-				list: [
+				value1: 'B',
+				list1: [
+					{
+						label: '选项一',
+						value: 'A'
+					},
+					{
+						label: '选项二',
+						value: 'B'
+					}
+				],
+				value2: ['2', '21', '213'],
+				value2String: '',
+				list2: [
 					{
 						label: '选项1',
 						value: '1',
@@ -228,21 +228,79 @@
 							}
 						]
 					}
+				],
+				value3: ['2', '33', '222'],
+				value3String: '',
+				list3: [
+					[
+						{
+						label: '选项1',
+						value: '1'
+						},
+						{
+							label: '选项2',
+							value: '2'
+						},
+						{
+							label: '选项3',
+							value: '3'
+						}
+					],
+					[
+						{
+						label: '选项11',
+						value: '11'
+						},
+						{
+							label: '选项22',
+							value: '22'
+						},
+						{
+							label: '选项33',
+							value: '33'
+						}
+					],
+					[
+						{
+						label: '选项111',
+						value: '111'
+						},
+						{
+							label: '选项222',
+							value: '222'
+						},
+						{
+							label: '选项333',
+							value: '333'
+						}
+					]
 				]
 			}
+		},
+		onLoad () {
+			this.value2String = JSON.stringify(this.value2)
+			this.value3String = JSON.stringify(this.value3)
 		},
 		methods: {
 			handleTap (picker) {
 				this.$refs[picker].show()
 			},
-			handleChange (item) {
-				console.log('change::', item)
+			handleChange1 (e) {
+				if (e.change === 'scroll') {
+					this.value1 = e.value
+				}
 			},
-			handleConfirm (item) {
-				console.log('confirm::', item)
+			handleChange2 (e) {
+				if (e.change === 'scroll') {
+					this.value2 = e.value
+					this.value2String = JSON.stringify(this.value2)
+				}
 			},
-			handleCancel (item) {
-				console.log('cancel::', item)
+			handleChange3 (e) {
+				if (e.change === 'scroll') {
+					this.value3 = e.value
+					this.value3String = JSON.stringify(this.value3)
+				}
 			}
 		}
 	}

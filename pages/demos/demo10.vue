@@ -9,7 +9,7 @@
       :list="list"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle"
+      @cancel="handleCancel"
       @show="handleShow"
       @hide="handleHide">
     </lb-picker>
@@ -52,10 +52,10 @@
 					icon: 'none'
 				})
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 				uni.showToast({
-					title: `cancle`,
+					title: `cancel`,
 					icon: 'none'
 				})
 			},

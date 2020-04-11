@@ -9,7 +9,7 @@
       :column-num="5"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker2')">可视区自定义滚动个数(3个)</button>
@@ -21,7 +21,7 @@
       :column-num="3"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker3')">可视区自定义滚动个数(7个)</button>
@@ -33,7 +33,7 @@
       :column-num="7"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker4')">可视区自定义滚动个数(4个)</button>
@@ -46,7 +46,7 @@
       :column-num="4"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
   </view>
 </template>
@@ -83,8 +83,8 @@
 				this.label = item.item.label
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

@@ -9,7 +9,7 @@
       :level="1"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker2')">省市二级选择</button>
@@ -21,7 +21,7 @@
       :level="2"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker3')">省市区三级选择</button>
@@ -33,7 +33,7 @@
       :level="3"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker5')">默认值</button>
@@ -45,7 +45,7 @@
       :level="3"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
 
     <button @tap="handleTap('picker6')">默认值有缺省</button>
@@ -57,7 +57,7 @@
       :level="3"
       @change="handleChange"
       @confirm="handleConfirm"
-      @cancle="handleCancle">
+      @cancel="handleCancel">
     </lb-picker>
   </view>
 </template>
@@ -85,8 +85,8 @@
 			handleConfirm (item) {
 				console.log('confirm::', item)
 			},
-			handleCancle (item) {
-				console.log('cancle::', item)
+			handleCancel (item) {
+				console.log('cancel::', item)
 			}
 		}
 	}

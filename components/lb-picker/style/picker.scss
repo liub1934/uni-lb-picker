@@ -58,7 +58,7 @@
 				display: flex;
 				align-items: center;
 
-				.lb-picker-action-cancle {
+				.lb-picker-action-cancel {
 					color: #999;
 				}
 
@@ -106,6 +106,15 @@
 					color: #999;
 				}
 			}
+		}
+	}
+
+	&.lb-picker-inline {
+		.lb-picker-container {
+			position: relative;
+			visibility: visible;
+			box-shadow: unset;
+			transform: translateY(0);
 		}
 	}
 }

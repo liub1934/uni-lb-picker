@@ -255,7 +255,7 @@ data () {
 
 ```html
 <lb-picker>
-  <view slot="cancle-text">我是自定义取消</view>
+  <view slot="cancel-text">我是自定义取消</view>
   <view slot="confirm-text">我是自定义确定</view>
 </lb-picker>
 ```
@@ -266,28 +266,30 @@ data () {
 
 ### Props
 
-| 参数                    | 说明                                                                                 | 类型                | 可选值                                                           | 默认值                                            |
-| :---------------------- | :----------------------------------------------------------------------------------- | :------------------ | :--------------------------------------------------------------- | :------------------------------------------------ |
-| value/v-model           | 绑定值，联动选择为 Array 类型                                                        | String/Number/Array | -                                                                | -                                                 |
-| mode                    | 选择器类型，支持单列，多列联动                                                       | String              | selector 单选/multiSelector 多级联动/unlinkedSelector 多级非联动 | selector                                          |
-| list                    | 选择器数据(v1.0.7 单选及非联动多选支持扁平数据：['选项 1', '选项 2'])                | Array               | -                                                                | -                                                 |
-| level                   | 多列联动层级，仅 mode 为 multiSelector 有效                                          | Number              | -                                                                | 2                                                 |
-| props                   | 自定义数据字段                                                                       | Object              | -                                                                | {label:'label',value:'value',children:'children'} |
-| cancle-text             | 取消文字                                                                             | String              | -                                                                | 取消                                              |
-| cancle-color            | 取消文字颜色                                                                         | String              | -                                                                | #999                                              |
-| confirm-text            | 确定文字                                                                             | String              | -                                                                | 确定                                              |
-| confirm-color           | 确定文字颜色                                                                         | String              | -                                                                | #007aff                                           |
-| empty-text              | (v1.0.7 新增)选择器列表为空的时候显示的文字                                          | String              | -                                                                | 暂无数据                                          |
-| empty-color             | (v1.0.7 新增)暂无数据文字颜色                                                        | String              | -                                                                | #999                                              |
-| column-num              | 可视滚动区域内滚动个数，最好设置奇数值                                               | Number              | -                                                                | 5                                                 |
-| radius                  | 选择器顶部圆角，支持 rpx，如 radius="10rpx"                                          | String              | -                                                                | -                                                 |
-| ~~column-style~~        | ~~选择器默认样式(已弃用，见下方自定义样式说明)~~                                     | Object              | -                                                                | -                                                 |
-| ~~active-column-style~~ | ~~选择器选中样式(已弃用，见下方自定义样式说明)~~                                     | Object              | -                                                                | -                                                 |
-| loading                 | 选择器是否显示加载中，可使用 loading 插槽自定义加载效果                              | Boolean             | -                                                                | -                                                 |
-| mask-color              | 遮罩层颜色                                                                           | String              | -                                                                | rgba(0, 0, 0, 0.4)                                |
-| close-on-click-mask     | 点击遮罩层是否关闭选择器                                                             | Boolean             | true/false                                                       | true                                              |
-| ~~change-on-init~~      | ~~(v1.0.7 已弃用)初始化时是否触发 change 事件~~                                      | Boolean             | true/false                                                       | -                                                 |
-| dataset                 | (v1.0.7 新增)可以向组件中传递任意的自定义的数据，在`confirm`或`change`事件中可以取到 | Object              | -                                                                | -                                                 |
+| 参数                    | 说明                                                                                        | 类型                | 可选值                                                           | 默认值                                            |
+| :---------------------- | :------------------------------------------------------------------------------------------ | :------------------ | :--------------------------------------------------------------- | :------------------------------------------------ |
+| value/v-model           | 绑定值，联动选择为 Array 类型                                                               | String/Number/Array | -                                                                | -                                                 |
+| mode                    | 选择器类型，支持单列，多列联动                                                              | String              | selector 单选/multiSelector 多级联动/unlinkedSelector 多级非联动 | selector                                          |
+| list                    | 选择器数据(v1.0.7 单选及非联动多选支持扁平数据：['选项 1', '选项 2'])                       | Array               | -                                                                | -                                                 |
+| level                   | 多列联动层级，仅 mode 为 multiSelector 有效                                                 | Number              | -                                                                | 2                                                 |
+| props                   | 自定义数据字段                                                                              | Object              | -                                                                | {label:'label',value:'value',children:'children'} |
+| cancel-text             | 取消文字                                                                                    | String              | -                                                                | 取消                                              |
+| cancel-color            | 取消文字颜色                                                                                | String              | -                                                                | #999                                              |
+| confirm-text            | 确定文字                                                                                    | String              | -                                                                | 确定                                              |
+| confirm-color           | 确定文字颜色                                                                                | String              | -                                                                | #007aff                                           |
+| empty-text              | (v1.0.7 新增)选择器列表为空的时候显示的文字                                                 | String              | -                                                                | 暂无数据                                          |
+| empty-color             | (v1.0.7 新增)暂无数据文字颜色                                                               | String              | -                                                                | #999                                              |
+| column-num              | 可视滚动区域内滚动个数，最好设置奇数值                                                      | Number              | -                                                                | 5                                                 |
+| radius                  | 选择器顶部圆角，支持 rpx，如 radius="10rpx"                                                 | String              | -                                                                | -                                                 |
+| ~~column-style~~        | ~~选择器默认样式(已弃用，见下方自定义样式说明)~~                                            | Object              | -                                                                | -                                                 |
+| ~~active-column-style~~ | ~~选择器选中样式(已弃用，见下方自定义样式说明)~~                                            | Object              | -                                                                | -                                                 |
+| loading                 | 选择器是否显示加载中，可使用 loading 插槽自定义加载效果                                     | Boolean             | -                                                                | -                                                 |
+| mask-color              | 遮罩层颜色                                                                                  | String              | -                                                                | rgba(0, 0, 0, 0.4)                                |
+| close-on-click-mask     | 点击遮罩层是否关闭选择器                                                                    | Boolean             | true/false                                                       | true                                              |
+| ~~change-on-init~~      | ~~(v1.0.7 已弃用)初始化时是否触发 change 事件~~                                             | Boolean             | true/false                                                       | -                                                 |
+| dataset                 | (v1.0.7 新增)可以向组件中传递任意的自定义的数据，在`confirm`或`change`事件中可以取到        | Object              | -                                                                | -                                                 |
+| show-header             | (v1.0.8 新增)是否显示选择器头部                                                             | Boolean             | -                                                                | - true                                            |
+| inline                  | (v1.0.8 新增)inline 模式，开启后默认显示选择器，无需点击弹出，可以配合`show-header`一起使用 | Boolean             | -                                                                | -                                                 |
 
 ### 方法
 
@@ -304,7 +306,7 @@ data () {
 | hide     | 选择器隐藏时触发                         | -                                                                                                                                                                                                                                                                                                                                    |
 | change   | 选择器滚动时触发，此时不会改变绑定的值   | `{ index, item, value, change }` `index`触发滚动后新的索引，单选时是具体的索引值，多列联动选择时为数组。`item`触发滚动后新的的完整内容，包括`label`、`value`等，单选时为对象，多列选择时为数组对象。`value`触发滚动后新的 value 值，单列选择时为具体值，多列联动选择时为数组。`change`触发事件的类型，详情参考下面的 change 事件备注 |
 | confirm  | 点击选择器确定时触发，此时会改变绑定的值 | 同上`change`事件说明                                                                                                                                                                                                                                                                                                                 |
-| cancle   | 点击选择器取消时触发                     | 同上`change`事件说明                                                                                                                                                                                                                                                                                                                 |
+| cancel   | 点击选择器取消时触发                     | 同上`change`事件说明                                                                                                                                                                                                                                                                                                                 |
 
 ### `change` 事件备注
 
@@ -338,7 +340,7 @@ handleChange (e) {
 
 | 插槽名        | 说明                |
 | :------------ | :------------------ |
-| cancle-text   | 选择器取消文字插槽  |
+| cancel-text   | 选择器取消文字插槽  |
 | action-center | 选择器顶部中间插槽  |
 | confirm-text  | 选择器确定文字插槽  |
 | loading       | 选择器 loading 插槽 |
