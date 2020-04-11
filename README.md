@@ -4,6 +4,8 @@
 Github：[https://github.com/liub1934/uni-lb-picker](https://github.com/liub1934/uni-lb-picker)  
 插件市场：[https://ext.dcloud.net.cn/plugin?id=1111](https://ext.dcloud.net.cn/plugin?id=1111)
 
+> **由于之前`cancel`拼写失误，写成了`cancle`，`v1.08`现已修正，如果之前版本有使用`cancel`事件的，更新后请及时修正。**
+
 ## 兼容性
 
 H5 + 各平台小程序（百度除外）  
