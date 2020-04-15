@@ -1,21 +1,31 @@
 <p align="center">
   <a href="https://github.com/liub1934/uni-lb-picker">
-    <img src="https://img.shields.io/github/stars/liub1934/uni-lb-picker?style=social">
+    <img src="https://img.shields.io/github/stars/liub1934/uni-lb-picker">
   </a>
   <a href="https://github.com/liub1934/uni-lb-picker/fork">
-    <img src="https://img.shields.io/github/forks/liub1934/uni-lb-picker?style=social">
+    <img src="https://img.shields.io/github/forks/liub1934/uni-lb-picker">
+  </a>
+  <a href="https://github.com/liub1934/uni-lb-picker/issues">
+    <img src="https://img.shields.io/github/issues/liub1934/uni-lb-picker">
+  </a>
+  <a href="https://www.npmjs.com/package/uni-lb-picker">
+    <img src="https://img.shields.io/npm/v/uni-lb-picker">
   </a>
   <a href="https://npmcharts.com/compare/uni-lb-picker?minimal=true">
-    <img src="https://img.shields.io/npm/v/uni-lb-picker?style=social">
+    <img src="https://img.shields.io/npm/dm/uni-lb-picker">
   </a>
+  
   <a href="https://github.com/liub1934/uni-lb-picker/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/liub1934/uni-lb-picker?style=social">
+    <img src="https://img.shields.io/github/license/liub1934/uni-lb-picker">
   </a>
 </p>
 
 插件市场里面的 picker 选择器不满足自己的需求，所以自己写了一个简单的 picker 选择器，可扩展、可自定义，一般满足日常需要。  
-Github：[https://github.com/liub1934/uni-lb-picker](https://github.com/liub1934/uni-lb-picker)  
-插件市场：[https://ext.dcloud.net.cn/plugin?id=1111](https://ext.dcloud.net.cn/plugin?id=1111)
+Github：[uni-lb-picker](https://github.com/liub1934/uni-lb-picker)
+<a href="https://github.com/liub1934/uni-lb-picker">
+<img src="https://img.shields.io/github/stars/liub1934/uni-lb-picker?style=social">
+</a>  
+插件市场：[uni-lb-picker](https://ext.dcloud.net.cn/plugin?id=1111)
 
 > **由于之前`cancel`拼写失误，写成了`cancle`，`v1.08`现已修正，如果之前版本有使用`cancel`事件的，更新后请及时修正。**
 
