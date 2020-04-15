@@ -1,4 +1,17 @@
-# uni-app picker 选择器
+<p align="center">
+  <a href="https://github.com/liub1934/uni-lb-picker">
+    <img src="https://img.shields.io/github/stars/liub1934/uni-lb-picker?style=social">
+  </a>
+  <a href="https://github.com/liub1934/uni-lb-picker/fork">
+    <img src="https://img.shields.io/github/forks/liub1934/uni-lb-picker?style=social">
+  </a>
+  <a href="https://npmcharts.com/compare/uni-lb-picker?minimal=true">
+    <img src="https://img.shields.io/npm/v/uni-lb-picker?style=social">
+  </a>
+  <a href="https://github.com/liub1934/uni-lb-picker/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/liub1934/uni-lb-picker?style=social">
+  </a>
+</p>
 
 插件市场里面的 picker 选择器不满足自己的需求，所以自己写了一个简单的 picker 选择器，可扩展、可自定义，一般满足日常需要。  
 Github：[https://github.com/liub1934/uni-lb-picker](https://github.com/liub1934/uni-lb-picker)  
