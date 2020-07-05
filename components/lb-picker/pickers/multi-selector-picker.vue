@@ -1,5 +1,5 @@
 <template>
-  <view class="multi-selector picker-item"
+  <view class="lb-multi-selector lb-picker-item"
     :style="{ height: height }">
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
@@ -14,11 +14,10 @@
               ? 'lb-picker-column-active'
               : ''
           ]"
-          :key="i"
-          :style="{ height: columnHeight, 'line-height': columnHeight }">
-          <view class="lb-picker-column-label">
-            {{ item[props.label] }}
-          </view>
+          :key="i">
+          <text class="lb-picker-column-label">
+            {{ item[props.label] || item }}
+          </text>
         </view>
       </picker-view-column>
     </picker-view>
@@ -26,8 +25,6 @@
 </template>
 
 <script>
-import { getIndicatorHeight } from '../utils.js'
-const indicatorHeight = getIndicatorHeight()
 export default {
   props: {
     value: Array,
@@ -35,7 +32,8 @@ export default {
     props: Object,
     level: Number,
     visible: Boolean,
-    height: String
+    height: String,
+    isConfirmChange: Boolean
   },
   data () {
     return {
@@ -43,8 +41,7 @@ export default {
       pickerColumns: [],
       selectValue: [],
       selectItem: [],
-      columnHeight: indicatorHeight + 'px',
-      indicatorStyle: `height: ${indicatorHeight}px`
+      indicatorStyle: `height: 34px`
     }
   },
   created () {
@@ -117,7 +114,9 @@ export default {
   },
   watch: {
     value (newVal) {
-      this.init('value')
+      if (!this.isConfirmChange) {
+        this.init('value')
+      }
     },
     list () {
       this.init('list')

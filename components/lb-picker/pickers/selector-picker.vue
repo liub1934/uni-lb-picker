@@ -1,23 +1,22 @@
 <template>
-  <view class="selector-picker picker-item"
+  <view class="lb-selector-picker lb-picker-item"
     :style="{ height: height }">
     <picker-view :value="pickerValue"
-      :indicator-style="indicatorStyle"
       :style="{ height: height }"
+      :indicator-style="indicatorStyle"
       @change="handleChange">
       <picker-view-column>
         <view v-for="(item, i) in list"
           :class="[
             'lb-picker-column',
-            item[props.value] || item === selectValue
+            (item[props.value] || item) === selectValue
               ? 'lb-picker-column-active'
               : ''
           ]"
-          :key="i"
-          :style="{ height: columnHeight, lineHeight: columnHeight }">
-          <view class="lb-picker-column-label">
+          :key="i">
+          <text class="lb-picker-column-label">
             {{ item[props.label] || item }}
-          </view>
+          </text>
         </view>
       </picker-view-column>
     </picker-view>
@@ -25,22 +24,21 @@
 </template>
 
 <script>
-import { getIndicatorHeight, isObject } from '../utils.js'
-const indicatorHeight = getIndicatorHeight()
+import { isObject } from '../utils'
 export default {
   props: {
     value: [String, Number],
     list: Array,
     props: Object,
     visible: Boolean,
-    height: String
+    height: String,
+    isConfirmChange: Boolean
   },
   data () {
     return {
       pickerValue: [],
       selectValue: '',
-      columnHeight: indicatorHeight + 'px',
-      indicatorStyle: `height: ${indicatorHeight}px`
+      indicatorStyle: `height: 34px`
     }
   },
   created () {
@@ -84,11 +82,13 @@ export default {
     }
   },
   watch: {
+    value (newVal) {
+      if (!this.isConfirmChange) {
+        this.init('value')
+      }
+    },
     list () {
       this.init('list')
-    },
-    value (newVal) {
-      this.init('value')
     }
   }
 }

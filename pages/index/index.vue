@@ -82,13 +82,13 @@
   .list-item {
     display: flex;
     align-items: center;
-    height: 88rpx;
+    height: 44px;
     background-color: $uni-text-color-inverse;
-    margin-bottom: 20rpx;
-    padding: 0 20rpx;
+    margin-bottom: 10px;
+    padding: 0 10px;
     .item-title {
       flex: 1;
-      font-size: 32rpx;
+      font-size: 16px;
     }
   }
 }

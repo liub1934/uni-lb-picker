@@ -1,5 +1,5 @@
 <template>
-  <view class="selector-picker picker-item"
+  <view class="lb-selector-picker lb-picker-item"
     :style="{ height: height }">
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
@@ -7,18 +7,17 @@
       @change="handleChange">
       <picker-view-column v-for="(column, index) in pickerColumns"
         :key="index">
-        <view v-for="(item, i) in column"
+        <view v-for="(item, i) in column || []"
           :class="[
             'lb-picker-column',
-            item[props.value] || item === selectValue[index]
+            (item[props.value] || item) === selectValue[index]
               ? 'lb-picker-column-active'
               : ''
           ]"
-          :key="i"
-          :style="{ height: columnHeight, 'line-height': columnHeight }">
-          <view class="lb-picker-column-label">
+          :key="i">
+          <text class="lb-picker-column-label">
             {{ item[props.label] || item }}
-          </view>
+          </text>
         </view>
       </picker-view-column>
     </picker-view>
@@ -26,8 +25,7 @@
 </template>
 
 <script>
-import { getIndicatorHeight, isObject } from '../utils.js'
-const indicatorHeight = getIndicatorHeight()
+import { isObject } from '../utils'
 export default {
   props: {
     value: Array,
@@ -35,7 +33,7 @@ export default {
     props: Object,
     visible: Boolean,
     height: String,
-    indicatorHeight: Number
+    isConfirmChange: Boolean
   },
   data () {
     return {
@@ -43,8 +41,7 @@ export default {
       pickerColumns: [],
       selectValue: [],
       selectItem: [],
-      columnHeight: indicatorHeight + 'px',
-      indicatorStyle: `height: ${indicatorHeight}px`
+      indicatorStyle: `height: 34px`
     }
   },
   created () {
@@ -105,11 +102,13 @@ export default {
     }
   },
   watch: {
+    value (newVal) {
+      if (!this.isConfirmChange) {
+        this.init('value')
+      }
+    },
     list () {
       this.init('list')
-    },
-    value (newVal) {
-      this.init('value')
     }
   }
 }

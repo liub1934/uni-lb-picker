@@ -1,27 +1,23 @@
-.picker-item {
-	picker-view-column {
-		transition: all 0.3s;
-	}
+.lb-picker-column {
+  height: 34px;
+  /* #ifndef APP-NVUE */
+  display: flex;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  /* #endif */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
-	.lb-picker-column-flex0 {
-		flex: 0;
-	}
-
-	.lb-picker-column-flex1 {
-		flex: 1;
-	}
-
-	.lb-picker-column {
-		padding: 0;
-		font-size: 36rpx;
-		text-align: center;
-		box-sizing: border-box;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-
-		.lb-picker-column-label {
-			transition: all 0.3s;
-		}
-	}
+.lb-picker-column-label {
+  font-size: 16px;
+  text-align: center;
+  text-overflow: ellipsis;
+  transition-property: color;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
