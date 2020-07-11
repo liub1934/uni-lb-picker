@@ -74,6 +74,12 @@
 				value6: ['130000', '130200'],
 				list: areaData
 			}
+    },
+    onReady () {
+			this.$nextTick(() => {
+        const info = this.$refs.picker5.getColumnsInfo(['340000', '340800', '340826'])
+        console.log('根据value获取的信息：', info)
+			})
 		},
 		methods: {
 			handleTap (picker) {

@@ -25,70 +25,39 @@
 
 <script>
 import { isObject } from '../utils'
+import { commonMixin } from '../mixins'
 export default {
   props: {
     value: [String, Number],
     list: Array,
+    mode: String,
     props: Object,
     visible: Boolean,
     height: String,
     isConfirmChange: Boolean
   },
+  mixins: [commonMixin],
   data () {
     return {
       pickerValue: [],
       selectValue: '',
-      indicatorStyle: `height: 34px`
+      selectItem: null
     }
   },
-  created () {
-    this.init('init')
-  },
   methods: {
-    init (changeType) {
-      if (this.list && this.list.length) {
-        let index = this.list.findIndex(item => {
-          return isObject(item)
-            ? item[this.props.value] === this.value
-            : item === this.value
-        })
-        index = index > -1 ? index : 0
-        const listItem = this.list[index]
-        this.pickerValue = [index]
-        this.selectValue = isObject(listItem)
-          ? listItem[this.props.value]
-          : listItem
-        this.$emit('change', {
-          value: this.selectValue,
-          item: listItem,
-          index: index,
-          change: changeType
-        })
-      }
-    },
     handleChange (item) {
       const index = item.detail.value[0] || 0
-      const listItem = this.list[index]
-      this.selectValue = isObject(listItem)
-        ? listItem[this.props.value]
-        : listItem
+      this.selectItem = this.list[index]
+      this.selectValue = isObject(this.selectItem)
+        ? this.selectItem[this.props.value]
+        : this.selectItem
       this.pickerValue = item.detail.value
       this.$emit('change', {
         value: this.selectValue,
-        item: listItem,
+        item: this.selectItem,
         index: index,
         change: 'scroll'
       })
-    }
-  },
-  watch: {
-    value (newVal) {
-      if (!this.isConfirmChange) {
-        this.init('value')
-      }
-    },
-    list () {
-      this.init('list')
     }
   }
 }

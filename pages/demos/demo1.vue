@@ -54,6 +54,12 @@
 				value3: ''
 			}
 		},
+		onReady () {
+			this.$nextTick(() => {
+				const info = this.$refs.picker1.getColumnsInfo('C')
+				console.log('根据value获取的信息：', info)
+			})
+		},
 		methods: {
 			handleTap (name) {
 				this.$refs[name].show()

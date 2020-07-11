@@ -25,43 +25,31 @@
 </template>
 
 <script>
+import { commonMixin } from '../mixins'
 export default {
   props: {
     value: Array,
     list: Array,
+    mode: String,
     props: Object,
     level: Number,
     visible: Boolean,
     height: String,
     isConfirmChange: Boolean
   },
+  mixins: [commonMixin],
   data () {
     return {
       pickerValue: [],
       pickerColumns: [],
       selectValue: [],
-      selectItem: [],
-      indicatorStyle: `height: 34px`
+      selectItem: []
     }
   },
-  created () {
-    this.init('init')
-  },
   methods: {
-    init (changeType) {
-      this.setPickerItems(this.list)
-      this.$emit('change', {
-        value: this.selectValue,
-        item: this.selectItem,
-        index: this.pickerValue,
-        change: changeType
-      })
-    },
     handleChange (item) {
       const pickerValue = item.detail.value
-      const columnIndex = pickerValue.findIndex(
-        (item, i) => item !== this.pickerValue[i]
-      )
+      const columnIndex = pickerValue.findIndex((item, i) => item !== this.pickerValue[i])
       const valueIndex = pickerValue[columnIndex]
       this.setPickerChange(pickerValue, valueIndex, columnIndex)
     },
@@ -75,10 +63,11 @@ export default {
           this.$set(this.pickerColumns, i, column[this.props.children] || [])
           valueIndex = 0
         }
-        this.pickerValue = pickerValue
-        this.selectItem[i] = this.pickerColumns[i][pickerValue[i]]
-        if (this.selectItem[i]) {
-          this.selectValue[i] = this.selectItem[i][this.props.value]
+        this.$set(this.pickerValue, i, pickerValue[i])
+        const selectItem = this.pickerColumns[i][pickerValue[i]]
+        if (selectItem) {
+          this.selectItem[i] = selectItem
+          this.selectValue[i] = selectItem[this.props.value]
         } else {
           const spliceNum = this.level - i
           this.pickerValue.splice(i, spliceNum)
@@ -94,32 +83,6 @@ export default {
         index: this.pickerValue,
         change: 'scroll'
       })
-    },
-    setPickerItems (list = [], index = 0) {
-      if (!list.length) return
-      const defaultValue = this.value || []
-      if (index < this.level) {
-        const value = defaultValue[index] || ''
-        let i = list.findIndex(item => item[this.props.value] === value)
-        i = i > -1 ? i : 0
-        this.$set(this.pickerValue, index, i)
-        this.$set(this.pickerColumns, index, list)
-        if (list[i]) {
-          this.$set(this.selectValue, index, list[i][this.props.value])
-          this.$set(this.selectItem, index, list[i])
-          this.setPickerItems(list[i][this.props.children] || [], index + 1)
-        }
-      }
-    }
-  },
-  watch: {
-    value (newVal) {
-      if (!this.isConfirmChange) {
-        this.init('value')
-      }
-    },
-    list () {
-      this.init('list')
     }
   }
 }

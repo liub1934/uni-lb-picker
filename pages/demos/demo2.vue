@@ -230,6 +230,12 @@
 					}
 				]
 			}
+    },
+    onReady () {
+			this.$nextTick(() => {
+        const info = this.$refs.picker3.getColumnsInfo(['2', '22', '223'])
+        console.log('根据value获取的信息：', info)
+			})
 		},
 		methods: {
 			handleTap (picker) {

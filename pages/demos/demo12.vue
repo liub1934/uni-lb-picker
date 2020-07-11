@@ -94,6 +94,12 @@
 				]
 			}
 		},
+		onReady () {
+			this.$nextTick(() => {
+				const info = this.$refs.picker2.getColumnsInfo(['2', '33', '222'])
+				console.log('根据value获取的信息：', info)
+			})
+		},
 		methods: {
 			handleTap (picker) {
 				this.$refs[picker].show()

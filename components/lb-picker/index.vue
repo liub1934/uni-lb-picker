@@ -1,11 +1,8 @@
 <template>
-  <view v-show="visible || inline"
+  <view v-if="visible || inline"
     :class="['lb-picker', inline ? 'lb-picker-inline' : '']">
-    <view v-show="!inline"
-      :class="[
-				'lb-picker-mask',
-				animation ? 'lb-picker-mask-animation' : ''
-			]"
+    <view v-if="!inline"
+      :class="['lb-picker-mask', animation ? 'lb-picker-mask-animation' : '']"
       :style="{
         backgroundColor: maskBgColor,
         zIndex: zIndex - 1
@@ -14,11 +11,11 @@
       @touchmove.stop.prevent="moveHandle">
     </view>
     <view :class="[
-			'lb-picker-container',
-      !inline ? 'lb-picker-container-fixed' : '',
-			animation ? 'lb-picker-container-animation' : '',
-			containerVisible ? 'lb-picker-container-show' : ''
-		]"
+        'lb-picker-container',
+        !inline ? 'lb-picker-container-fixed' : '',
+        animation ? 'lb-picker-container-animation' : '',
+        containerVisible ? 'lb-picker-container-show' : ''
+      ]"
       :style="{
         borderRadius: `${radius} ${radius} 0 0`,
         zIndex: zIndex
@@ -85,6 +82,7 @@
         <selector-picker v-if="mode === 'selector' && !loading && !isEmpty"
           :value="value"
           :list="list"
+          :mode="mode"
           :props="pickerProps"
           :height="pickerContentHeight"
           :inline="inline"
@@ -96,6 +94,7 @@
         <multi-selector-picker v-if="mode === 'multiSelector' && !loading && !isEmpty"
           :value="value"
           :list="list"
+          :mode="mode"
           :level="level"
           :visible="visible"
           :props="pickerProps"
@@ -109,6 +108,7 @@
         <unlinked-selector-picker v-if="mode === 'unlinkedSelector' && !loading && !isEmpty"
           :value="value"
           :list="list"
+          :mode="mode"
           :visible="visible"
           :props="pickerProps"
           :height="pickerContentHeight"
@@ -127,6 +127,7 @@ const defaultProps = {
   value: 'value',
   children: 'children'
 }
+import { getColumns } from './utils'
 import SelectorPicker from './pickers/selector-picker'
 import MultiSelectorPicker from './pickers/multi-selector-picker'
 import UnlinkedSelectorPicker from './pickers/unlinked-selector-picker'
@@ -189,10 +190,10 @@ export default {
       type: Boolean,
       default: true
     },
-		animation: {
-			type: Boolean,
-			default: true
-		},
+    animation: {
+      type: Boolean,
+      default: true
+    },
     zIndex: {
       type: Number,
       default: 999
@@ -201,8 +202,8 @@ export default {
   data () {
     return {
       visible: false,
-			containerVisible: false,
-			maskBgColor: '',
+      containerVisible: false,
+      maskBgColor: '',
       isConfirmChange: false,
       myValue: this.value,
       picker: {},
@@ -221,18 +222,18 @@ export default {
     show () {
       if (this.inline) return
       this.visible = true
-			setTimeout(() => {
-				this.maskBgColor = this.maskColor
-				this.containerVisible = true
-			}, 20)
+      setTimeout(() => {
+        this.maskBgColor = this.maskColor
+        this.containerVisible = true
+      }, 20)
     },
     hide () {
       if (this.inline) return
-			this.maskBgColor = ''
-			this.containerVisible = false
-			setTimeout(() => {
-				this.visible = false
-			}, 200)
+      this.maskBgColor = ''
+      this.containerVisible = false
+      setTimeout(() => {
+        this.visible = false
+      }, 200)
     },
     handleCancel () {
       this.$emit('cancel', this.picker)
@@ -266,7 +267,25 @@ export default {
         this.hide()
       }
     },
-    moveHandle () {}
+    moveHandle () {},
+    getColumnsInfo (value, type = 1) {
+      let columnsInfo = getColumns({
+        value,
+        list: this.list,
+        mode: this.mode,
+        props: this.pickerProps,
+        level: this.level
+      }, type)
+      if (columnsInfo) {
+        if (this.mode === 'selector') {
+          columnsInfo.index = columnsInfo.index[0]
+        }
+      } else {
+        columnsInfo = {}
+      }
+      columnsInfo.dataset = this.dataset || {}
+      return columnsInfo
+    }
   },
   watch: {
     value (newVal) {
@@ -281,6 +300,9 @@ export default {
       } else {
         this.$emit('hide')
       }
+    },
+    props (newProps) {
+      this.pickerProps = Object.assign({}, defaultProps, newProps)
     }
   }
 }

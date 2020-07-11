@@ -26,63 +26,30 @@
 
 <script>
 import { isObject } from '../utils'
+import { commonMixin } from '../mixins'
 export default {
   props: {
     value: Array,
     list: Array,
+    mode: String,
     props: Object,
     visible: Boolean,
     height: String,
     isConfirmChange: Boolean
   },
+  mixins: [commonMixin],
   data () {
     return {
       pickerValue: [],
       pickerColumns: [],
       selectValue: [],
-      selectItem: [],
-      indicatorStyle: `height: 34px`
+      selectItem: []
     }
   },
-  created () {
-    this.init('init')
-  },
   methods: {
-    init (changeType) {
-      if (this.list && this.list.length) {
-        this.pickerColumns = this.list
-        this.setPickerValue()
-        this.$emit('change', {
-          value: this.selectValue,
-          item: this.selectItem,
-          index: this.pickerValue,
-          change: changeType
-        })
-      }
-    },
-    setPickerValue (value) {
-      this.list.forEach((item, i) => {
-        let index = item.findIndex(item => {
-          return isObject(item)
-            ? item[this.props.value] === this.value[i]
-            : item === this.value[i]
-        })
-        index = index > -1 ? index : 0
-        const columnItem = this.list[i][index]
-        const valueItem = isObject(columnItem)
-          ? columnItem[this.props.value]
-          : columnItem
-        this.$set(this.pickerValue, i, index)
-        this.$set(this.selectValue, i, valueItem)
-        this.$set(this.selectItem, i, columnItem)
-      })
-    },
-
     handleChange (item) {
       const pickerValue = item.detail.value
-      const columnIndex = pickerValue.findIndex(
-        (item, i) => item !== this.pickerValue[i]
-      )
+      const columnIndex = pickerValue.findIndex((item, i) => item !== this.pickerValue[i])
       if (columnIndex > -1) {
         const valueIndex = pickerValue[columnIndex]
         const columnItem = this.list[columnIndex][valueIndex]
@@ -99,16 +66,6 @@ export default {
           change: 'scroll'
         })
       }
-    }
-  },
-  watch: {
-    value (newVal) {
-      if (!this.isConfirmChange) {
-        this.init('value')
-      }
-    },
-    list () {
-      this.init('list')
     }
   }
 }
