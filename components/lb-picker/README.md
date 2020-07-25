@@ -22,7 +22,8 @@
 
 插件市场里面的 picker 选择器不满足自己的需求，所以自己写了一个简单的 picker 选择器，可扩展、可自定义，一般满足日常需要。  
 Github：[uni-lb-picker](https://github.com/liub1934/uni-lb-picker)  
-插件市场：[uni-lb-picker](https://ext.dcloud.net.cn/plugin?id=1111)
+插件市场：[uni-lb-picker](https://ext.dcloud.net.cn/plugin?id=1111)  
+H5 预览：[uni-lb-picker](https://github.liubing.me/uni-lb-picker)
 
 > 如果问题最好去 github 反馈，插件市场评论区留下五星好评即可，[点我去反馈](https://github.com/liub1934/uni-lb-picker/issues/new)
 

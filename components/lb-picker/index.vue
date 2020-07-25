@@ -182,7 +182,7 @@ export default {
     },
     showMask: {
       type: Boolean,
-      default: false
+      default: true
     },
     maskColor: {
       type: String,
