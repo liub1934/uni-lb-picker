@@ -320,6 +320,7 @@ data () {
 | ~~active-column-style~~ | ~~选择器选中样式(已弃用，见下方自定义样式说明)~~                                                                                   | Object              | -                                                                | -                                                 |
 | loading                 | 选择器是否显示加载中，可使用 loading 插槽自定义加载效果                                                                            | Boolean             | -                                                                | -                                                 |
 | mask-color              | 遮罩层颜色                                                                                                                         | String              | -                                                                | rgba(0, 0, 0, 0.4)                                |
+| show-mask               | (v1.1.0 新增)是否显示遮罩层                                                                                                        | Boolean             | true/false                                                       | true                                              |
 | close-on-click-mask     | 点击遮罩层是否关闭选择器                                                                                                           | Boolean             | true/false                                                       | true                                              |
 | ~~change-on-init~~      | ~~(v1.0.7 已弃用)初始化时是否触发 change 事件~~                                                                                    | Boolean             | true/false                                                       | -                                                 |
 | dataset                 | (v1.0.7 新增)可以向组件中传递任意的自定义的数据（对象形式数据），如`:dataset="{name:'test'}"`，在`confirm`或`change`事件中可以取到 | Object              | -                                                                | -                                                 |
@@ -362,8 +363,8 @@ data () {
 - `list`
 - `scroll`
 
-根据这些类型大家可以在`change`的时候按需处理自己的业务逻辑，`init`现在指挥在调用选择器弹出的时候触发。
-下面的说明情况已失效，如需要在页面显示的时候根据`value`的值显示相应的中文，调用`v1.10`新增的方法`getColumnsInfo`，传入绑定的值即可获取到你想要的所有信息。
+根据这些类型大家可以在`change`的时候按需处理自己的业务逻辑，`init`现在指挥在调用选择器弹出的时候触发。  
+下面的说明情况已失效，如需要在页面显示的时候根据`value`的值显示相应的中文，调用`v1.10`新增的方法`getColumnsInfo`，传入绑定的值即可获取到你想要的所有信息。  
 ~~比如一种常见的情况，有默认值的时候需要显示默认值的文字，此时可以`change`事件中判断`change`的类型是否是`init`，如果是的话可以取事件回调中的`item`进行显示绑定值对应的文字信息。~~
 
 ```javascript

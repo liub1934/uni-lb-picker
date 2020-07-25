@@ -45,9 +45,12 @@
 	height: 45px;
 	background-color: #fff;
 	/* #ifdef APP-NVUE */
-	border-width: 1px;
-	border-style: solid;
-	border-color: #e5e5e5;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #e5e5e5;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #e5e5e5;
 	/* #endif */
 	/* #ifndef APP-NVUE */
 	box-sizing: border-box;
@@ -59,6 +62,20 @@
 }
 
 /* #ifndef APP-PLUS */
+.lb-picker-header::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: 1px;
+	clear: both;
+	border-bottom: 1px solid #e5e5e5;
+	color: #e5e5e5;
+	transform-origin: 0 100%;
+	transform: scaleY(0.5);
+}
+
 .lb-picker-header::after {
 	content: "";
 	position: absolute;
@@ -70,7 +87,6 @@
 	border-bottom: 1px solid #e5e5e5;
 	color: #e5e5e5;
 	transform-origin: 0 100%;
-	-webkit-transform: scaleY(0.5);
 	transform: scaleY(0.5);
 }
 
@@ -87,17 +103,18 @@
 	justify-content: center;
 }
 
-.lb-picker-action-cancel {
+.lb-picker-action-item {
 	text-align: center;
+	height: 45px;
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	align-items: center;
 }
 
 .lb-picker-action-cancel-text {
 	font-size: 16px;
 	color: #999;
-}
-
-.lb-picker-action-confirm {
-	text-align: center;
 }
 
 .lb-picker-action-confirm-text {

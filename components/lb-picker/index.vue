@@ -1,7 +1,7 @@
 <template>
   <view v-if="visible || inline"
     :class="['lb-picker', inline ? 'lb-picker-inline' : '']">
-    <view v-if="!inline"
+    <view v-if="showMask && !inline"
       :class="['lb-picker-mask', animation ? 'lb-picker-mask-animation' : '']"
       :style="{
         backgroundColor: maskBgColor,
@@ -23,7 +23,7 @@
       <view v-if="showHeader"
         class="lb-picker-header">
         <view class="lb-picker-action lb-picker-left">
-          <view class="lb-picker-action-cancel"
+          <view class="lb-picker-action-item lb-picker-action-cancel"
             @tap.stop="handleCancel">
             <slot v-if="$slots['cancel-text']"
               name="cancel-text">
@@ -42,7 +42,7 @@
         </view>
 
         <view class="lb-picker-action lb-picker-right">
-          <view class="lb-picker-action-confirm"
+          <view class="lb-picker-action-item lb-picker-action-confirm"
             @tap.stop="handleConfirm">
             <slot v-if="$slots['confirm-text']"
               name="confirm-text">
@@ -179,6 +179,10 @@ export default {
     closeOnClickMask: {
       type: Boolean,
       default: true
+    },
+    showMask: {
+      type: Boolean,
+      default: false
     },
     maskColor: {
       type: String,
