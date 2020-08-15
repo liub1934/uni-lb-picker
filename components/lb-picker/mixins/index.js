@@ -2,6 +2,7 @@ import { getColumns } from '../utils'
 export const commonMixin = {
   data () {
     return {
+      isConfirmChange: false,
       indicatorStyle: `height: 34px`
     }
   },

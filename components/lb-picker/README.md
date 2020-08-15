@@ -14,7 +14,9 @@
   <a href="https://npmcharts.com/compare/uni-lb-picker?minimal=true">
     <img src="https://img.shields.io/npm/dm/uni-lb-picker">
   </a>
-  
+  <a href="https://standardjs.com">
+    <img src="https://img.shields.io/badge/code%20style-standard-brightgreen">
+  </a>
   <a href="https://github.com/liub1934/uni-lb-picker/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/liub1934/uni-lb-picker">
   </a>
@@ -23,7 +25,7 @@
 插件市场里面的 picker 选择器不满足自己的需求，所以自己写了一个简单的 picker 选择器，可扩展、可自定义，一般满足日常需要。  
 Github：[uni-lb-picker](https://github.com/liub1934/uni-lb-picker)  
 插件市场：[uni-lb-picker](https://ext.dcloud.net.cn/plugin?id=1111)  
-H5 预览：[uni-lb-picker](https://github.liubing.me/uni-lb-picker)
+H5 Demo：[点击预览](https://github.liubing.me/uni-lb-picker)
 
 > 如果问题最好去 github 反馈，插件市场评论区留下五星好评即可，[点我去反馈](https://github.com/liub1934/uni-lb-picker/issues/new)
 
@@ -192,11 +194,21 @@ list: [
 
 通过`ref`形式手动调用`show`方法显示，隐藏同理调用`hide`
 
-```text
+```html
 <lb-picker ref="picker"></lb-picker>
+```
 
+```javascript
 this.$refs.picker.show() // 显示
 this.$refs.picker.hide() // 隐藏
+```
+
+`v1.1.3`新增，将需要点击的元素包裹在`lb-picker`中即可。
+
+```html
+<lb-picker>
+  <button>点我直接打开选择器</button>
+</lb-picker>
 ```
 
 ## 绑定值及设置默认值
@@ -296,6 +308,8 @@ data () {
 </lb-picker>
 ```
 
+也可参考示例中的`demo5`，自定义插槽元素样式交给开发者自由调整，插槽仅提供预留位置。
+
 其他插槽见下。
 
 ## 参数及事件
@@ -379,13 +393,17 @@ handleChange (e) {
 
 ### 插槽
 
-| 插槽名        | 说明                |
-| :------------ | :------------------ |
-| cancel-text   | 选择器取消文字插槽  |
-| action-center | 选择器顶部中间插槽  |
-| confirm-text  | 选择器确定文字插槽  |
-| loading       | 选择器 loading 插槽 |
-| empty         | 选择器 空数据 插槽  |
+| 插槽名        | 说明                   |
+| :------------ | :--------------------- |
+| cancel-text   | 选择器取消文字插槽     |
+| action-center | 选择器顶部中间插槽     |
+| confirm-text  | 选择器确定文字插槽     |
+| loading       | 选择器 loading 插槽    |
+| empty         | 选择器 空数据 插槽     |
+| header-top    | 选择器头部顶部插槽     |
+| header-bottom | 选择器头部底部插槽     |
+| picker-top    | 选择器滚动部分顶部插槽 |
+| picker-bottom | 选择器滚动部分底部插槽 |
 
 ### 选择器自定义样式
 

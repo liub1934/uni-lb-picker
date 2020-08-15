@@ -45,7 +45,7 @@
 		{
 			"path": "pages/demos/demo5",
 			"style": {
-				"navigationBarTitleText": "插槽自定义选择器头部"
+				"navigationBarTitleText": "插槽自定义选择器各部分"
 			}
 		},
 		{
@@ -82,13 +82,13 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#FFF",
+		"backgroundColor": "#FFF"
 	},
-  "easycom": {
-  	"autoscan": true,
-  	"custom": {
-  		"lb-picker": "@/components/lb-picker/index.vue"
-  	}
-  }
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"lb-picker": "@/components/lb-picker/index.vue"
+		}
+	}
 }

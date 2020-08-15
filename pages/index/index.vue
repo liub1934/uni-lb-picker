@@ -40,7 +40,7 @@
 						path: '/pages/demos/demo4'
 					},
 					{
-						title: '插槽自定义选择器头部',
+						title: '插槽自定义选择器各部分',
 						path: '/pages/demos/demo5'
 					},
 					{

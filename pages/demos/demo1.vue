@@ -56,7 +56,7 @@
 		},
 		onReady () {
 			this.$nextTick(() => {
-				const info = this.$refs.picker1.getColumnsInfo('C')
+				const info = this.$refs.picker1.getColumnsInfo('B')
 				console.log('根据value获取的信息：', info)
 			})
 		},

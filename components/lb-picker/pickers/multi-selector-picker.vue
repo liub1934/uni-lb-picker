@@ -34,8 +34,7 @@ export default {
     props: Object,
     level: Number,
     visible: Boolean,
-    height: String,
-    isConfirmChange: Boolean
+    height: String
   },
   mixins: [commonMixin],
   data () {
@@ -49,7 +48,9 @@ export default {
   methods: {
     handleChange (item) {
       const pickerValue = item.detail.value
-      const columnIndex = pickerValue.findIndex((item, i) => item !== this.pickerValue[i])
+      const columnIndex = pickerValue.findIndex(
+        (item, i) => item !== this.pickerValue[i]
+      )
       const valueIndex = pickerValue[columnIndex]
       this.setPickerChange(pickerValue, valueIndex, columnIndex)
     },

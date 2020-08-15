@@ -33,8 +33,7 @@ export default {
     mode: String,
     props: Object,
     visible: Boolean,
-    height: String,
-    isConfirmChange: Boolean
+    height: String
   },
   mixins: [commonMixin],
   data () {

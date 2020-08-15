@@ -42,7 +42,6 @@
 
 .lb-picker-header {
 	position: relative;
-	height: 45px;
 	background-color: #fff;
 	/* #ifdef APP-NVUE */
 	border-bottom-width: 1px;
@@ -52,6 +51,14 @@
 	border-top-style: solid;
 	border-top-color: #e5e5e5;
 	/* #endif */
+	/* #ifndef APP-NVUE */
+	box-sizing: border-box;
+	/* #endif */
+
+}
+
+.lb-picker-header-actions {
+	height: 45px;
 	/* #ifndef APP-NVUE */
 	box-sizing: border-box;
 	display: flex;
@@ -125,6 +132,10 @@
 .lb-picker-content {
 	position: relative;
 	background-color: #fff;
+}
+
+.lb-picker-content-main {
+	position: relative;
 	/* #ifndef APP-NVUE */
 	display: flex;
 	/* #endif */
