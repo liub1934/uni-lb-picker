@@ -77,7 +77,10 @@
         <slot name="header-bottom"></slot>
       </view>
 
-      <view class="lb-picker-content">
+      <view :class="[
+        'lb-picker-content',
+        safeAreaInsetBottom ? 'lb-picker-content-safe-buttom' : ''
+      ]">
 
         <!-- 选择器顶部插槽 -->
         <slot name="picker-top"></slot>
@@ -232,7 +235,12 @@ export default {
     zIndex: {
       type: Number,
       default: 999
-    }
+    },
+    safeAreaInsetBottom: {
+      type: Boolean,
+      default: true
+    },
+    disabled: Boolean
   },
   data () {
     return {
@@ -254,7 +262,7 @@ export default {
   },
   methods: {
     show () {
-      if (this.inline) return
+      if (this.inline || this.disabled) return
       this.visible = true
       setTimeout(() => {
         this.maskBgColor = this.maskColor

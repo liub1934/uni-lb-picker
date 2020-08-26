@@ -342,6 +342,8 @@ data () {
 | show-header             | (v1.0.8 新增)是否显示选择器头部                                                                                                    | Boolean             | -                                                                | true                                              |
 | inline                  | (v1.0.8 新增)inline 模式，开启后默认显示选择器，无需点击弹出，可以配合`show-header`一起使用                                        | Boolean             | -                                                                | -                                                 |
 | z-index                 | (v1.0.9 新增)选择器层级，遮罩层默认-1                                                                                              | Number              | -                                                                | 999                                               |
+| safe-area-inset-bottom  | (v1.1.4 新增)是否留出底部安全距离                                                                                                  | Boolean             | true/false                                                       | true                                              |
+| disabled                | (v1.1.4 新增)是否禁用选择器，禁用后无法弹出选择器                                                                                  | Boolean             | -                                                                | -                                                 |
 
 ### 方法
 
