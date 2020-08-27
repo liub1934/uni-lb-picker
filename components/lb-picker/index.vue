@@ -288,12 +288,10 @@ export default {
         this.$emit('confirm', null)
         this.hide()
       } else {
-        const picker = JSON.parse(JSON.stringify(this.picker))
+        const picker = { ...this.picker }
+        this.$refs[this.mode].isConfirmChange = true
         this.myValue = picker.value
         this.$emit('confirm', this.picker)
-        this.$nextTick(() => {
-          this.$refs[this.mode].isConfirmChange = true
-        })
         if (this.canHide) this.hide()
       }
     },
@@ -304,9 +302,6 @@ export default {
       this.picker.change = change
       this.picker.dataset = this.dataset || {}
       this.$emit('change', this.picker)
-      this.$nextTick(() => {
-        this.$refs[this.mode].isConfirmChange = false
-      })
     },
     handleMaskTap () {
       if (this.closeOnClickMask) {
