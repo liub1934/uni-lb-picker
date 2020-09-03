@@ -13,10 +13,29 @@
               ? 'lb-picker-column-active'
               : ''
           ]"
-          :key="i">
-          <text class="lb-picker-column-label">
-            {{ item[props.label] || item }}
-          </text>
+          :key="i"
+          :data-item="item"
+          @touchstart="touchstart"
+          @touchmove="touchmove"
+          @touchend="touchend">
+          <!-- #ifdef APP-NVUE -->
+          <text :class="[
+              'lb-picker-column-label',
+              `lb-picker-column-label-${align}`
+            ]"
+            :style="[
+              (item[props.value] || item) === selectValue
+                ? activeColumnStyle
+                : columnStyle
+            ]">{{ item[props.label] || item }}</text>
+          <!-- #endif -->
+
+          <!-- #ifndef APP-NVUE -->
+          <text :class="[
+              'lb-picker-column-label',
+              `lb-picker-column-label-${align}`
+            ]">{{ item[props.label] || item }}</text>
+          <!-- #endif -->
         </view>
       </picker-view-column>
     </picker-view>
@@ -33,7 +52,14 @@ export default {
     mode: String,
     props: Object,
     visible: Boolean,
-    height: String
+    height: String,
+    // #ifdef APP-NVUE
+    columnStyle: Object,
+    activeColumnStyle: Object,
+    // #endif
+    align: String,
+    pressEnable: Boolean,
+    pressTime: Number
   },
   mixins: [commonMixin],
   data () {

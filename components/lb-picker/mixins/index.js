@@ -1,9 +1,10 @@
-import { getColumns } from '../utils'
+import { getColumns, isObject } from '../utils'
 export const commonMixin = {
   data () {
     return {
       isConfirmChange: false,
-      indicatorStyle: `height: 34px`
+      indicatorStyle: `height: 34px`,
+      pressTimeout: null
     }
   },
   created () {
@@ -31,6 +32,31 @@ export const commonMixin = {
           change: changeType
         })
       }
+    },
+    touchstart (e) {
+      if (!this.pressEnable) return
+      clearTimeout(this.pressTimeout)
+      this.pressTimeout = setTimeout(() => {
+        // #ifdef APP-NVUE
+        const item = e.target.dataset.item
+        // #endif
+
+        // #ifndef APP-NVUE
+        const item = e.currentTarget.dataset.item
+        // #endif
+        uni.showToast({
+          title: isObject(item) ? item[this.props.label] : item,
+          icon: 'none'
+        })
+      }, this.pressTime)
+    },
+    touchmove () {
+      if (!this.pressEnable) return
+      clearTimeout(this.pressTimeout)
+    },
+    touchend () {
+      if (!this.pressEnable) return
+      clearTimeout(this.pressTimeout)
     }
   },
   watch: {

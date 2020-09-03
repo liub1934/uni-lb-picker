@@ -1,5 +1,6 @@
 .lb-picker-column {
   height: 34px;
+  padding: 0 10px;
   /* #ifndef APP-NVUE */
   display: flex;
   box-sizing: border-box;
@@ -8,16 +9,32 @@
   /* #endif */
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 }
 
 .lb-picker-column-label {
   font-size: 16px;
   text-align: center;
+  flex: 1;
+  /* #ifdef APP-NVUE */
+  lines: 1;
+  /* #endif */
   text-overflow: ellipsis;
   transition-property: color;
   transition-duration: 0.3s;
+  /* #ifndef APP-NVUE */
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  /* #endif */
+}
+
+.lb-picker-column-label-left {
+  text-align: left;
+}
+
+.lb-picker-column-label-center {
+  text-align: center;
+}
+
+.lb-picker-column-label-right {
+  text-align: right;
 }

@@ -7,73 +7,73 @@
 			}
 		},
 		{
-			"path": "pages/demos/demo1",
+			"path": "pages/demos/demo1/demo1",
 			"style": {
 				"navigationBarTitleText": "单选"
 			}
 		},
 		{
-			"path": "pages/demos/demo2",
+			"path": "pages/demos/demo2/demo2",
 			"style": {
 				"navigationBarTitleText": "多级联动"
 			}
 		},
 		{
-			"path": "pages/demos/demo12",
+			"path": "pages/demos/demo12/demo12",
 			"style": {
 				"navigationBarTitleText": "多级非联动"
 			}
 		},
 		{
-			"path": "pages/demos/demo3",
+			"path": "pages/demos/demo3/demo3",
 			"style": {
 				"navigationBarTitleText": "省市区选择"
 			}
 		},
 		{
-			"path": "pages/demos/demo13",
+			"path": "pages/demos/demo13/demo13",
 			"style": {
 				"navigationBarTitleText": "inline默认显示"
 			}
 		},
 		{
-			"path": "pages/demos/demo4",
+			"path": "pages/demos/demo4/demo4",
 			"style": {
 				"navigationBarTitleText": "自定义确定取消文字及颜色"
 			}
 		},
 		{
-			"path": "pages/demos/demo5",
+			"path": "pages/demos/demo5/demo5",
 			"style": {
 				"navigationBarTitleText": "插槽自定义选择器各部分"
 			}
 		},
 		{
-			"path": "pages/demos/demo6",
+			"path": "pages/demos/demo6/demo6",
 			"style": {
 				"navigationBarTitleText": "可视区自定义滚动个数"
 			}
 		},
 		{
-			"path": "pages/demos/demo7",
+			"path": "pages/demos/demo7/demo7",
 			"style": {
 				"navigationBarTitleText": "自定义数据结构"
 			}
 		},
 		{
-			"path": "pages/demos/demo9",
+			"path": "pages/demos/demo9/demo9",
 			"style": {
 				"navigationBarTitleText": "自定义样式颜色"
 			}
 		},
 		{
-			"path": "pages/demos/demo10",
+			"path": "pages/demos/demo10/demo10",
 			"style": {
 				"navigationBarTitleText": "相关事件"
 			}
 		},
 		{
-			"path": "pages/demos/demo11",
+			"path": "pages/demos/demo11/demo11",
 			"style": {
 				"navigationBarTitleText": "异步加载整体数据"
 			}

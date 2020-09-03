@@ -37,19 +37,15 @@
         <slot name="header-top"></slot>
 
         <view class="lb-picker-header-actions">
-          <view class="lb-picker-action lb-picker-left">
-            <!-- 取消 -->
-            <view class="lb-picker-action-item lb-picker-action-cancel"
-              @tap.stop="handleCancel">
-              <slot v-if="$slots['cancel-text']"
-                name="cancel-text">
-              </slot>
-              <text v-else
-                class="lb-picker-action-cancel-text"
-                :style="{ color: cancelColor }">
-                {{ cancelText }}
-              </text>
-            </view>
+          <!-- 取消 -->
+          <view class="lb-picker-action lb-picker-action-cancel"
+            @tap.stop="handleCancel">
+            <slot v-if="$slots['cancel-text']"
+              name="cancel-text">
+            </slot>
+            <text v-else
+              class="lb-picker-action-cancel-text"
+              :style="{ color: cancelColor }">{{ cancelText }}</text>
           </view>
 
           <!-- 中间 -->
@@ -59,17 +55,13 @@
           </view>
 
           <!-- 确定 -->
-          <view class="lb-picker-action lb-picker-right">
-            <view class="lb-picker-action-item lb-picker-action-confirm"
-              @tap.stop="handleConfirm">
-              <slot v-if="$slots['confirm-text']"
-                name="confirm-text"> </slot>
-              <text v-else
-                class="lb-picker-action-confirm-text"
-                :style="{ color: confirmColor }">
-                {{ confirmText }}
-              </text>
-            </view>
+          <view class="lb-picker-action lb-picker-action-confirm"
+            @tap.stop="handleConfirm">
+            <slot v-if="$slots['confirm-text']"
+              name="confirm-text"> </slot>
+            <text v-else
+              class="lb-picker-action-confirm-text"
+              :style="{ color: confirmColor }">{{ confirmText }}</text>
           </view>
         </view>
 
@@ -102,9 +94,7 @@
             class="lb-picker-empty">
             <slot name="empty">
               <text class="lb-picker-empty-text"
-                :style="{ color: emptyColor }">
-                {{ emptyText }}
-              </text>
+                :style="{ color: emptyColor }">{{ emptyText }}</text>
             </slot>
           </view>
 
@@ -117,6 +107,11 @@
             :props="pickerProps"
             :height="pickerContentHeight"
             :inline="inline"
+            :column-style="columnStyle"
+            :active-column-style="activeColumnStyle"
+            :align="align"
+            :press-enable="pressEnable"
+            :press-time="pressTime"
             @change="handleChange">
           </selector-picker>
 
@@ -131,6 +126,11 @@
             :props="pickerProps"
             :height="pickerContentHeight"
             :inline="inline"
+            :column-style="columnStyle"
+            :active-column-style="activeColumnStyle"
+            :align="align"
+            :press-enable="pressEnable"
+            :press-time="pressTime"
             @change="handleChange">
           </multi-selector-picker>
 
@@ -144,6 +144,11 @@
             :props="pickerProps"
             :height="pickerContentHeight"
             :inline="inline"
+            :column-style="columnStyle"
+            :active-column-style="activeColumnStyle"
+            :align="align"
+            :press-enable="pressEnable"
+            :press-time="pressTime"
             @change="handleChange">
           </unlinked-selector-picker>
         </view>
@@ -189,17 +194,26 @@ export default {
       type: String,
       default: '取消'
     },
-    cancelColor: String,
+    cancelColor: {
+			type: String,
+			default: '#999'
+		},
     confirmText: {
       type: String,
       default: '确定'
     },
-    confirmColor: String,
+    confirmColor: {
+			type: String,
+			default: '#007aff'
+		},
     canHide: {
       type: Boolean,
       default: true
     },
-    emptyColor: String,
+    emptyColor: {
+			type: String,
+			default: '#999'
+		},
     emptyText: {
       type: String,
       default: '暂无数据'
@@ -240,7 +254,20 @@ export default {
       type: Boolean,
       default: true
     },
-    disabled: Boolean
+    disabled: Boolean,
+		// #ifdef APP-NVUE
+    columnStyle: Object,
+    activeColumnStyle: Object,
+    // #endif
+    align: {
+      type: String,
+      default: 'center'
+    },
+    pressEnable: Boolean,
+    pressTime: {
+      type: Number,
+      default: 500
+    }
   },
   data () {
     return {

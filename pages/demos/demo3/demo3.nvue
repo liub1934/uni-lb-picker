@@ -63,7 +63,7 @@
 </template>
 
 <script>
-	import areaData from './area-data-min'
+	import areaData from '../area-data-min'
 	export default {
 		data(){
 			return {

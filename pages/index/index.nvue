@@ -78,22 +78,17 @@
 
 <style lang="scss">
 .list {
-  padding-top: 10px;
+	padding-top: 10px;
   background-color: $uni-bg-color-grey;
 }
 .list-item {
-  /* #ifndef APP-NVUE */
-  display: flex;
-  /* #endif */
-  align-items: center;
-  height: 44px;
-  line-height: 44px;
   background-color: $uni-text-color-inverse;
   margin-bottom: 10px;
   padding: 0 10px;
 }
 .item-title {
-  flex: 1;
-  font-size: 16px;
+  font-size: 14px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 </style>
