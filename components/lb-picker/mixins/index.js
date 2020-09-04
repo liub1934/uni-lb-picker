@@ -1,4 +1,4 @@
-import { getColumns, isObject } from '../utils'
+import { getColumns, isObject, isFunction } from '../utils'
 export const commonMixin = {
   data () {
     return {
@@ -57,6 +57,13 @@ export const commonMixin = {
     touchend () {
       if (!this.pressEnable) return
       clearTimeout(this.pressTimeout)
+    },
+    getLabel (item, rowIndex, columnIndex) {
+      if (this.formatter && isFunction(this.formatter)) {
+        return this.formatter({ item, rowIndex, columnIndex })
+      } else {
+        return item[this.props.label] || item
+      }
     }
   },
   watch: {

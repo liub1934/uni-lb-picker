@@ -112,6 +112,7 @@
             :align="align"
             :press-enable="pressEnable"
             :press-time="pressTime"
+            :formatter="formatter"
             @change="handleChange">
           </selector-picker>
 
@@ -131,6 +132,7 @@
             :align="align"
             :press-enable="pressEnable"
             :press-time="pressTime"
+            :formatter="formatter"
             @change="handleChange">
           </multi-selector-picker>
 
@@ -149,6 +151,7 @@
             :align="align"
             :press-enable="pressEnable"
             :press-time="pressTime"
+            :formatter="formatter"
             @change="handleChange">
           </unlinked-selector-picker>
         </view>
@@ -267,7 +270,8 @@ export default {
     pressTime: {
       type: Number,
       default: 500
-    }
+    },
+    formatter: Function
   },
   data () {
     return {

@@ -54,13 +54,12 @@ export default {
     level: Number,
     visible: Boolean,
     height: String,
-    // #ifdef APP-NVUE
     columnStyle: Object,
     activeColumnStyle: Object,
-    // #endif
     align: String,
     pressEnable: Boolean,
-    pressTime: Number
+    pressTime: Number,
+    formatter: Function
   },
   mixins: [commonMixin],
   data () {

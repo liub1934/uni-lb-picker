@@ -10,6 +10,17 @@ export function isObject (val) {
 }
 
 /**
+ * 判断是否是Function
+ *
+ * @export
+ * @param {*} val
+ * @returns true/false
+ */
+export function isFunction (val) {
+  return Object.prototype.toString.call(val) === '[object Function]'
+}
+
+/**
  * 根据value获取columns信息
  *
  * @export
