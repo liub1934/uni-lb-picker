@@ -164,6 +164,7 @@
 </template>
 
 <script>
+const defaultMaskBgColor = 'rgba(0, 0, 0, 0)'
 const defaultProps = {
   label: 'label',
   value: 'value',
@@ -277,7 +278,7 @@ export default {
     return {
       visible: false,
       containerVisible: false,
-      maskBgColor: '',
+      maskBgColor: defaultMaskBgColor,
       myValue: this.value,
       picker: {},
       pickerProps: Object.assign({}, defaultProps, this.props),
@@ -302,7 +303,7 @@ export default {
     },
     hide () {
       if (this.inline) return
-      this.maskBgColor = ''
+      this.maskBgColor = defaultMaskBgColor
       this.containerVisible = false
       setTimeout(() => {
         this.visible = false
