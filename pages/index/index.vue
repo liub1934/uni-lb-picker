@@ -1,10 +1,15 @@
 <template>
   <view class="list">
-    <view class="list-item"
-      v-for="(item, index) in demoList"
-      :key="index"
-      @tap="handleTap(item)">
-      <view class="item-title">{{ item.title }}</view>
+    <view class="grey-block"></view>
+    <view v-for="(item, index) in demoList"
+      :key="index">
+      <view class="list-item"
+        @tap="handleTap(item)">
+        <view class="item-content">
+          <text class="item-left">{{ item.title }}</text>
+        </view>
+      </view>
+      <view class="grey-block"></view>
     </view>
   </view>
 </template>
@@ -76,24 +81,6 @@
 	}
 </script>
 
-<style lang="scss">
-.list {
-  padding-top: 10px;
-  background-color: $uni-bg-color-grey;
-}
-.list-item {
-  /* #ifndef APP-NVUE */
-  display: flex;
-  /* #endif */
-  align-items: center;
-  height: 44px;
-  line-height: 44px;
-  background-color: $uni-text-color-inverse;
-  margin-bottom: 10px;
-  padding: 0 10px;
-}
-.item-title {
-  flex: 1;
-  font-size: 16px;
-}
+<style lang="scss" scoped>
+@import "./index.scss";
 </style>
