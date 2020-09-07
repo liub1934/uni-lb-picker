@@ -40,6 +40,12 @@
 						title: 'inline模式',
 						path: '/pages/demos/demo13/demo13'
 					},
+					// #ifdef APP-NVUE || H5
+					{
+						title: 'formatter自定义显示',
+						path: '/pages/demos/demo14/demo14'
+					},
+					// #endif
 					{
 						title: '自定义确定取消文字及颜色',
 						path: '/pages/demos/demo4/demo4'

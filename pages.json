@@ -37,6 +37,12 @@
 			}
 		},
 		{
+			"path": "pages/demos/demo14/demo14",
+			"style": {
+				"navigationBarTitleText": "formatter自定义显示"
+			}
+		},
+		{
 			"path": "pages/demos/demo4/demo4",
 			"style": {
 				"navigationBarTitleText": "自定义确定取消文字及颜色"

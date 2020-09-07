@@ -18,7 +18,7 @@
           @touchstart="touchstart"
           @touchmove="touchmove"
           @touchend="touchend">
-          <!-- #ifdef APP-NVUE -->
+          <!-- #ifdef APP-PLUS || H5 -->
           <text :class="[
               'lb-picker-column-label',
               `lb-picker-column-label-${align}`
@@ -27,10 +27,10 @@
               (item[props.value] || item) === selectValue
                 ? activeColumnStyle
                 : columnStyle
-            ]">{{ item[props.label] || item }}</text>
+            ]">{{ getLabel(item, i, 0) }}</text>
           <!-- #endif -->
 
-          <!-- #ifndef APP-NVUE -->
+          <!-- #ifndef APP-PLUS || H5 -->
           <text :class="[
               'lb-picker-column-label',
               `lb-picker-column-label-${align}`

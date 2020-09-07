@@ -6,7 +6,7 @@
       <view class="list-item"
         @tap="handleTap(item)">
         <view class="item-content">
-          <view class="item-left">{{ item.title }}</view>
+          <text class="item-left">{{ item.title }}</text>
         </view>
       </view>
       <view class="grey-block"></view>
@@ -39,6 +39,10 @@
 					{
 						title: 'inline模式',
 						path: '/pages/demos/demo13/demo13'
+					},
+					{
+						title: 'formatter自定义显示',
+						path: '/pages/demos/demo14/demo14'
 					},
 					{
 						title: '自定义确定取消文字及颜色',

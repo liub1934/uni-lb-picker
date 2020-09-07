@@ -1,5 +1,9 @@
 .list-item {
   padding: 10px 15px;
+	/* #ifndef APP-NVUE */
+	display: flex;
+	flex-direction: column;
+	/* #endif */
 }
 
 .sub-title {
