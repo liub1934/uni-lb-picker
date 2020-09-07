@@ -259,10 +259,8 @@ export default {
       default: true
     },
     disabled: Boolean,
-		// #ifdef APP-NVUE
     columnStyle: Object,
     activeColumnStyle: Object,
-    // #endif
     align: {
       type: String,
       default: 'center'
@@ -281,11 +279,13 @@ export default {
       maskBgColor: defaultMaskBgColor,
       myValue: this.value,
       picker: {},
-      pickerProps: Object.assign({}, defaultProps, this.props),
-      pickerContentHeight: 34 * this.columnNum + 'px'
+      pickerProps: Object.assign({}, defaultProps, this.props)
     }
   },
   computed: {
+    pickerContentHeight () {
+      return 34 * this.columnNum + 'px'
+    },
     isEmpty () {
       if (!this.list) return true
       if (this.list && !this.list.length) return true
@@ -333,6 +333,9 @@ export default {
       this.picker.index = index
       this.picker.change = change
       this.picker.dataset = this.dataset || {}
+      if (this.$refs[this.mode] && this.inline) {
+        this.$refs[this.mode].isConfirmChange = true
+      }
       this.$emit('change', this.picker)
     },
     handleMaskTap () {
