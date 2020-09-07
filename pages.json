@@ -43,6 +43,12 @@
 			}
 		},
 		{
+			"path": "pages/demos/demo15/demo15",
+			"style": {
+				"navigationBarTitleText": "长按Toast提示"
+			}
+		},
+		{
 			"path": "pages/demos/demo4/demo4",
 			"style": {
 				"navigationBarTitleText": "自定义确定取消文字及颜色"

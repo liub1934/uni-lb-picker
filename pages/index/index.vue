@@ -47,6 +47,10 @@
 					},
 					// #endif
 					{
+						title: '长按Toast提示',
+						path: '/pages/demos/demo15/demo15'
+					},
+					{
 						title: '自定义确定取消文字及颜色',
 						path: '/pages/demos/demo4/demo4'
 					},
