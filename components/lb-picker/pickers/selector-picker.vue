@@ -6,37 +6,53 @@
       :indicator-style="indicatorStyle"
       @change="handleChange">
       <picker-view-column>
+        <!-- #ifdef H5 -->
         <view v-for="(item, i) in list"
           :class="[
+				    'lb-picker-column',
+				    (item[props.value] || item) === selectValue
+				      ? 'lb-picker-column-active'
+				      : ''
+				  ]"
+          :key="i"
+          :data-item="JSON.stringify(item)"
+          @touchstart="touchstart"
+          @touchmove="touchmove"
+          @touchend="touchend">
+          <!-- #endif -->
+          <!-- #ifndef H5 -->
+          <view v-for="(item, i) in list"
+            :class="[
             'lb-picker-column',
             (item[props.value] || item) === selectValue
               ? 'lb-picker-column-active'
               : ''
           ]"
-          :key="i"
-          :data-item="item"
-          @touchstart="touchstart"
-          @touchmove="touchmove"
-          @touchend="touchend">
-          <!-- #ifdef APP-PLUS || H5 -->
-          <text :class="[
+            :key="i"
+            :data-item="item"
+            @touchstart="touchstart"
+            @touchmove="touchmove"
+            @touchend="touchend">
+            <!-- #endif -->
+            <!-- #ifdef APP-PLUS || H5 -->
+            <text :class="[
               'lb-picker-column-label',
               `lb-picker-column-label-${align}`
             ]"
-            :style="[
+              :style="[
               (item[props.value] || item) === selectValue
                 ? activeColumnStyle
                 : columnStyle
             ]">{{ getLabel(item, i, 0) }}</text>
-          <!-- #endif -->
+            <!-- #endif -->
 
-          <!-- #ifndef APP-PLUS || H5 -->
-          <text :class="[
+            <!-- #ifndef APP-PLUS || H5 -->
+            <text :class="[
               'lb-picker-column-label',
               `lb-picker-column-label-${align}`
             ]">{{ item[props.label] || item }}</text>
-          <!-- #endif -->
-        </view>
+            <!-- #endif -->
+          </view>
       </picker-view-column>
     </picker-view>
   </view>
@@ -66,6 +82,11 @@ export default {
       pickerValue: [],
       selectValue: '',
       selectItem: null
+    }
+  },
+  computed: {
+    isH5 () {
+      return false
     }
   },
   methods: {

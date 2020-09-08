@@ -7,37 +7,53 @@
       @change="handleChange">
       <picker-view-column v-for="(column, index) in pickerColumns"
         :key="index">
+        <!-- #ifdef H5 -->
         <view v-for="(item, i) in column || []"
           :class="[
+				    'lb-picker-column',
+				    item[props.value] === selectValue[index]
+				      ? 'lb-picker-column-active'
+				      : ''
+				  ]"
+          :key="i"
+          :data-item="JSON.stringify(item)"
+          @touchstart="touchstart"
+          @touchmove="touchmove"
+          @touchend="touchend">
+          <!-- #endif -->
+          <!-- #ifndef H5 -->
+          <view v-for="(item, i) in column || []"
+            :class="[
             'lb-picker-column',
             item[props.value] === selectValue[index]
               ? 'lb-picker-column-active'
               : ''
           ]"
-          :key="i"
-          :data-item="item"
-          @touchstart="touchstart"
-          @touchmove="touchmove"
-          @touchend="touchend">
-          <!-- #ifdef APP-PLUS || H5 -->
-          <text :class="[
+            :key="i"
+            :data-item="item"
+            @touchstart="touchstart"
+            @touchmove="touchmove"
+            @touchend="touchend">
+            <!-- #endif -->
+            <!-- #ifdef APP-PLUS || H5 -->
+            <text :class="[
               'lb-picker-column-label',
               `lb-picker-column-label-${align}`
             ]"
-            :style="[
+              :style="[
               item[props.value] === selectValue[index]
               ? activeColumnStyle
               : columnStyle
             ]">{{ getLabel(item, i, index) }}</text>
-          <!-- #endif -->
+            <!-- #endif -->
 
-          <!-- #ifndef APP-PLUS || H5 -->
-          <text :class="[
+            <!-- #ifndef APP-PLUS || H5 -->
+            <text :class="[
               'lb-picker-column-label',
               `lb-picker-column-label-${align}`
             ]">{{ item[props.label] || item }}</text>
-          <!-- #endif -->
-        </view>
+            <!-- #endif -->
+          </view>
       </picker-view-column>
     </picker-view>
   </view>

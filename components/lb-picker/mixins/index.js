@@ -41,7 +41,11 @@ export const commonMixin = {
         const item = e.target.dataset.item
         // #endif
 
-        // #ifndef APP-NVUE
+        // #ifdef H5
+        const item = JSON.parse(e.currentTarget.dataset.item)
+        // #endif
+
+        // #ifndef APP-NVUE || H5
         const item = e.currentTarget.dataset.item
         // #endif
         uni.showToast({
