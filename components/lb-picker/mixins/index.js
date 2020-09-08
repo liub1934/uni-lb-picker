@@ -48,8 +48,16 @@ export const commonMixin = {
         // #ifndef APP-NVUE || H5
         const item = e.currentTarget.dataset.item
         // #endif
+
+        // #ifdef APP-PLUS || H5
+        const toastTitle = this.getLabel(item)
+        // #endif
+
+        // #ifndef APP-PLUS || H5
+        const toastTitle = item[this.props.label] || item
+        // #endif
         uni.showToast({
-          title: isObject(item) ? item[this.props.label] : item,
+          title: toastTitle,
           icon: 'none'
         })
       }, this.pressTime)
