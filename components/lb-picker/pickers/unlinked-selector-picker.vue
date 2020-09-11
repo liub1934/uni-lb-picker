@@ -16,7 +16,7 @@
 				      : ''
 				  ]"
           :key="i"
-          :data-item="JSON.stringify(item)"
+          :data-item="pressEnable ? JSON.stringify(item) : ''"
           @touchstart="touchstart"
           @touchmove="touchmove"
           @touchend="touchend">
