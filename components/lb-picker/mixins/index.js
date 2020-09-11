@@ -37,24 +37,26 @@ export const commonMixin = {
       if (!this.pressEnable) return
       clearTimeout(this.pressTimeout)
       this.pressTimeout = setTimeout(() => {
+        let item = {}
+        let toastTitle = ''
         // #ifdef APP-NVUE
-        const item = e.target.dataset.item
+        item = e.target.dataset.item
         // #endif
 
         // #ifdef H5
-        const item = JSON.parse(e.currentTarget.dataset.item)
+        item = JSON.parse(e.currentTarget.dataset.item)
         // #endif
 
         // #ifndef APP-NVUE || H5
-        const item = e.currentTarget.dataset.item
+        item = e.currentTarget.dataset.item
         // #endif
 
         // #ifdef APP-PLUS || H5
-        const toastTitle = this.getLabel(item)
+        toastTitle = this.getLabel(item)
         // #endif
 
         // #ifndef APP-PLUS || H5
-        const toastTitle = item[this.props.label] || item
+        toastTitle = item[this.props.label] || item
         // #endif
         uni.showToast({
           title: toastTitle,
