@@ -28,7 +28,7 @@
         v-model="value"
         mode="selector"
         :list="list"
-        :column-num="columnNum"
+        :column-num="+columnNum"
         @change="handleChange"
         @confirm="handleConfirm"
         @cancel="handleCancel">
@@ -42,11 +42,11 @@
 export default {
   data () {
     return {
-      columnNum: 5,
+      columnNum: '5',
       value: 2,
       label: '',
       list: [],
-      radios: [3, 4, 5, 6, 7]
+      radios: ['3', '4', '5', '6', '7']
     }
   },
   created () {
