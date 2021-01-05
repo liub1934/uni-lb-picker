@@ -37,6 +37,10 @@
 						path: '/pages/demos/demo3/demo3'
 					},
 					{
+						title: '日期选择',
+						path: '/pages/demos/demo16/demo16'
+					},
+					{
 						title: 'inline模式',
 						path: '/pages/demos/demo13/demo13'
 					},

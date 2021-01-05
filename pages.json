@@ -31,6 +31,12 @@
 			}
 		},
 		{
+			"path": "pages/demos/demo16/demo16",
+			"style": {
+				"navigationBarTitleText": "日期选择"
+			}
+		},
+		{
 			"path": "pages/demos/demo13/demo13",
 			"style": {
 				"navigationBarTitleText": "inline默认显示"
