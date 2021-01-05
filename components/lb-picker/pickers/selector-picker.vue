@@ -84,11 +84,6 @@ export default {
       selectItem: null
     }
   },
-  computed: {
-    isH5 () {
-      return false
-    }
-  },
   methods: {
     handleChange (item) {
       const index = item.detail.value[0] || 0
@@ -109,5 +104,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../style/picker-item.scss";
+@import '../style/picker-item.scss';
 </style>

@@ -28,7 +28,7 @@
         v-model="value"
         mode="selector"
         :list="list"
-        :column-num="+columnNum"
+        :column-num="num"
         @change="handleChange"
         @confirm="handleConfirm"
         @cancel="handleCancel">
@@ -47,6 +47,11 @@ export default {
       label: '',
       list: [],
       radios: ['3', '4', '5', '6', '7']
+    }
+  },
+  computed: {
+    num () {
+      return +this.columnNum
     }
   },
   created () {
@@ -91,5 +96,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../index/index.scss";
+@import '../../index/index.scss';
 </style>

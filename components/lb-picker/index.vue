@@ -340,6 +340,7 @@ export default {
       return 34 * this.columnNum + 'px'
     },
     isEmpty () {
+      if (this.mode === 'dateSelector') return false
       if (!this.list && this.mode !== 'dateSelector') return true
       if (this.list && !this.list.length) return true
       return false
@@ -447,5 +448,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./style/picker.scss";
+@import './style/picker.scss';
 </style>
