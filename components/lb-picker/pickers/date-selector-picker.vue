@@ -108,12 +108,9 @@ export default {
       }
       this.selectItem = this.toObject(this.selectDate)
       this.setColumnData()
-      let selectItem = {
-        ...this.selectItem
-      }
-      selectItem.month = selectItem.month - 1
+      const value = this.getValueDate()
       this.$emit('change', {
-        value: this.dayjs(selectItem).format(this.format),
+        value: value.format(this.format),
         valueArr: this.selectValue,
         item: this.selectItem,
         index: this.pickerValue,
@@ -134,12 +131,9 @@ export default {
         this.$set(this.selectValue, columnIndex, valueItem.value)
         this.$set(this.selectItem, columnName, valueItem.value)
         this.setColumnData()
-        let selectItem = {
-          ...this.selectItem
-        }
-        selectItem.month = selectItem.month - 1
+        const value = this.getValueDate()
         this.$emit('change', {
-          value: this.dayjs(selectItem).format(this.format),
+          value: value.format(this.format),
           valueArr: this.selectValue,
           item: this.selectItem,
           index: this.pickerValue,
@@ -147,16 +141,23 @@ export default {
         })
       }
     },
-    getLabel (value, name, format, rowIndex, columnIndex) {
+    getLabel (value, name, format, $d, rowIndex, columnIndex) {
       const ch = this.isShowChinese ? this.chConfig[name] || '' : ''
-      let label = value < 10 && format.length > 1
-        ? `0${value}${ch}`
-        : value + ch
+      let label =
+        value < 10 && format.length > 1 ? `0${value}${ch}` : value + ch
       if (this.formatter && isFunction(this.formatter)) {
-        const item = { name, format, value }
+        const item = { name, format, value, $d }
         label = this.formatter({ item, rowIndex, columnIndex }) || label
       }
       return label
+    },
+    getValueDate (dateObj = {}) {
+      let selectItem = {
+        ...this.selectItem,
+        ...dateObj
+      }
+      selectItem.month = selectItem.month - 1
+      return this.dayjs(selectItem)
     },
     setColumnData () {
       let list = []
@@ -219,7 +220,14 @@ export default {
           for (let i = this.startInfo[name]; i <= this.endInfo[name]; i++) {
             n++
             list.push({
-              label: this.getLabel(i, name, format, n, index),
+              label: this.getLabel(
+                i,
+                name,
+                format,
+                this.getValueDate({ [name]: i }),
+                n,
+                index
+              ),
               value: i
             })
           }
@@ -236,7 +244,14 @@ export default {
           for (let i = start; i <= end; i++) {
             n++
             list.push({
-              label: this.getLabel(i, name, format, n, index),
+              label: this.getLabel(
+                i,
+                name,
+                format,
+                this.getValueDate({ [name]: i }),
+                n,
+                index
+              ),
               value: i
             })
           }
@@ -263,7 +278,14 @@ export default {
           for (let i = start; i <= end; i++) {
             n++
             list.push({
-              label: this.getLabel(i, name, format, n, index),
+              label: this.getLabel(
+                i,
+                name,
+                format,
+                this.getValueDate({ [name]: i }),
+                n,
+                index
+              ),
               value: i
             })
           }
@@ -288,7 +310,14 @@ export default {
           for (let i = start; i <= end; i++) {
             n++
             list.push({
-              label: this.getLabel(i, name, format, n, index),
+              label: this.getLabel(
+                i,
+                name,
+                format,
+                this.getValueDate({ [name]: i }),
+                n,
+                index
+              ),
               value: i
             })
           }
@@ -315,7 +344,14 @@ export default {
           for (let i = start; i <= end; i++) {
             n++
             list.push({
-              label: this.getLabel(i, name, format, n, index),
+              label: this.getLabel(
+                i,
+                name,
+                format,
+                this.getValueDate({ [name]: i }),
+                n,
+                index
+              ),
               value: i
             })
           }
@@ -344,7 +380,14 @@ export default {
           for (let i = start; i <= end; i++) {
             n++
             list.push({
-              label: this.getLabel(i, name, format, n, index),
+              label: this.getLabel(
+                i,
+                name,
+                format,
+                this.getValueDate({ [name]: i }),
+                n,
+                index
+              ),
               value: i
             })
           }
