@@ -109,7 +109,7 @@
 
     <view class="list-item"
       @tap="handleTap('picker6')">
-      <text class="sub-title">formatter自定义显示</text>
+      <text class="sub-title">formatter自定义显示(百度、支付宝、头条小程序不支持)</text>
       <view class="item-content">
         <text class="item-title">绑定值:{{ value6 }}</text>
         <view class="item-value">
@@ -302,7 +302,8 @@ export default {
         const arr = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二']
         return `${arr[item.value - 1]}月`
       } else if (item.name === 'day') {
-        return `第${item.value}日`
+        const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+        return `${item.value}号-${week[item.$d.day()]}`
       }
     },
     radioChange (e) {
