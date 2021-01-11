@@ -109,7 +109,7 @@
 
     <view class="list-item"
       @tap="handleTap('picker6')">
-      <text class="sub-title">高级formatter自定义显示</text>
+      <text class="sub-title">formatter自定义显示</text>
       <view class="item-content">
         <text class="item-title">绑定值:{{ value6 }}</text>
         <view class="item-value">
@@ -163,7 +163,6 @@
     <view class="list-item"
       @tap="handleTap('picker8')">
       <text class="sub-title">自定义显示日期颗粒，可自由组合</text>
-
       <view class="item-content">
         <text class="item-title">绑定值:{{ value8 }}</text>
         <view class="item-value">
@@ -178,6 +177,60 @@
         @change="handleChange"
         @confirm="handleConfirm"
         @cancel="handleCancel">
+      </lb-picker>
+    </view>
+    <view class="grey-block"></view>
+
+    <view class="list-item"
+      @tap="handleTap('picker9')">
+      <text class="sub-title">filter过滤列表，例：过滤排除年月日为奇数项，仅保留偶数项</text>
+      <view class="item-content">
+        <text class="item-title">绑定值:{{ value9 }}</text>
+        <view class="item-value">
+          <text class="item-placeholder">点我打开选择器</text>
+        </view>
+      </view>
+      <lb-picker ref="picker9"
+        v-model="value9"
+        mode="dateSelector"
+        :filter="filter"
+        @change="handleChange"
+        @confirm="handleConfirm"
+        @cancel="handleCancel">
+      </lb-picker>
+    </view>
+    <view class="grey-block"></view>
+
+    <view class="list-item"
+      @tap="handleTap('picker10')">
+      <text class="sub-title">插槽自定义日期范围选择</text>
+      <view class="item-content">
+        <text class="item-title">绑定值:{{ JSON.stringify(value10) }}</text>
+        <view class="item-value">
+          <text class="item-placeholder">点我打开选择器</text>
+        </view>
+      </view>
+      <lb-picker ref="picker10"
+        :value="value10[value10Active] || ''"
+        mode="dateSelector"
+        :dataset="{
+          name: 'picker10'
+        }"
+        :start-date="value10Start"
+        @change="handleChange"
+        @confirm="handleConfirm"
+        @cancel="handleCancel">
+        <view class="picker-top"
+          slot="picker-top">
+          <view class="start"
+            @tap="handleStartEnd(0)">
+            <text>{{ value10[0] || '点击选择开始日期' }}</text>
+          </view>
+          <view class="end"
+            @tap="handleStartEnd(1)">
+            <text>{{ value10[1] || '点击选择结束日期' }}</text>
+          </view>
+        </view>
       </lb-picker>
     </view>
     <view class="grey-block"></view>
@@ -196,6 +249,10 @@ export default {
       value6: '',
       value7: '天朝2021年第01月第01日',
       value8: '',
+      value9: '',
+      value10: [],
+      value10Active: 0,
+      value10Start: '',
       startDate: '2018-08-08 08:08:08',
       endDate: '2021-08-08 08:08:08',
       curFormat: 'YYYY',
@@ -221,23 +278,19 @@ export default {
       }
     }
   },
-  onReady () {
-    // this.$nextTick(() => {
-    //   // 此处可以调用getColumnsInfo方法获取默认值的选项信息
-    //   const info = this.$refs.picker2.getColumnsInfo(this.value2)
-    //   console.log('根据value获取的信息：', info)
-    //   this.label2 = info.item.label
-    // })
-  },
   methods: {
     handleTap (name) {
       this.$refs[name].show()
     },
     handleChange (e) {
       console.log('change::', e)
+      if (e.dataset.name === 'picker10') {
+        this.$set(this.value10, this.value10Active, e.value)
+      }
     },
     handleConfirm (e) {
       console.log('confirm::', e)
+      
     },
     handleCancel (e) {
       console.log('cancel::', e)
@@ -255,11 +308,34 @@ export default {
     radioChange (e) {
       this.value8 = ''
       this.curFormat = e.detail.value
+    },
+    filter (name, list) {
+      list = list.filter(item => item.value%2 === 0)
+      return list
+    },
+    handleStartEnd (active) {
+      this.value10Active = active
+      this.value10Start = active === 1 ? this.value10[0] : ''
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../index/index.scss';
+@import "../../index/index.scss";
+.picker-top {
+  padding: 10px 0;
+  /* #ifndef APP-NVUE */
+  display: flex;
+  /* #endif */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  .start {
+    margin-right: 5px;
+  }
+  .end {
+    margin-left: 5px;
+  }
+}
 </style>
