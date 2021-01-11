@@ -174,6 +174,7 @@
             :default-time-limit="defaultTimeLimit"
             :is-show-chinese="isShowChinese"
             :ch-config="pickerChConfig"
+            :filter="filter"
             @change="handleChange">
           </date-selector-picker>
         </view>
@@ -306,7 +307,6 @@ export default {
     format: {
       type: String,
       default: 'YYYY-MM-DD'
-      // default: 'YYYY-MM-DD HH:mm:ss'
     },
     displayFormat: {
       type: String,
@@ -322,7 +322,8 @@ export default {
       type: Boolean,
       default: true
     },
-    chConfig: Object
+    chConfig: Object,
+    filter: Function
   },
   data () {
     return {
@@ -448,5 +449,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './style/picker.scss';
+@import "./style/picker.scss";
 </style>

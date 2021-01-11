@@ -63,7 +63,8 @@ export default {
     endDate: String,
     defaultTimeLimit: Number,
     isShowChinese: Boolean,
-    chConfig: Object
+    chConfig: Object,
+    filter: Function
   },
   data () {
     return {
@@ -106,11 +107,11 @@ export default {
         throw new Error('开始结束日期异常，startDate不得大于endDate')
       }
       this.selectItem = this.toObject(this.selectDate)
+      this.setColumnData()
       let selectItem = {
         ...this.selectItem
       }
       selectItem.month = selectItem.month - 1
-      this.setColumnData()
       this.$emit('change', {
         value: this.dayjs(selectItem).format(this.format),
         valueArr: this.selectValue,
@@ -147,13 +148,15 @@ export default {
       }
     },
     getLabel (value, name, format, rowIndex, columnIndex) {
+      const ch = this.isShowChinese ? this.chConfig[name] || '' : ''
+      let label = value < 10 && format.length > 1
+        ? `0${value}${ch}`
+        : value + ch
       if (this.formatter && isFunction(this.formatter)) {
         const item = { name, format, value }
-        return this.formatter({ item, rowIndex, columnIndex })
-      } else {
-        const ch = this.isShowChinese ? this.chConfig[name] || '' : ''
-        return value < 10 && format.length > 1 ? `0${value}${ch}` : value + ch
+        label = this.formatter({ item, rowIndex, columnIndex }) || label
       }
+      return label
     },
     setColumnData () {
       let list = []
@@ -194,6 +197,10 @@ export default {
           if (value > lastValue) {
             n = l
             value = lastValue
+          }
+          if (n < 0) {
+            n = 0
+            value = firstValue
           }
         }
         this.$set(this.pickerValue, index, n)
@@ -343,6 +350,9 @@ export default {
           }
           break
       }
+      if (this.filter && isFunction(this.filter)) {
+        list = this.filter(name, list) || list
+      }
       return list
     },
     validate (type) {
@@ -394,7 +404,9 @@ export default {
         hour: d.$H,
         minute: d.$m,
         second: d.$s,
-        timestamp: d.valueOf()
+        timestamp: d.valueOf(),
+        $d: d,
+        dayjs: this.dayjs
       }
     }
   },
@@ -403,11 +415,29 @@ export default {
       if (!this.isConfirmChange) {
         this.init('value')
       }
+    },
+    displayFormat () {
+      this.init('displayFormat')
+    },
+    startDate () {
+      this.init('startDate')
+    },
+    endDate () {
+      this.init('endDate')
+    },
+    defaultTimeLimit () {
+      this.init('defaultTimeLimit')
+    },
+    isShowChinese () {
+      this.init('isShowChinese')
+    },
+    chConfig () {
+      this.init('chConfig')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../style/picker-item.scss';
+@import "../style/picker-item.scss";
 </style>
