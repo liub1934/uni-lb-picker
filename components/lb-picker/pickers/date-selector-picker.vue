@@ -122,6 +122,7 @@ export default {
       const columnIndex = pickerValue.findIndex(
         (item, i) => item !== this.pickerValue[i]
       )
+      console.log(columnIndex)
       if (columnIndex > -1) {
         const valueIndex = pickerValue[columnIndex]
         const columnItem = this.pickerColumns[columnIndex]
@@ -130,7 +131,7 @@ export default {
         this.pickerValue = pickerValue
         this.$set(this.selectValue, columnIndex, valueItem.value)
         this.$set(this.selectItem, columnName, valueItem.value)
-        this.setColumnData()
+        this.setColumnData(columnIndex)
         const value = this.getValueDate()
         this.$emit('change', {
           value: value.format(this.format),
@@ -159,8 +160,8 @@ export default {
       selectItem.month = selectItem.month - 1
       return this.dayjs(selectItem)
     },
-    setColumnData () {
-      let list = []
+    setColumnData (n = 0) {
+      let list = [...this.pickerColumns]
       const formatArr = this.displayFormat.split('-')
       const formatObj = {
         YY: 'year',
@@ -179,82 +180,74 @@ export default {
         ss: 'second'
       }
       formatArr.forEach((item, index) => {
-        const name = formatObj[item]
-        let value = this.selectItem[name]
-        const obj = {
-          name: name,
-          list: this.getColumnData(name, item, index)
-        }
-        list.push(obj)
-        let n = obj.list.findIndex(l => l.value === value)
-        if (n < 0) {
-          const l = obj.list.length - 1
-          const firstValue = obj.list[0].value
-          const lastValue = obj.list[l].value
-          if (value < firstValue) {
-            n = 0
-            value = firstValue
+        if (index >= n) {
+          const name = formatObj[item]
+          const obj = {
+            name: name,
+            list: this.getColumnData(name, item, index)
           }
-          if (value > lastValue) {
-            n = l
-            value = lastValue
+          let value = this.selectItem[name]
+          if (index !== n) {
+            list[index] = obj
           }
+          // list.push(obj)
+          let n = obj.list.findIndex(l => l.value === value)
           if (n < 0) {
-            n = 0
-            value = firstValue
+            const l = obj.list.length - 1
+            const firstValue = obj.list[0].value
+            const lastValue = obj.list[l].value
+            if (value < firstValue) {
+              n = 0
+              value = firstValue
+            }
+            if (value > lastValue) {
+              n = l
+              value = lastValue
+            }
+            if (n < 0) {
+              n = 0
+              value = firstValue
+            }
           }
+          this.$set(this.pickerValue, index, n)
+          this.$set(this.selectValue, index, value)
+          this.$set(this.selectItem, name, value)
         }
-        this.$set(this.pickerValue, index, n)
-        this.$set(this.selectValue, index, value)
-        this.$set(this.selectItem, name, value)
       })
       this.pickerColumns = list
+    },
+    isSame (name, type = 'startInfo') {
+      let same = true
+      const arr = ['year', 'month', 'day', 'hour', 'minute', 'second']
+      const index = arr.findIndex(item => item === name)
+      if (index > -1) {
+        const slice = arr.slice(0, index + 1)
+        for (let i = 0; i < slice.length; i++) {
+          same = same && this.selectItem[slice[i]] === this[type][slice[i]]
+        }
+      }
+      return same
     },
     getColumnData (name, format, index) {
       let list = []
       let start = 0
       let end = 0
       let n = 0
+      const obj = {
+        month: 'year',
+        day: 'month',
+        hour: 'day',
+        minute: 'hour',
+        second: 'minute'
+      }
       switch (name) {
         case 'year':
-          for (let i = this.startInfo[name]; i <= this.endInfo[name]; i++) {
-            n++
-            list.push({
-              label: this.getLabel(
-                i,
-                name,
-                format,
-                this.getValueDate({ [name]: i }),
-                n,
-                index
-              ),
-              value: i
-            })
-          }
+          start = this.startInfo[name]
+          end = this.endInfo[name]
           break
         case 'month':
           start = 1
           end = 12
-          if (this.selectItem.year === this.startInfo.year) {
-            start = this.startInfo[name]
-          }
-          if (this.selectItem.year === this.endInfo.year) {
-            end = this.endInfo[name]
-          }
-          for (let i = start; i <= end; i++) {
-            n++
-            list.push({
-              label: this.getLabel(
-                i,
-                name,
-                format,
-                this.getValueDate({ [name]: i }),
-                n,
-                index
-              ),
-              value: i
-            })
-          }
           break
         case 'day':
           start = 1
@@ -263,135 +256,39 @@ export default {
             this.selectItem.month,
             0
           ).getDate()
-          if (
-            this.selectItem.year === this.startInfo.year &&
-            this.selectItem.month === this.startInfo.month
-          ) {
-            start = this.startInfo[name]
-          }
-          if (
-            this.selectItem.year === this.endInfo.year &&
-            this.selectItem.month === this.endInfo.month
-          ) {
-            end = this.endInfo[name]
-          }
-          for (let i = start; i <= end; i++) {
-            n++
-            list.push({
-              label: this.getLabel(
-                i,
-                name,
-                format,
-                this.getValueDate({ [name]: i }),
-                n,
-                index
-              ),
-              value: i
-            })
-          }
           break
         case 'hour':
           start = 0
           end = 23
-          if (
-            this.selectItem.year === this.startInfo.year &&
-            this.selectItem.month === this.startInfo.month &&
-            this.selectItem.day === this.startInfo.day
-          ) {
-            start = this.startInfo[name]
-          }
-          if (
-            this.selectItem.year === this.endInfo.year &&
-            this.selectItem.month === this.endInfo.month &&
-            this.selectItem.day === this.endInfo.day
-          ) {
-            end = this.endInfo[name]
-          }
-          for (let i = start; i <= end; i++) {
-            n++
-            list.push({
-              label: this.getLabel(
-                i,
-                name,
-                format,
-                this.getValueDate({ [name]: i }),
-                n,
-                index
-              ),
-              value: i
-            })
-          }
           break
         case 'minute':
           start = 0
           end = 59
-          if (
-            this.selectItem.year === this.startInfo.year &&
-            this.selectItem.month === this.startInfo.month &&
-            this.selectItem.day === this.startInfo.day &&
-            this.selectItem.hour === this.startInfo.hour
-          ) {
-            start = this.startInfo[name]
-          }
-          if (
-            this.selectItem.year === this.endInfo.year &&
-            this.selectItem.month === this.endInfo.month &&
-            this.selectItem.day === this.endInfo.day &&
-            this.selectItem.hour === this.endInfo.hour
-          ) {
-            end = this.endInfo[name]
-          }
-          for (let i = start; i <= end; i++) {
-            n++
-            list.push({
-              label: this.getLabel(
-                i,
-                name,
-                format,
-                this.getValueDate({ [name]: i }),
-                n,
-                index
-              ),
-              value: i
-            })
-          }
           break
         case 'second':
           start = 0
           end = 59
-          if (
-            this.selectItem.year === this.startInfo.year &&
-            this.selectItem.month === this.startInfo.month &&
-            this.selectItem.day === this.startInfo.day &&
-            this.selectItem.hour === this.startInfo.hour &&
-            this.selectItem.minute === this.startInfo.minute
-          ) {
-            start = this.startInfo[name]
-          }
-          if (
-            this.selectItem.year === this.endInfo.year &&
-            this.selectItem.month === this.endInfo.month &&
-            this.selectItem.day === this.endInfo.day &&
-            this.selectItem.hour === this.endInfo.hour &&
-            this.selectItem.minute === this.endInfo.minute
-          ) {
-            end = this.endInfo[name]
-          }
-          for (let i = start; i <= end; i++) {
-            n++
-            list.push({
-              label: this.getLabel(
-                i,
-                name,
-                format,
-                this.getValueDate({ [name]: i }),
-                n,
-                index
-              ),
-              value: i
-            })
-          }
           break
+      }
+      if (this.isSame(obj[name], 'startInfo')) {
+        start = this.startInfo[name]
+      }
+      if (this.isSame(obj[name], 'endInfo')) {
+        end = this.endInfo[name]
+      }
+      for (let i = start; i <= end; i++) {
+        n++
+        list.push({
+          label: this.getLabel(
+            i,
+            name,
+            format,
+            this.getValueDate({ [name]: i }),
+            n,
+            index
+          ),
+          value: i
+        })
       }
       if (this.filter && isFunction(this.filter)) {
         list = this.filter(name, list) || list
@@ -448,8 +345,7 @@ export default {
         minute: d.$m,
         second: d.$s,
         timestamp: d.valueOf(),
-        $d: d,
-        dayjs: this.dayjs
+        $d: d
       }
     }
   },
