@@ -1,10 +1,10 @@
 <template>
   <view class="list">
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker1')">
+    <view class="list-item">
       <text class="sub-title">默认单选</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker1')">
         <text class="item-title">绑定值:{{ value1 }}</text>
         <view class="item-value">
           <text class="item-label">{{ label1 }}</text>
@@ -23,10 +23,10 @@
       </lb-picker>
     </view>
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker2')">
+    <view class="list-item">
       <text class="sub-title">单选绑定默认值</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker2')">
         <text class="item-title">绑定值:{{ value2 }}</text>
         <view class="item-value">
           <text class="item-label">{{ label2 }}</text>
@@ -45,10 +45,10 @@
       </lb-picker>
     </view>
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker3')">
+    <view class="list-item">
       <text class="sub-title">默认扁平化单选</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker3')">
         <text class="item-title">绑定值:{{ value3 }}</text>
         <view class="item-value">
           <text class="item-label">{{ value3 }}</text>
@@ -66,10 +66,10 @@
       </lb-picker>
     </view>
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker4')">
+    <view class="list-item">
       <text class="sub-title">扁平化单选绑定默认值</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker4')">
         <text class="item-title">绑定值:{{ value4 }}</text>
         <view class="item-value">
           <text class="item-label">{{ value4 }}</text>
@@ -87,10 +87,10 @@
       </lb-picker>
     </view>
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker5')">
+    <view class="list-item">
       <text class="sub-title">无数据</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker5')">
         <text class="item-title">绑定值:{{ value5 }}</text>
         <view class="item-value">
           <text class="item-label">{{ value5 }}</text>

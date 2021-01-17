@@ -1,10 +1,10 @@
 <template>
   <view class="list">
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker1')">
+    <view class="list-item">
       <text class="sub-title">单选formatter自定义显示</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker1')">
         <text class="item-title">绑定值:{{ value1 }}</text>
         <view class="item-value">
           <text class="item-label">{{ label1 }}</text>
@@ -24,10 +24,10 @@
       </lb-picker>
     </view>
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker2')">
+    <view class="list-item">
       <text class="sub-title">多级联动formatter自定义显示</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker2')">
         <text class="item-title">绑定值:{{ JSON.stringify(value2) }}</text>
         <view class="item-value">
           <text class="item-label">{{ label2 }}</text>
@@ -48,10 +48,10 @@
       </lb-picker>
     </view>
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker3')">
+    <view class="list-item">
       <text class="sub-title">非联动formatter自定义显示</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker3')">
         <text class="item-title">绑定值:{{ JSON.stringify(value3) }}</text>
         <view class="item-value">
           <text class="item-label">{{ label3 }}</text>

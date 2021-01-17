@@ -13,10 +13,10 @@
         </label>
       </radio-group>
     </view>
-    <view class="list-item"
-      @tap="handleTap('picker1')">
+    <view class="list-item">
       <view class="sub-title">可视区自定义滚动个数：{{ columnNum }}（默认值为5）</view>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker1')">
         <text class="item-title">绑定值:{{ value }}</text>
         <view class="item-value">
           <text class="item-label">{{ label }}</text>

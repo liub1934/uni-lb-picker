@@ -1,10 +1,10 @@
 <template>
   <view class="list">
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker1')">
+    <view class="list-item">
       <text class="sub-title">点击弹出选择器后长按选择器文字</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker1')">
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
         </view>

@@ -1,10 +1,10 @@
 <template>
   <view class="list">
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker1')">
+    <view class="list-item">
       <text class="sub-title">年月日选择</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker1')">
         <text class="item-title">绑定值:{{ value1 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -20,10 +20,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker2')">
+    <view class="list-item">
       <text class="sub-title">年月日默认值</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker2')">
         <text class="item-title">绑定值:{{ value2 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -39,10 +39,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker3')">
+    <view class="list-item">
       <text class="sub-title">开始结束日期限制（可精确到秒）</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker3')">
         <text class="item-title">绑定值:{{ value3 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -63,10 +63,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker4')">
+    <view class="list-item">
       <text class="sub-title">不显示年月日等日期文字</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker4')">
         <text class="item-title">绑定值:{{ value4 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -83,10 +83,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker5')">
+    <view class="list-item">
       <text class="sub-title">自定义显示年月日等文字</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker5')">
         <text class="item-title">绑定值:{{ value5 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -107,10 +107,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker6')">
+    <view class="list-item">
       <text class="sub-title">formatter自定义显示(百度、支付宝、头条小程序不支持)</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker6')">
         <text class="item-title">绑定值:{{ value6 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -127,10 +127,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker7')">
+    <view class="list-item">
       <text class="sub-title">format格式化日期</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker7')">
         <text class="item-title">绑定值:{{ value7 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -160,10 +160,10 @@
         </view>
       </radio-group>
     </view>
-    <view class="list-item"
-      @tap="handleTap('picker8')">
+    <view class="list-item">
       <text class="sub-title">自定义显示日期颗粒，可自由组合</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker8')">
         <text class="item-title">绑定值:{{ value8 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -181,10 +181,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker9')">
+    <view class="list-item">
       <text class="sub-title">filter过滤列表，例：过滤排除年月日为奇数项，仅保留偶数项</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker9')">
         <text class="item-title">绑定值:{{ value9 }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>
@@ -201,10 +201,10 @@
     </view>
     <view class="grey-block"></view>
 
-    <view class="list-item"
-      @tap="handleTap('picker10')">
+    <view class="list-item">
       <text class="sub-title">插槽自定义日期范围选择</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker10')">
         <text class="item-title">绑定值:{{ JSON.stringify(value10) }}</text>
         <view class="item-value">
           <text class="item-placeholder">点我打开选择器</text>

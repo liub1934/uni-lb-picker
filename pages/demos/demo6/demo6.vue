@@ -13,10 +13,10 @@
         </label>
       </radio-group>
     </view>
-    <view class="list-item"
-      @tap="handleTap('picker1')">
+    <view class="list-item">
       <text class="sub-title">可视区自定义滚动个数：{{ columnNum }}（默认值为5）</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker1')">
         <text class="item-title">绑定值:{{ value }}</text>
         <view class="item-value">
           <text class="item-label">{{ label }}</text>
@@ -96,5 +96,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../index/index.scss';
+@import "../../index/index.scss";
 </style>
