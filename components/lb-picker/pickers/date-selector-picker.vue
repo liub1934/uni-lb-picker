@@ -122,7 +122,6 @@ export default {
       const columnIndex = pickerValue.findIndex(
         (item, i) => item !== this.pickerValue[i]
       )
-      console.log(columnIndex)
       if (columnIndex > -1) {
         const valueIndex = pickerValue[columnIndex]
         const columnItem = this.pickerColumns[columnIndex]
