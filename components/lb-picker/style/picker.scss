@@ -31,6 +31,7 @@
 	/* #endif */
 }
 
+/* #ifndef APP-NVUE */
 .lb-picker-container-animation {
 	transition-property: transform;
 	transition-duration: 0.3s;
@@ -39,6 +40,8 @@
 .lb-picker-container-show {
 	transform: translateY(0);
 }
+
+/* #endif */
 
 .lb-picker-header {
 	position: relative;

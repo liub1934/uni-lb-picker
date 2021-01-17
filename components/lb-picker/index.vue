@@ -20,6 +20,7 @@
     </view>
 
     <view v-if="visible || inline"
+      ref="container"
       :class="[
         'lb-picker-container',
         !inline ? 'lb-picker-container-fixed' : '',
@@ -201,6 +202,9 @@ const defaultChConfig = {
   minute: '分',
   second: '秒'
 }
+// #ifdef APP-NVUE
+const animation = weex.requireModule('animation')
+// #endif
 import { getColumns } from './utils'
 import SelectorPicker from './pickers/selector-picker'
 import MultiSelectorPicker from './pickers/multi-selector-picker'
@@ -354,15 +358,21 @@ export default {
       setTimeout(() => {
         this.maskBgColor = this.maskColor
         this.containerVisible = true
+        // #ifdef APP-PLUS
+        this.wxAnimation(0)
+        // #endif
       }, 20)
     },
     hide () {
       if (this.inline) return
       this.maskBgColor = defaultMaskBgColor
       this.containerVisible = false
+      // #ifdef APP-PLUS
+      this.wxAnimation('100%')
+      // #endif
       setTimeout(() => {
         this.visible = false
-      }, 200)
+      }, 300)
     },
     handleCancel () {
       this.$emit('cancel', this.picker)
@@ -402,6 +412,17 @@ export default {
       }
     },
     moveHandle () {},
+    // #ifdef APP-PLUS
+    wxAnimation (num) {
+      const $container = this.$refs.container
+      animation.transition($container, {
+        styles: {
+          transform: `translateY(${num})`
+        },
+        duration: 300
+      })
+    },
+    // #endif 
     getColumnsInfo (value, type = 1) {
       let columnsInfo = getColumns(
         {
