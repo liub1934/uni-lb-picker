@@ -1,6 +1,6 @@
 {
   "name": "uni-lb-picker",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "uniapp picker选择器，可自定义，扩展性高，支持单选、理论任意级数多级联动、非联动及日期选择。",
   "main": "components/lb-picker/index.vue",
   "scripts": {
