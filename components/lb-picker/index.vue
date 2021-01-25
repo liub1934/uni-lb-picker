@@ -358,7 +358,7 @@ export default {
       setTimeout(() => {
         this.maskBgColor = this.maskColor
         this.containerVisible = true
-        // #ifdef APP-PLUS
+        // #ifdef APP-NVUE
         this.wxAnimation(0)
         // #endif
       }, 20)
@@ -367,7 +367,7 @@ export default {
       if (this.inline) return
       this.maskBgColor = defaultMaskBgColor
       this.containerVisible = false
-      // #ifdef APP-PLUS
+      // #ifdef APP-NVUE
       this.wxAnimation('100%')
       // #endif
       setTimeout(() => {
@@ -412,7 +412,7 @@ export default {
       }
     },
     moveHandle () {},
-    // #ifdef APP-PLUS
+    // #ifdef APP-NVUE
     wxAnimation (num) {
       const $container = this.$refs.container
       animation.transition($container, {
