@@ -1,10 +1,10 @@
 <template>
   <view class="list">
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker1')">
+    <view class="list-item">
       <text class="sub-title">默认异步加载整体数据</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker1')">
         <text class="item-title">绑定值:{{ value1 }}</text>
         <view class="item-value">
           <text class="item-label">{{ label1 }}</text>
@@ -25,10 +25,10 @@
       </lb-picker>
     </view>
     <view class="grey-block"></view>
-    <view class="list-item"
-      @tap="handleTap('picker2')">
+    <view class="list-item">
       <text class="sub-title">插槽自定义loading</text>
-      <view class="item-content">
+      <view class="item-content"
+        @tap="handleTap('picker2')">
         <text class="item-title">绑定值:{{ value2 }}</text>
         <view class="item-value">
           <text class="item-label">{{ label2 }}</text>

@@ -20,6 +20,7 @@
     </view>
 
     <view v-if="visible || inline"
+      ref="container"
       :class="[
         'lb-picker-container',
         !inline ? 'lb-picker-container-fixed' : '',
@@ -174,6 +175,7 @@
             :default-time-limit="defaultTimeLimit"
             :is-show-chinese="isShowChinese"
             :ch-config="pickerChConfig"
+            :filter="filter"
             @change="handleChange">
           </date-selector-picker>
         </view>
@@ -200,6 +202,9 @@ const defaultChConfig = {
   minute: '分',
   second: '秒'
 }
+// #ifdef APP-NVUE
+const animation = weex.requireModule('animation')
+// #endif
 import { getColumns } from './utils'
 import SelectorPicker from './pickers/selector-picker'
 import MultiSelectorPicker from './pickers/multi-selector-picker'
@@ -306,7 +311,6 @@ export default {
     format: {
       type: String,
       default: 'YYYY-MM-DD'
-      // default: 'YYYY-MM-DD HH:mm:ss'
     },
     displayFormat: {
       type: String,
@@ -322,7 +326,8 @@ export default {
       type: Boolean,
       default: true
     },
-    chConfig: Object
+    chConfig: Object,
+    filter: Function
   },
   data () {
     return {
@@ -353,15 +358,21 @@ export default {
       setTimeout(() => {
         this.maskBgColor = this.maskColor
         this.containerVisible = true
+        // #ifdef APP-NVUE
+        this.wxAnimation(0)
+        // #endif
       }, 20)
     },
     hide () {
       if (this.inline) return
       this.maskBgColor = defaultMaskBgColor
       this.containerVisible = false
+      // #ifdef APP-NVUE
+      this.wxAnimation('100%')
+      // #endif
       setTimeout(() => {
         this.visible = false
-      }, 200)
+      }, 300)
     },
     handleCancel () {
       this.$emit('cancel', this.picker)
@@ -401,6 +412,17 @@ export default {
       }
     },
     moveHandle () {},
+    // #ifdef APP-NVUE
+    wxAnimation (num) {
+      const $container = this.$refs.container
+      animation.transition($container, {
+        styles: {
+          transform: `translateY(${num})`
+        },
+        duration: 300
+      })
+    },
+    // #endif 
     getColumnsInfo (value, type = 1) {
       let columnsInfo = getColumns(
         {
@@ -448,5 +470,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './style/picker.scss';
+@import "./style/picker.scss";
 </style>
