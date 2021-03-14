@@ -9,11 +9,11 @@
         <!-- #ifdef H5 -->
         <view v-for="(item, i) in list"
           :class="[
-				    'lb-picker-column',
-				    (item[props.value] || item) === selectValue
-				      ? 'lb-picker-column-active'
-				      : ''
-				  ]"
+            'lb-picker-column',
+            (item[props.value] || item) === selectValue
+              ? 'lb-picker-column-active'
+              : ''
+          ]"
           :key="i"
           :data-item="pressEnable ? JSON.stringify(item) : ''"
           @touchstart="touchstart"
@@ -104,5 +104,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/picker-item.scss';
+@import "../style/picker-item.scss";
 </style>

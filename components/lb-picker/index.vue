@@ -236,25 +236,25 @@ export default {
       default: '取消'
     },
     cancelColor: {
-			type: String,
-			default: '#999'
-		},
+      type: String,
+      default: '#999'
+    },
     confirmText: {
       type: String,
       default: '确定'
     },
     confirmColor: {
-			type: String,
-			default: '#007aff'
-		},
+      type: String,
+      default: '#007aff'
+    },
     canHide: {
       type: Boolean,
       default: true
     },
     emptyColor: {
-			type: String,
-			default: '#999'
-		},
+      type: String,
+      default: '#999'
+    },
     emptyText: {
       type: String,
       default: '暂无数据'
