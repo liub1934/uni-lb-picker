@@ -160,7 +160,6 @@ export default {
       return this.dayjs(selectItem)
     },
     setColumnData (n = 0) {
-      let list = [...this.pickerColumns]
       const formatArr = this.displayFormat.split('-')
       const formatObj = {
         YY: 'year',
@@ -187,9 +186,8 @@ export default {
           }
           let value = this.selectItem[name]
           if (index !== n) {
-            list[index] = obj
+            this.$set(this.pickerColumns, index, obj)
           }
-          // list.push(obj)
           let n = obj.list.findIndex(l => l.value === value)
           if (n < 0) {
             const l = obj.list.length - 1
@@ -213,7 +211,6 @@ export default {
           this.$set(this.selectItem, name, value)
         }
       })
-      this.pickerColumns = list
     },
     isSame (name, type = 'startInfo') {
       let same = true

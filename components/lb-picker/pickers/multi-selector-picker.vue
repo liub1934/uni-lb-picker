@@ -10,11 +10,11 @@
         <!-- #ifdef H5 -->
         <view v-for="(item, i) in column || []"
           :class="[
-				    'lb-picker-column',
-				    item[props.value] === selectValue[index]
-				      ? 'lb-picker-column-active'
-				      : ''
-				  ]"
+            'lb-picker-column',
+            item[props.value] === selectValue[index]
+              ? 'lb-picker-column-active'
+              : ''
+          ]"
           :key="i"
           :data-item="pressEnable ? JSON.stringify(item) : ''"
           @touchstart="touchstart"
