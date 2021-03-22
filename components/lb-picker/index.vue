@@ -357,7 +357,9 @@ export default {
       this.visible = true
       setTimeout(() => {
         this.maskBgColor = this.maskColor
-        this.containerVisible = true
+				// #ifndef APP-NVUE
+				this.containerVisible = true
+				// #endif
         // #ifdef APP-NVUE
         this.wxAnimation(0)
         // #endif
@@ -366,7 +368,9 @@ export default {
     hide () {
       if (this.inline) return
       this.maskBgColor = defaultMaskBgColor
-      this.containerVisible = false
+			// #ifndef APP-NVUE
+			this.containerVisible = false
+			// #endif
       // #ifdef APP-NVUE
       this.wxAnimation('100%')
       // #endif
