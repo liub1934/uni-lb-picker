@@ -41,6 +41,14 @@
             path: '/pages/demos/demo16/demo16'
           },
           {
+            title: 'vfor循环中使用-show方法弹出',
+            path: '/pages/demos/demo17/demo17'
+          },
+          {
+            title: 'vfor循环中使用-默认插槽形式弹出',
+            path: '/pages/demos/demo18/demo18'
+          },
+          {
             title: 'inline模式',
             path: '/pages/demos/demo13/demo13'
           },

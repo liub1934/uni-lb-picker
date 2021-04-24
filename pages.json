@@ -37,6 +37,18 @@
       }
     },
     {
+      "path": "pages/demos/demo17/demo17",
+      "style": {
+        "navigationBarTitleText": "vfor循环中使用-show方法弹出"
+      }
+    },
+    {
+      "path": "pages/demos/demo18/demo18",
+      "style": {
+        "navigationBarTitleText": "vfor循环中使用-默认插槽形式弹出"
+      }
+    },
+    {
       "path": "pages/demos/demo13/demo13",
       "style": {
         "navigationBarTitleText": "inline默认显示"
