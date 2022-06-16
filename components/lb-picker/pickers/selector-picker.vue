@@ -4,6 +4,7 @@
     <picker-view :value="pickerValue"
       :style="{ height: height }"
       :indicator-style="indicatorStyle"
+      :immediate-change="immediateChange"
       @change="handleChange">
       <picker-view-column>
         <!-- #ifdef H5 -->
@@ -59,8 +60,8 @@
 </template>
 
 <script>
-import { isObject } from '../utils'
-import { commonMixin } from '../mixins'
+import { isObject } from '../utils';
+import { commonMixin } from '../mixins';
 export default {
   props: {
     value: [String, Number],
@@ -69,6 +70,7 @@ export default {
     props: Object,
     visible: Boolean,
     height: String,
+    immediateChange: Boolean,
     columnStyle: Object,
     activeColumnStyle: Object,
     align: String,
@@ -82,25 +84,25 @@ export default {
       pickerValue: [],
       selectValue: '',
       selectItem: null
-    }
+    };
   },
   methods: {
     handleChange (item) {
-      const index = item.detail.value[0] || 0
-      this.selectItem = this.list[index]
+      const index = item.detail.value[0] || 0;
+      this.selectItem = this.list[index];
       this.selectValue = isObject(this.selectItem)
         ? this.selectItem[this.props.value]
-        : this.selectItem
-      this.pickerValue = item.detail.value
+        : this.selectItem;
+      this.pickerValue = item.detail.value;
       this.$emit('change', {
         value: this.selectValue,
         item: this.selectItem,
         index: index,
         change: 'scroll'
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
