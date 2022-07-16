@@ -4,6 +4,7 @@
     <picker-view :value="pickerValue"
       :style="{ height: height }"
       :indicator-style="indicatorStyle"
+      :immediate-change="immediateChange"
       @change="handleChange">
       <picker-view-column>
         <!-- #ifdef H5 -->
@@ -69,6 +70,7 @@ export default {
     props: Object,
     visible: Boolean,
     height: String,
+    immediateChange: Boolean,
     columnStyle: Object,
     activeColumnStyle: Object,
     align: String,

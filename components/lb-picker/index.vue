@@ -114,6 +114,7 @@
             :press-enable="pressEnable"
             :press-time="pressTime"
             :formatter="formatter"
+            :immediate-change="immediateChange"
             @change="handleChange">
           </selector-picker>
 
@@ -134,6 +135,7 @@
             :press-enable="pressEnable"
             :press-time="pressTime"
             :formatter="formatter"
+            :immediate-change="immediateChange"
             @change="handleChange">
           </multi-selector-picker>
 
@@ -153,6 +155,7 @@
             :press-enable="pressEnable"
             :press-time="pressTime"
             :formatter="formatter"
+            :immediate-change="immediateChange"
             @change="handleChange">
           </unlinked-selector-picker>
 
@@ -176,6 +179,7 @@
             :is-show-chinese="isShowChinese"
             :ch-config="pickerChConfig"
             :filter="filter"
+            :immediate-change="immediateChange"
             @change="handleChange">
           </date-selector-picker>
         </view>
@@ -297,6 +301,10 @@ export default {
     },
     disabled: Boolean,
     columnStyle: Object,
+    immediateChange: {
+      type: Boolean,
+      default: false
+    },
     activeColumnStyle: Object,
     align: {
       type: String,
