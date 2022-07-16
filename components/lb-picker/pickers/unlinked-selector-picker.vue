@@ -4,7 +4,6 @@
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
       :style="{ height: height }"
-      :immediate-change="immediateChange"
       @change="handleChange">
       <picker-view-column v-for="(column, index) in pickerColumns"
         :key="index">
@@ -61,8 +60,8 @@
 </template>
 
 <script>
-import { isObject } from '../utils';
-import { commonMixin } from '../mixins';
+import { isObject } from '../utils'
+import { commonMixin } from '../mixins'
 export default {
   props: {
     value: Array,
@@ -71,7 +70,6 @@ export default {
     props: Object,
     visible: Boolean,
     height: String,
-    immediateChange: Boolean,
     columnStyle: Object,
     activeColumnStyle: Object,
     align: String,
@@ -86,31 +84,31 @@ export default {
       pickerColumns: [],
       selectValue: [],
       selectItem: []
-    };
+    }
   },
   methods: {
     handleChange (item) {
-      const pickerValue = item.detail.value;
-      const columnIndex = pickerValue.findIndex((item, i) => item !== this.pickerValue[i]);
+      const pickerValue = item.detail.value
+      const columnIndex = pickerValue.findIndex((item, i) => item !== this.pickerValue[i])
       if (columnIndex > -1) {
-        const valueIndex = pickerValue[columnIndex];
-        const columnItem = this.list[columnIndex][valueIndex];
+        const valueIndex = pickerValue[columnIndex]
+        const columnItem = this.list[columnIndex][valueIndex]
         const valueItem = isObject(columnItem)
           ? columnItem[this.props.value]
-          : columnItem;
-        this.pickerValue = pickerValue;
-        this.$set(this.selectValue, columnIndex, valueItem);
-        this.$set(this.selectItem, columnIndex, columnItem);
+          : columnItem
+        this.pickerValue = pickerValue
+        this.$set(this.selectValue, columnIndex, valueItem)
+        this.$set(this.selectItem, columnIndex, columnItem)
         this.$emit('change', {
           value: this.selectValue,
           item: this.selectItem,
           index: this.pickerValue,
           change: 'scroll'
-        });
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

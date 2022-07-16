@@ -114,7 +114,6 @@
             :press-enable="pressEnable"
             :press-time="pressTime"
             :formatter="formatter"
-            :immediate-change="immediateChange"
             @change="handleChange">
           </selector-picker>
 
@@ -135,7 +134,6 @@
             :press-enable="pressEnable"
             :press-time="pressTime"
             :formatter="formatter"
-            :immediate-change="immediateChange"
             @change="handleChange">
           </multi-selector-picker>
 
@@ -155,7 +153,6 @@
             :press-enable="pressEnable"
             :press-time="pressTime"
             :formatter="formatter"
-            :immediate-change="immediateChange"
             @change="handleChange">
           </unlinked-selector-picker>
 
@@ -179,7 +176,6 @@
             :is-show-chinese="isShowChinese"
             :ch-config="pickerChConfig"
             :filter="filter"
-            :immediate-change="immediateChange"
             @change="handleChange">
           </date-selector-picker>
         </view>
@@ -192,12 +188,12 @@
 </template>
 
 <script>
-const defaultMaskBgColor = 'rgba(0, 0, 0, 0)';
+const defaultMaskBgColor = 'rgba(0, 0, 0, 0)'
 const defaultProps = {
   label: 'label',
   value: 'value',
   children: 'children'
-};
+}
 const defaultChConfig = {
   year: '年',
   month: '月',
@@ -205,15 +201,15 @@ const defaultChConfig = {
   hour: '时',
   minute: '分',
   second: '秒'
-};
+}
 // #ifdef APP-NVUE
-const animation = weex.requireModule('animation');
+const animation = weex.requireModule('animation')
 // #endif
-import { getColumns } from './utils';
-import SelectorPicker from './pickers/selector-picker';
-import MultiSelectorPicker from './pickers/multi-selector-picker';
-import UnlinkedSelectorPicker from './pickers/unlinked-selector-picker';
-import DateSelectorPicker from './pickers/date-selector-picker';
+import { getColumns } from './utils'
+import SelectorPicker from './pickers/selector-picker'
+import MultiSelectorPicker from './pickers/multi-selector-picker'
+import UnlinkedSelectorPicker from './pickers/unlinked-selector-picker'
+import DateSelectorPicker from './pickers/date-selector-picker'
 export default {
   components: {
     SelectorPicker,
@@ -301,10 +297,6 @@ export default {
     },
     disabled: Boolean,
     columnStyle: Object,
-    immediateChange: {
-      type: Boolean,
-      default: false
-    },
     activeColumnStyle: Object,
     align: {
       type: String,
@@ -346,93 +338,93 @@ export default {
       picker: {},
       pickerProps: Object.assign({}, defaultProps, this.props),
       pickerChConfig: Object.assign({}, defaultChConfig, this.chConfig)
-    };
+    }
   },
   computed: {
     pickerContentHeight () {
-      return 34 * this.columnNum + 'px';
+      return 34 * this.columnNum + 'px'
     },
     isEmpty () {
-      if (this.mode === 'dateSelector') return false;
-      if (!this.list && this.mode !== 'dateSelector') return true;
-      if (this.list && !this.list.length) return true;
-      return false;
+      if (this.mode === 'dateSelector') return false
+      if (!this.list && this.mode !== 'dateSelector') return true
+      if (this.list && !this.list.length) return true
+      return false
     }
   },
   methods: {
     show () {
-      if (this.inline || this.disabled) return;
-      this.visible = true;
+      if (this.inline || this.disabled) return
+      this.visible = true
       setTimeout(() => {
-        this.maskBgColor = this.maskColor;
+        this.maskBgColor = this.maskColor
 				// #ifndef APP-NVUE
-				this.containerVisible = true;
+				this.containerVisible = true
 				// #endif
         // #ifdef APP-NVUE
-        this.wxAnimation(0);
+        this.wxAnimation(0)
         // #endif
-      }, 20);
+      }, 20)
     },
     hide () {
-      if (this.inline) return;
-      this.maskBgColor = defaultMaskBgColor;
+      if (this.inline) return
+      this.maskBgColor = defaultMaskBgColor
 			// #ifndef APP-NVUE
-			this.containerVisible = false;
+			this.containerVisible = false
 			// #endif
       // #ifdef APP-NVUE
-      this.wxAnimation('100%');
+      this.wxAnimation('100%')
       // #endif
       setTimeout(() => {
-        this.visible = false;
-      }, 300);
+        this.visible = false
+      }, 300)
     },
     handleCancel () {
-      this.$emit('cancel', this.picker);
+      this.$emit('cancel', this.picker)
       if (this.canHide && !this.inline) {
-        this.hide();
+        this.hide()
       }
     },
     handleConfirm () {
       if (this.isEmpty) {
-        this.$emit('confirm', null);
-        this.hide();
+        this.$emit('confirm', null)
+        this.hide()
       } else {
-        const picker = { ...this.picker };
-        this.$refs[this.mode].isConfirmChange = true;
-        this.myValue = picker.value;
-        this.$emit('confirm', this.picker);
-        if (this.canHide) this.hide();
+        const picker = { ...this.picker }
+        this.$refs[this.mode].isConfirmChange = true
+        this.myValue = picker.value
+        this.$emit('confirm', this.picker)
+        if (this.canHide) this.hide()
       }
     },
     handleChange ({ value, valueArr, item, index, change }) {
       if (this.mode === 'dateSelector') {
-        this.picker.valueArr = valueArr;
+        this.picker.valueArr = valueArr
       }
-      this.picker.value = value;
-      this.picker.item = item;
-      this.picker.index = index;
-      this.picker.change = change;
-      this.picker.dataset = this.dataset || {};
+      this.picker.value = value
+      this.picker.item = item
+      this.picker.index = index
+      this.picker.change = change
+      this.picker.dataset = this.dataset || {}
       if (this.$refs[this.mode] && this.inline) {
-        this.$refs[this.mode].isConfirmChange = true;
+        this.$refs[this.mode].isConfirmChange = true
       }
-      this.$emit('change', this.picker);
+      this.$emit('change', this.picker)
     },
     handleMaskTap () {
       if (this.closeOnClickMask) {
-        this.hide();
+        this.hide()
       }
     },
     moveHandle () {},
     // #ifdef APP-NVUE
     wxAnimation (num) {
-      const $container = this.$refs.container;
+      const $container = this.$refs.container
       animation.transition($container, {
         styles: {
           transform: `translateY(${num})`
         },
         duration: 300
-      });
+      })
     },
     // #endif 
     getColumnsInfo (value, type = 1) {
@@ -445,40 +437,40 @@ export default {
           level: this.level
         },
         type
-      );
+      )
       if (columnsInfo) {
         if (this.mode === 'selector') {
-          columnsInfo.index = columnsInfo.index[0];
+          columnsInfo.index = columnsInfo.index[0]
         }
       } else {
-        columnsInfo = {};
+        columnsInfo = {}
       }
-      columnsInfo.dataset = this.dataset || {};
-      return columnsInfo;
+      columnsInfo.dataset = this.dataset || {}
+      return columnsInfo
     }
   },
   watch: {
     value (newVal) {
-      this.myValue = newVal;
+      this.myValue = newVal
     },
     myValue (newVal) {
-      this.$emit('input', newVal);
+      this.$emit('input', newVal)
     },
     visible (newVisible) {
       if (newVisible) {
-        this.$emit('show');
+        this.$emit('show')
       } else {
-        this.$emit('hide');
+        this.$emit('hide')
       }
     },
     props (newProps) {
-      this.pickerProps = Object.assign({}, defaultProps, newProps);
+      this.pickerProps = Object.assign({}, defaultProps, newProps)
     },
     chConfig (newVal) {
-      this.pickerChConfig = Object.assign({}, defaultChConfig, newVal);
+      this.pickerChConfig = Object.assign({}, defaultChConfig, newVal)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

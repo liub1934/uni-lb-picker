@@ -4,7 +4,6 @@
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
       :style="{ height: height }"
-      :immediate-change="immediateChange"
       @change="handleChange">
       <picker-view-column v-for="(column, index) in pickerColumns"
         :key="index">
@@ -61,7 +60,7 @@
 </template>
 
 <script>
-import { commonMixin } from '../mixins';
+import { commonMixin } from '../mixins'
 export default {
   props: {
     value: Array,
@@ -71,7 +70,6 @@ export default {
     level: Number,
     visible: Boolean,
     height: String,
-    immediateChange: Boolean,
     columnStyle: Object,
     activeColumnStyle: Object,
     align: String,
@@ -86,39 +84,39 @@ export default {
       pickerColumns: [],
       selectValue: [],
       selectItem: []
-    };
+    }
   },
   methods: {
     handleChange (item) {
-      const pickerValue = item.detail.value;
+      const pickerValue = item.detail.value
       const columnIndex = pickerValue.findIndex(
         (item, i) => item !== this.pickerValue[i]
-      );
-      const valueIndex = pickerValue[columnIndex];
-      this.setPickerChange(pickerValue, valueIndex, columnIndex);
+      )
+      const valueIndex = pickerValue[columnIndex]
+      this.setPickerChange(pickerValue, valueIndex, columnIndex)
     },
     setPickerChange (pickerValue, valueIndex, columnIndex) {
       for (let i = 0; i < this.level; i++) {
         if (i > columnIndex) {
-          pickerValue[i] = 0;
+          pickerValue[i] = 0
           const column =
             this.pickerColumns[i - 1][valueIndex] ||
-            this.pickerColumns[i - 1][0];
-          this.$set(this.pickerColumns, i, column[this.props.children] || []);
-          valueIndex = 0;
+            this.pickerColumns[i - 1][0]
+          this.$set(this.pickerColumns, i, column[this.props.children] || [])
+          valueIndex = 0
         }
-        this.$set(this.pickerValue, i, pickerValue[i]);
-        const selectItem = this.pickerColumns[i][pickerValue[i]];
+        this.$set(this.pickerValue, i, pickerValue[i])
+        const selectItem = this.pickerColumns[i][pickerValue[i]]
         if (selectItem) {
-          this.selectItem[i] = selectItem;
-          this.selectValue[i] = selectItem[this.props.value];
+          this.selectItem[i] = selectItem
+          this.selectValue[i] = selectItem[this.props.value]
         } else {
-          const spliceNum = this.level - i;
-          this.pickerValue.splice(i, spliceNum);
-          this.selectValue.splice(i, spliceNum);
-          this.selectItem.splice(i, spliceNum);
-          this.pickerColumns.splice(i, spliceNum);
-          break;
+          const spliceNum = this.level - i
+          this.pickerValue.splice(i, spliceNum)
+          this.selectValue.splice(i, spliceNum)
+          this.selectItem.splice(i, spliceNum)
+          this.pickerColumns.splice(i, spliceNum)
+          break
         }
       }
       this.$emit('change', {
@@ -126,10 +124,10 @@ export default {
         item: this.selectItem,
         index: this.pickerValue,
         change: 'scroll'
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
