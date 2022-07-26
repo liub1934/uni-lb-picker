@@ -4,6 +4,7 @@
     <picker-view :value="pickerValue"
       :indicator-style="indicatorStyle"
       :style="{ height: height }"
+      :immediate-change="immediateChange"
       @change="handleChange">
       <picker-view-column v-for="(column, index) in pickerColumns"
         :key="index">
@@ -70,6 +71,7 @@ export default {
     level: Number,
     visible: Boolean,
     height: String,
+    immediateChange: Boolean,
     columnStyle: Object,
     activeColumnStyle: Object,
     align: String,
